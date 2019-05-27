@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./rating.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+
+  <h1>별점 주기</h1>
+
+  <h2>Jack</h2>
+  <form action="">
+    <div class="rating" data-name="rating" data-rating="0">
+      <span class="star" data-name="star"></span>
+      <span class="star" data-name="star"></span>
+      <span class="star" data-name="star"></span>
+      <span class="star" data-name="star"></span>
+      <span class="star" data-name="star"></span>
+    </div>
+    <input type="text" class="rating__input" disabled>
+  </form>
+
+
+  <script>
+    document.querySelectorAll('div[data-name="rating"]').forEach(x => {
+      x.addEventListener('click', function (e) {
+        doRatingStar(this, e.target, function (val) {
+          document.querySelector('.rating__input').value = `${val} 점`
+          return console.log(`${val}점 부여.`);
+        })
+      })
+    });
+
+    function doRatingStar(evtEl, tarEl, f) {
+      if (tarEl.dataset.name == 'star') {
+        Array.from(evtEl.children).map(x => x.classList.remove('on'));
+        const rating = prevAll(tarEl).concat(tarEl);
+        rating.forEach(x => x.classList.add('on'));
+        evtEl.dataset.rating = rating.length;
+        return f(rating.length)
+      }
+    }
+
+    function prevAll(element) {
+      let result = [];
+      while (element = element.previousElementSibling)
+        result.push(element);
+      return result;
+    }
+  </script>
+
+  <h1>별점 리스트</h1>
+  <div class="ratingBox">
+    <div class="card">
+      <h2>name1</h2>
+      <div class="parTar">
+        <p class="target" data-name="name1"></p>
+      </div>
+    </div>
+    <div class="card">
+      <h2>name2</h2>
+      <div class="parTar">
+        <p class="target" data-name="name2"></p>
+      </div>
+    </div>
+    <div class="card">
+      <h2>name3</h2>
+      <div class="parTar">
+        <p class="target" data-name="name3"></p>
+      </div>
+    </div>
+
+  </div>
+  <script>
+    console.log('hello');
+    const userDate = [{
+        name: 'name1',
+        rating: (Math.random() * 5).toFixed(1),
+      },
+      {
+        name: 'name2',
+        rating: (Math.random() * 5).toFixed(1),
+      },
+      {
+        name: 'name3',
+        rating: (Math.random() * 5).toFixed(1),
+      },
+    ];
+
+    const arr = Array.from(document.querySelectorAll('.ratingBox *')).filter(x => {
+      if (x.classList.contains('target')) return x
+    });
+
+    userDate.map((x, i) => {
+      if (x.name == arr[i].getAttribute('data-name')) {
+        changeWidth(arr[i], x)
+      }
+    });
+
+    function changeWidth(tar, data) {
+      return tar.style.width = `${data.rating * 20}%`;
+    }
+  </script>
+
+
+
+
+
+
+</body>
+
+</html>

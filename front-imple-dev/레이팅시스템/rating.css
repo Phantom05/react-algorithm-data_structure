@@ -1,0 +1,50 @@
+
+
+/* 점수 부여 */
+.star{
+  margin: 0 5px;
+  height: 18px;
+  cursor: pointer;
+}
+.rating .star:after{
+  content: url(icon_star2.gif) 
+}
+.rating .star.on:after{
+  content: url(icon_star.gif);
+}
+
+
+
+
+
+
+
+/* 점수 표현 */
+.parTar {
+  background: url(icon_star2.gif) 0px 0px;
+  width: 90px;
+  height: 18px;
+  overflow: hidden;
+}
+
+.target {
+  width: 0%;
+  background: url(icon_star.gif) 0px 0px;
+  margin: 0px;
+  height: 18px;
+}
+
+.card {
+  border: 1px solid #bbbbbb;
+  padding: 20px;
+  margin: 10px 0;
+  width: 450px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.card:hover {
+  background: black;
+  color: #fff;
+}
