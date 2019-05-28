@@ -1,14 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
+
 <body>
   <script>
     console.log(`hello world`);
+
+
+    function rot13(message) {
+      const alpa = 'abcdefghijklmnopqrstuvwxyz';
+      const exep = '!@#$%^&*()+-.'
+      return message.split('').map(x => {
+        let idx = null;
+        if (Number(x) || Number(x) == '0' || exep.includes(x)) {
+          return x
+        } else {
+          return (alpa.indexOf(x) == -1) ? getStrUpperOrLower(alpa, x) : getStrUpperOrLower(alpa, x)
+        }
+      }).join('')
+    }
+
+    function getStrUpperOrLower(alpa, x) {
+      let idx = null;
+      if (alpa.indexOf(x) == -1) {
+        idx = (alpa.length) - (alpa.indexOf(x.toLowerCase()) + 13)
+        return (idx < 0) ? alpa[Math.abs(idx)].toUpperCase() : alpa[alpa.indexOf(x.toLowerCase()) + 13].toUpperCase()
+      } else {
+        idx = (alpa.length) - (alpa.indexOf(x) + 13);
+        return (idx <= 0) ? alpa[Math.abs(idx)] : alpa[alpa.indexOf(x) + 13]
+      }
+    }
+
+    function rot13(message) {
+      var alpabet = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      var cipher = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM"
+      return message.replace(/[a-z]/gi, c => cipher[alpabet.indexOf(c)])
+    }
+
+    var rot13 = str => str.replace(/[a-z]/gi, letter => String.fromCharCode(letter.charCodeAt(0) + (letter.toLowerCase() <= 'm' ? 13: -13)));
+
+    console.log(
+      rot13('n')
+    );
+
+    // 1aax 
   </script>
 </body>
+
 </html>
