@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    console.log(`hello world`);
+
+    function convertSecondsToHours(seconds) {
+      let hour = parseInt(seconds / 3600);
+      let min = parseInt((seconds % 3600) / 60);
+      let sec = seconds % 60;
+      return `${getNumbersDoubleDigit(hour)}:${getNumbersDoubleDigit(min)}:${getNumbersDoubleDigit(sec)}`
+    }
+
+    function getNumbersDoubleDigit(time) {
+      return (time < 10) ? `0${time}` : time
+    }
+    console.log(
+      convertSecondsToHours(0)
+    );
+
+
+    var moveZeros = function (arr) {
+      let newArr = [];
+      
+      arr.forEach((x,idx) => {
+        if(x === 0 && typeof x =='number'){
+          console.log(arr.slice(idx,idx+1));
+          newArr.push(arr.slice(idx,idx+1)[0])
+        }
+      });
+      console.log(newArr);
+      return arr.concat(newArr)
+    }
+
+  
+    console.log(
+      moveZeros([ 9, 0, 0, 9, 1, 2, 0, 1, 0, 1, 0, 3, 0, 1, 9, 0, 0, 0, 0, 9 ])
+    );
+
+  </script>
+</body>
+
+</html>
