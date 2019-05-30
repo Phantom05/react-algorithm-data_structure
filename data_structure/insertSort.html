@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+  
+    console.log(`hello world`);
+
+
+    var insertOnSort = function(array){
+      var i = 1,j, temp;
+      for(i;i<array.length;i++){
+        temp = array[i]; 
+        for(j = i - 1; j >= 0 && temp < array[j]; j--){ 
+          array[j+1] = array[j]; 
+        }
+        array[j+1] = temp;
+      }
+      return array;
+    }  
+
+    //
+
+    console.log(
+      insertOnSort([5, 6, 1, 2, 4, 3])
+    );
+    // 5 1 6 2 4 3 j==0
+
+
+    var arr = [1,2,3];
+    var temp = arr[1]
+    arr[1] = arr[2];
+    console.log(arr);
+    </script>
+</body>
+</html>
