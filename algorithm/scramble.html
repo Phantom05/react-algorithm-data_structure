@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function scramble(str1, str2) {
+      let str1Split = str1.split(''),res = [];
+      str2.split('').forEach((x) => {
+        if (str1Split.includes(x)) {
+          res.push(x)
+          str1Split.splice(str1Split.indexOf(x), 1);
+        }
+      })
+      return res.join('') == str2
+    }
+    console.log(
+      scramble('scriptjavx', 'javascript')
+    );
+  </script>
+</body>
+
+</html>
