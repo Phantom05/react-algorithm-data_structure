@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    // 10진수가 전달되면 16진수로 반환.
+    // 16진수 0 1 2 3 4 5 6 7 8 9 10 a b c d e f
+    function rgb(...rgb) {
+      const u = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 'A', 'B', 'C', 'D', 'E', 'F'];
+      return rgb.map(x => (x >= 255) ? "FF" : (x < 0) ? "00" : (
+        `${u[Math.floor(x/16)]}${u[x%16]}`
+      )).join("")
+    }
+    console.log(
+      rgb(300, 255, 255)
+    );
+    console.log(
+      rgb(173, 255, 47)
+    );
+    // ADFF2F
+  </script>
+</body>
+
+</html>

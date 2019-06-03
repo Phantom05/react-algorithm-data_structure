@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function domainName(url) {
+      const parseArr= ['https://www.','http://www.','http://','www.','https://'];
+      parseArr.filter(x=>{
+        if(!url.indexOf(x)){
+          url = url.replace(x,"");
+          url = url.replace(url.substr(url.indexOf('.')),"");
+        }
+      });
+      return url
+    }
+
+    console.log(
+      domainName("http://github.com/carbonfive/raygun")
+    );
+    console.log(
+      domainName("www.xakep.ru")
+    );
+  </script>
+</body>
+
+</html>
