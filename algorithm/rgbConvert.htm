@@ -19,6 +19,19 @@
         `${u[Math.floor(x/16)]}${u[x%16]}`
       )).join("")
     }
+
+    let rgb = (r, g, b) => [r, g, b].map((item) => item >= 255 ? 'FF' : item <= 0 ? '00' : item.toString(16).toUpperCase()).join('')
+
+    function rgb(r, g, b) {
+      return toHex(r) + toHex(g) + toHex(b);
+    }
+
+    function toHex(d) {
+      if (d < 0) {return "00";}
+      if (d > 255) {return "FF";}
+      return ("0" + (Number(d).toString(16))).slice(-2).toUpperCase()
+    }
+
     console.log(
       rgb(300, 255, 255)
     );
