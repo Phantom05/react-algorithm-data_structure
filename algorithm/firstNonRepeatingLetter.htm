@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // 다 짝수면 '' 가 나오면 됨, 전체를 훑고 맨앞의 혼자인것만. 대소문자 상관없음.
+    function firstNonRepeatingLetter(s) {
+      let str = s.replace(/\s/g, "");
+      let res = str;
+      im: while (1) {
+        for (let i = 0; i < res.length; i++) {
+          if (res.substr(1).toLowerCase().includes(res[i].toLowerCase())) {
+            let regex = new RegExp(`${res[i]}`, 'gi');
+            res = res.replace(regex, "");
+            break;
+          } else {
+            res = res[i];
+            break im;
+          }
+        }
+      }
+      return res
+    }
+
+    function firstNonRepeatingLetter(s) {
+      for (var i in s) {
+        if (s.match(new RegExp(s[i], "gi")).length === 1) {
+          return s[i];
+        }
+      }
+      return '';
+    }
+
+    function firstNonRepeatingLetter(s) {
+      var t = s.toLowerCase();
+      for (var x = 0; x < t.length; x++)
+        if (t.indexOf(t[x]) === t.lastIndexOf(t[x]))
+          return s[x];
+      return "";
+    }
+
+    const firstNonRepeatingLetter = s =>
+      s[[...s.toLowerCase()].findIndex((c, _, s) => s.indexOf(c) === s.lastIndexOf(c))] || "";
+
+    console.log(
+      firstNonRepeatingLetter("Go hang a salami, I'm a lasagna hog!"),
+      // firstNonRepeatingLetter("hello world, eh?")
+    );
+  </script>
+</body>
+
+</html>
