@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <script src="./_.js"></script>
+  <script>
+    function _curry(fn){
+      return function(a){
+        return function(b){
+          return fn(a,b);
+        }
+      }
+    }
+
+    var add = _curry(function(a,b){
+      return a+b;
+    });
+
+    var add10 = add(10);
+    console.log(
+      add10(5)
+    );
+  </script>
+</body>
+</html>
