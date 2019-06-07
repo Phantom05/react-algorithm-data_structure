@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .page_pagination_arrow{
+      border: 1px solid red;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="page_pagination_arrowBox">
+    <a href="#none" class="page_pagination_arrow prevArrow" data-page="active">
+      <img src="./../Style/Img/icon/page_arrow.png" alt="이전페이지" class="page_pagination_prev">
+    </a>
+    <a href="#none" class="page_pagination_arrow nextArrow" data-page="default">
+      <img src="./../Style/Img/icon/page_arrow.png" alt="다음페이지" class="page_pagination_next">
+    </a>
+  </div>
+
+
+  <script>
+    Array.from(document.querySelectorAll('.page_pagination_arrow')).map(elm=>{
+      elm.addEventListener('click',function(e){
+        doAhrefClick(elm);
+      })
+    });
+
+    function doAhrefClick(elm){
+      if(elm.getAttribute('data-page') == "active"){
+        console.log(elm.children);
+      }else{
+        console.log(elm.children);
+      }
+    }
+
+    // document.querySelector('.page_pagination_arrow').addEventListener('click', function (e) {
+    //   // ...
+    // });
+
+    // document.querySelector('.page_pagination_next').addEventListener('click', function (e) {
+    //   console.log(e.currentTarget, 'next son');
+    // });
+
+    // document.querySelector('.page_pagination_arrowBox').addEventListener('click', function (e) {
+    //   e.preventDefault();
+    //   console.dir(this);
+    //   if(e.target.classList.contains('page_pagination_arrow.prevArrow')){
+    //     console.log('in',e.target);
+    //   }else if (e.target.classList.contains('page_pagination_next')){
+    //     console.log('in',e.target);
+    //   }
+
+    // }, true);
+    
+
+    function _find(current, elm, opt = false) {
+      let element = document.querySelector(elm);
+      let allChild = document.querySelectorAll(`.${current.getAttribute('class')} *`);
+      let res = null;
+      Array.from(allChild).forEach(x => {
+        if (x == element) {
+          res = element;
+        }
+      })
+      return res
+    }
+
+    // console.log(_find(this, '[data-page="active"]').getAttribute('data-page'));
+    // if (_find(this, '[data-page="active"]').getAttribute('data-page') == "active") {
+    //   console.log('in');
+    // }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://unpkg.com/scrollreveal"></script>
+
+  <style>
+    .box {
+      height: 500px;
+      border: 1px solid red;
+      background: orange;
+      margin: 5px 0;
+
+    }
+
+    .widget_ul {
+      overflow: hidden;
+    }
+
+    .widget {
+      float: left;
+      list-style: none;
+      border: 1px solid red;
+      margin: 5px;
+      padding: 5px;
+      background: black;
+      color: #fff;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="box">
+    hello
+    <ul class="widget_ul">
+      <li class="widget">Hello</li>
+      <li class="widget">Hello</li>
+      <li class="widget">Hello</li>
+      <li class="widget">Hello</li>
+      <li class="widget">Hello</li>
+    </ul>
+  </div>
+  <div class="box">
+    hello
+  </div>
+  <div class="box">
+    hello
+  </div>
+  <div class="box target" data-name="target">
+    <h1>target</h1>
+  </div>
+  <div class="box">
+    hello
+  </div>
+  <div class="box">
+    hello
+  </div>
+
+
+
+  <script>
+
+
+
+    var slideUp = {
+      distance: '150%',
+      origin: 'bottom',
+      opacity: null
+    };
+    ScrollReveal().reveal('.box', {
+      delay: 375,
+      duration: 500,
+      reset: true,
+      easing: 'ease-in'
+    });
+  </script>
+</body>
+
+</html>
