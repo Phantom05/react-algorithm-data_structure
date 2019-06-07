@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    function prime(num) {
+      let res=[];
+      for(let i = 2 ; i <= num; i ++){
+        let prime = true;
+        for(let j = 2; j < i; j++){
+          if(i % j == 0) prime = false;
+        }
+        if(prime) res.push(i)
+      }
+      return res;
+    }
+    console.log(
+      prime(1)
+    );
+  </script>
+</body>
+
+</html>
