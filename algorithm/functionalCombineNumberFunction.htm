@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    zero = (f) => comb(0, zero, f);
+    one = (f) => comb(1, one, f);
+    two = (f) => comb(2, two, f);
+    three = (f) => comb(3, three, f);
+    four = (f) => comb(4, four, f);
+    five = (f) => comb(5, five, f);
+    six = (f) => comb(6, six, f);
+    seven = (f) => comb(7, seven, f);
+    eight = (f) => comb(8, eight, f);
+    nine = (f) => comb(9, nine, f);
+    minus = (n1) => (n2) => n2 - n1;
+    times = (n1) => (n2) => n2 * n1;
+    dividedBy = (n1) => (n2) => Math.floor(n2 / n1);
+    plus = (n1) => (n2) => n2 + n1;
+    comb = (n, nFn, f) => (f) ? f(nFn()) : n;
+
+
+    console.log(
+      seven(times(five())), four(plus(nine())), eight(minus(three())), six(dividedBy(two())),
+    );
+
+    //
+    var n = function (digit) {
+      return function (op) {
+        return op ? op(digit) : digit;
+      }
+    };
+    var zero = n(0);
+    var one = n(1);
+    var two = n(2);
+    var three = n(3);
+    var four = n(4);
+    var five = n(5);
+    var six = n(6);
+    var seven = n(7);
+    var eight = n(8);
+    var nine = n(9);
+
+    function plus(r) {
+      return function (l) {
+        return l + r;
+      };
+    }
+
+    function minus(r) {
+      return function (l) {
+        return l - r;
+      };
+    }
+
+    function times(r) {
+      return function (l) {
+        return l * r;
+      };
+    }
+
+    function dividedBy(r) {
+      return function (l) {
+        return l / r;
+      };
+    }
+
+    //
+    'zero one two three four five six seven eight nine'.split(' ').forEach(
+      (mth, num) => this[mth] = (f = val => val) => f(num)
+    );
+
+    let plus = (r) => (l) => l + r;
+    let minus = (r) => (l) => l - r;
+    let times = (r) => (l) => l * r;
+    let dividedBy = (r) => (l) => l / r;
+
+    //
+    const [
+      zero,
+      one,
+      two,
+      three,
+      four,
+      five,
+      six,
+      seven,
+      eight,
+      nine
+    ] = Array.from({
+      length: 10
+    }).map((item, i) => ((f) => f ? f(i) : i));
+
+    const [
+      plus,
+      minus,
+      times,
+      dividedBy
+    ] = ['+', '-', '*', '/'].map(op => Function('b', `return a => a ${op} b`));
+  </script>
+</body>
+
+</html>
