@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    //숫자 얻으면 문자 반환. 파스칼을 스네이킹으로
+    function toUnderscore(string) {
+      if(!isNaN(string)) return string+"";
+      const reg = /([A-Z])/g;
+      return string.replace(reg,(val)=>"_"+val.toLocaleLowerCase()).substr(1);
+    }
+    toUnderscore=(string) =>
+      (!isNaN(string))? string+"":string.replace(/([A-Z])/g,(val)=>"_"+val.toLocaleLowerCase()).substr(1);
+    
+    console.log(
+      toUnderscore("TestController")
+    );
+
+  </script>
+</body>
+
+</html>
