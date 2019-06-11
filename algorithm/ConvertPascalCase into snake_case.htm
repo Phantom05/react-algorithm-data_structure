@@ -14,17 +14,31 @@
   <script>
     //숫자 얻으면 문자 반환. 파스칼을 스네이킹으로
     function toUnderscore(string) {
-      if(!isNaN(string)) return string+"";
+      if (!isNaN(string)) return string + "";
       const reg = /([A-Z])/g;
-      return string.replace(reg,(val)=>"_"+val.toLocaleLowerCase()).substr(1);
+      return string.replace(reg, (val) => "_" + val.toLowerCase()).substr(1);
     }
-    toUnderscore=(string) =>
-      (!isNaN(string))? string+"":string.replace(/([A-Z])/g,(val)=>"_"+val.toLocaleLowerCase()).substr(1);
-    
+    toUnderscore = (string) =>
+      (!isNaN(string)) ? string + "" : string.replace(/([A-Z])/g, (val) => "_" + val.toLowerCase()).substr(1);
+
     console.log(
       toUnderscore("TestController")
     );
 
+
+
+    function toUnderscore(string) {
+      return string.toString().split(/(?=[A-Z])/).join('_').toLowerCase();
+    };
+    console.log(
+      toUnderscore("TestController")
+    );
+
+    function toUnderscore(string) {
+      return ('' + string).replace(/(.)([A-Z])/g, '$1_$2').toLowerCase();
+    }
+
+    let toUnderscore = s => (s + '').replace(/.(?=[A-Z])/g, '$&_').toLowerCase();
   </script>
 </body>
 
