@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // function LCS(x, y) {
+    //   let reg = new RegExp(`([${y}])(?=[${y[0]}])`,'g');
+    //   console.log(
+    //     (x.match(reg))?x.match(reg).join(""):""
+    //   );
+    // }
+    function LCS(x, y) {
+      let tmpArr= "";
+      x.split("").forEach(str=>{
+        if(y.indexOf(str) != -1){
+          tmpArr += str
+        }
+      })
+      
+      console.log(
+        tmpArr.substr(tmpArr.indexOf(y[0]))
+      );
+    }
+    console.log(
+      LCS("anothertest", "notatest")
+    ); //nottest
+
+    // console.log(
+    //   LCS("132535365", "123456789")
+    // ); //12356
+    // console.log(
+    //   LCS("1234", "3412")
+    // ); //12 or 34
+    // console.log(
+    //   LCS("nottest", "notatest")
+    // ); //12 or 34
+    // console.log(
+    //   LCS("a", "b")
+    // ); //12 or 34
+
+
+  </script>
+</body>
+
+</html>
