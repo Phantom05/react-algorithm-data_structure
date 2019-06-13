@@ -17,20 +17,39 @@
     //   );
     // }
     function LCS(x, y) {
-      let tmpArr= "";
+      let tmpArr= "",idx = 1;
       x.split("").forEach(str=>{
-        if(y.indexOf(str) != -1){ 
-          tmpArr += str
-        }
+
+        y.split("").forEach((tar,arrIdx)=>{
+
+          if(idx){
+            if(tmpArr.length){
+                
+              }
+              
+            if(str !== tar){
+                idx = 0;
+            }else{
+              tmpArr += str
+            }
+
+          }
+
+          if(y.length == arrIdx){
+            idx = 1;
+          }
+  
+
+        })
+
       })
-      
-      console.log(
-        tmpArr.substr(tmpArr.indexOf(y[0]))
-      );
     }
     console.log(
       LCS("anothertest", "notatest")
     ); //nottest
+
+
+
 
     // console.log(
     //   LCS("132535365", "123456789")
@@ -40,12 +59,12 @@
     // ); //12 or 34
     // console.log(
     //   LCS("nottest", "notatest")
-    // ); //12 or 34
+    // ); //nottest
     // console.log(
     //   LCS("a", "b")
-    // ); //12 or 34
+    // ); ""
 
-
+// https://www.codewars.com/kata/5c80b55e95eba7650dc671ea/train/javascript
   </script>
 </body>
 
