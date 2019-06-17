@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+
+  <script>
+  
+  // 스택은 실생활에도 많이 사용되는 자료구조 중 하나, 연결 리스트인데, 뒤로 넣고 뒤로만 뺄 수 있습니다.
+  // push, pop을 말하나봄.
+
+  function a(data){
+    b(data +1);
+  }
+  function b(data){
+    c(data +1);
+  }
+  function c(data){
+    console.log('스택이 내부적으로 사용되었습니다'+data);
+  }
+  
+  
+  function d(data){
+    if(data ==50){
+      console.log('재귀 함수의 스택입니다.',data);
+    }else{
+      d(data+1);
+    }
+  }
+  d(1);
+
+
+  var Stack = (function(){
+    function Stack(){
+      this.top = null;
+      this.count = 0;
+    }
+    function Node(data){
+      this.data = data;
+      this.next = null;
+    }
+    Stack.prototype.push = function(data){
+      var node = new Node(data);
+      node.next = this.top;
+      this.top = node;
+      return ++this.count;
+    }
+    Stack.prototype.pop = function(){
+      if(!this.top){
+        return false;
+      }
+      var data = this.top.data;
+      this.top = this.top.next;
+      //예전 this.top의 메모리 정리
+      this.count--;
+      return data;
+    };
+    Stack.prototype.stackTop = function(){
+      return this.top.data;
+    }
+
+    return Stack;
+  })();
+
+  var stack = new Stack();
+  console.log(stack);
+  console.log(
+    stack.push(1)
+  );
+  console.log(stack);
+
+  console.log(
+    stack.push(2)
+  );
+  console.log(
+    stack.push(3)
+  );
+  console.log(
+    stack.pop()
+  );
+  console.log(
+    stack.pop()
+  );
+
+
+// 스택 이용
+// 넣고 값을 업데이트하고 기존의 값을 빼놓고
+// 다음 값이 들어오면 기존의 값을 다시 기존의 값으로 빼놓고 들어온값으로 최신값을 업데이트.
+
+  </script>
+</body>
+</html>
