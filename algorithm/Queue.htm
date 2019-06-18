@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    // Queue는 뒤에서 들어가고 앞에서 빠지는것.
+    var Queue = (function(){
+      function Queue(){
+        this.count = 0;
+        this.head = null;
+        this.rear = null;
+      }
+      function Node(data){
+        this.data = data;
+        this.next = null;
+      }
+
+      // 뒤에서 들어감
+      Queue.prototype.enqueue = function(data){
+        //뒤에서 들어감.
+        var node = new Node(data);
+        if(!this.head){
+          this.head = node;
+        }else{
+          this.rear.next = node;
+        }
+        this.rear = node;
+        return ++this.count;
+      }
+
+      // dequeue 앞에서 빠짐.
+      Queue.prototype.dequeue = function(){
+        if(!this.head){ // stack underflow 방지
+          return false;
+        }
+        var data =this.head.data;
+        this.head= this.head.next;
+        // this.head 메모리 클린
+        --this.count;
+        return data;
+      };
+
+      Queue.prototype.front = function(){
+        return this.head && this.head.data;
+      }
+      return Queue
+    })();
+
+    var queue = new Queue();
+    queue.enqueue(1);
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.dequeue();
+    queue.dequeue();
+    console.log(queue);
+  </script>
+</body>
+</html>

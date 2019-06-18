@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <!-- <script src="https://momentjs.com/downloads/moment-timezone-with-data-1970-2030.js"></script> -->
+  <!-- <script src="https://momentjs.com/downloads/moment-timezone-with-data.js"></script> -->
+</head>
+
+<body>
+
+  <script>
+    // Stack은 들어오는대로 쌓이고 늦게들어온대로 빠진다.
+    // Queue는 뒤에서 들어가고 앞에서 빠지는것.
+    // 연결리스트는 배열을 말함. 찾을수있고 넣을수있고 뺄수있고.
+
+    // var test = (function(){
+    //   function hello(){
+    //     this.name ="hello"
+    //   }
+    //   function ha(data){
+    //     this.data = data
+    //   }
+
+    //   hello.prototype.aaaa = function(value){
+    //     var node = new ha();
+    //     return ha
+    //   }
+
+    //   return hello
+    // });
+    // var wow = new test();
+    // console.dir(wow.aaaa());
+
+    // axios({
+    //     method: 'get',
+    //     url: 'http://worldtimeapi.org/api/ip/61.36.134.210',
+    //   })
+    //   .then(function (response) {
+    //     console.log(response);
+    //     console.log(response.data.timezone);
+    //   });
+
+    let Arr = (function () {
+      function inArr() {
+        this.name = "wow"
+        this.count = 0;
+      }
+
+      inArr.prototype.setName = function (name) {
+          this.name = name
+        }
+      inArr.prototype.add = function(count){
+        return ++this.count;
+      }
+      return inArr
+    })();
+
+    var bb = new Arr();
+    console.log(
+      bb.add(5)
+    );
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>
