@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+  <script>
+    // Tree
+    /*
+      가장 위에 있는 Node를 Root(뿌리)라고 하고, 가장 아래있는 Node를 leaf(잎)이라고 함.
+      root도 leaf도 아닌 노드들은 내부 노드라고 부름.
+      노드와 노드 사이를 이어주는 것은 branch나 edge라고 부름. 시작점은 반드시 root여야함.
+      document부터 마지막 Text까지 가는 길을 Path라고 부름.
+      부모노드에서 자식 노드 사이의 edge 개수를 높이(height)라고 부름.
+      트리를 거치는 수를 height라고함 
+
+
+      (O(lgn)) 사실 일반 트리도 모두 이진 트리로 변형할 수 있지만 그 방법은 여기서 다루지 않겠습니다. 궁금하시면 개인적으로 메일 주세요.
+
+      이진 검색트리
+    */
+
+    var Tree = (function () {
+      function Tree() {
+        this.count = 0;
+        this.root;
+      }
+
+      function Node(data) {
+        this.data = data;
+        this.left;
+        this.right;
+      }
+
+      function _insert(root, node) {
+        if (!root) return node;
+        if (node.data < root.data) {
+          root.left = _insert(root.left, node);
+          return root;
+        } else {
+          root.right = _insert(root.right, node);
+          return root;
+        }
+        return root;
+      }
+
+      Tree.prototype.add = function (data) {
+        var node = new Node(data);
+        if (this.count == 0) {
+          this.root = node;
+        } else {
+          _insert(this.root, node);
+        }
+        return ++this.count;
+      };
+
+      function _get(data, node) {
+        if (node) {
+          if (data < node.data) {
+            return _get(data, node.left);
+          } else if (data > node.data) {
+            return _get(data, node.right);
+          } else {
+            return node;
+          }
+        } else {
+          return null;
+        }
+      }
+
+      Tree.prototype.get = function (data) {
+        if (this.root) {
+          return _get(data, this.root);
+        } else {
+          return null;
+        }
+      };
+
+      function _remove(root, data) {
+        var newRoot, exchange, temp;
+        if (!root) return false;
+        if (data < root.data) {
+          root.left = _remove(root.left, data);
+        } else if (data > root.data) {
+          root.right = _remove(root.right, data);
+        } else {
+          if (!root.left) {
+            newRoot = root.right;
+            // root 메모리 정리
+            return newRoot;
+          } else if (!root.right) {
+            newRoot = root.left;
+            // root 메모리 정리
+            return newRoot;
+          } else {
+            exchange = root.left;
+            while (exchange.right) exchange = exchange.right;
+            temp = root.data;
+            root.data = exchange.data;
+            exchange.data = temp;
+            root.left = _remove(root.left, exchange.data);
+          }
+        }
+
+        Tree.prototype.remove = function (key) {
+          var node = _remove(this.root, key);
+          if (node) {
+            this.root = node;
+            this.count--;
+            if (this.count == 0) this.root = null;
+          }
+          return true;
+        };
+        return root;
+      }
+      
+      return Tree;
+    })();
+
+
+    var tree = new Tree();
+    console.log(
+      tree.add(5)
+    );
+    console.log(
+      tree.add(3)
+    );
+    console.log(
+      tree.add(4)
+    );
+    console.log(
+      tree.add(2)
+    );
+    console.log(
+      tree.add(7)
+    );
+    console.log(
+      tree.add(6)
+    );
+
+    // 이진트리의 생성은 이런식으로 진행 됨.
+
+    console.log(
+      tree.get(5),'get'
+    );
+    // console.log(
+    //   tree.root.left.left.data
+    // );
+    // console.log(
+    //   tree.root.left.right.data
+    // );
+    console.log(
+      tree
+    );
+
+  </script>
+</body>
+
+</html>

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title>S</title>
 
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <!-- <script src="https://momentjs.com/downloads/moment-timezone-with-data-1970-2030.js"></script> -->
@@ -18,6 +18,17 @@
     // Stack은 들어오는대로 쌓이고 늦게들어온대로 빠진다.
     // Queue는 뒤에서 들어가고 앞에서 빠지는것.
     // 연결리스트는 배열을 말함. 찾을수있고 넣을수있고 뺄수있고.
+    /*
+    Tree
+    가장 위에 있는 Node를 Root(뿌리)라고 하고, 가장 아래있는 Node를 leaf(잎)이라고 함.
+      root도 leaf도 아닌 노드들은 내부 노드라고 부름.
+      노드와 노드 사이를 이어주는 것은 branch나 edge라고 부름. 시작점은 반드시 root여야함.
+      document부터 마지막 Text까지 가는 길을 Path라고 부름.
+      부모노드에서 자식 노드 사이의 edge 개수를 높이(height)라고 부름.
+      트리를 거치는 수를 height라고함 
+    */
+
+    // 이진 트리
 
     // var test = (function(){
     //   function hello(){
@@ -67,9 +78,13 @@
     );
 
 
-
-
-
+    function de(root, node){
+      if(!root) return node
+      
+    }
+    console.log(
+      de(null,'hello')
+    );
 
 
   </script>
