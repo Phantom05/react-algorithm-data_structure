@@ -108,8 +108,10 @@
             root.left = _remove(root.left, exchange.data);
           }
         }
+        return root;
+      }
 
-        Tree.prototype.remove = function (key) {
+      Tree.prototype.remove = function (key) {
           var node = _remove(this.root, key);
           if (node) {
             this.root = node;
@@ -118,8 +120,7 @@
           }
           return true;
         };
-        return root;
-      }
+        
       
       return Tree;
     })();
@@ -150,14 +151,20 @@
     console.log(
       tree.get(5),'get'
     );
-    // console.log(
-    //   tree.root.left.left.data
-    // );
-    // console.log(
-    //   tree.root.left.right.data
-    // );
+    // 이진트리 search
+
+    console.log(
+      tree.root.left.left.data
+    );
+    console.log(
+      tree.root.left.right.data
+    );
     console.log(
       tree
+    );
+
+    console.log(
+      tree.remove(3)
     );
 
   </script>
