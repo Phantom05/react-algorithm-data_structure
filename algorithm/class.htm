@@ -192,6 +192,58 @@
     // console.log(test.area);
     // console.log(test.name);
     // console.log(test);
+
+
+    class Module {
+      constructor() {}
+      querySelectorAll(elm) {
+        return Array.from(document.querySelectorAll(elm))
+      }
+
+      _filter(users, predi) {
+        let new_list = [];
+        this._each(users, function (val) {
+          if (predi(val)) new_list.push(val);
+        })
+        return new_list;
+      }
+
+      _map(list, mapper) {
+        let new_list = [];
+        this._each(list, function (val) {
+          new_list.push(mapper(val))
+        });
+        return new_list
+      }
+
+      _each(list, iter, str = 0, len = list.length) {
+        for (let i = str; i < len; i++) iter(list[i]);
+        return list
+      };
+    }
+
+    class somePage extends Module {
+      constructor() {
+        super();
+        this.init();
+      }
+      async init() {
+        this.setVars();
+      }
+
+      setVars() {
+        this.list = this.querySelectorAll('.list');
+      }
+
+      viewConsole() {
+        this._each(this.list,(val) =>console.log(val));
+        this._filter(this.list, (val)=> val.textContent =="MENU1")
+      }
+    }
+
+    let page = new somePage();
+    page.viewConsole();
+
   </script>
 </body>
 

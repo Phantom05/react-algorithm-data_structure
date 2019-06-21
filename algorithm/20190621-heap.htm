@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <ul>
+    <li class="list">MENU1</li>
+    <li class="list">MENU2</li>
+    <li class="list">MENU3</li>
+    <li class="list">MENU4</li>
+    <li class="list">MENU5</li>
+  </ul>
+  <img src="https://gmlwjd9405.github.io/images/data-structure-heap/types-of-heap.png" alt="" width="500">
+  <script>
+    /*
+      힙은 트리의 일종, 최대 힙과 최소 힙이 있음.
+      최소힙은 Root가 자식보다 작으면 됩니다. 완전 트리란 무엇일까요?
+      바로 노드가 순서대로 들어있는 트리가 완전 트리입니다. 왼쪽에서 부터 차곡차곡 들어가는 트리.
+      루트가 자식보다 커야함.
+      배열로도 확인 가능함.
+
+      완전 이진 트리의 일종으로 우선순위 큐를 위해 만들어진 자료구조이다.
+      여러개의 값들 중에서 최댓값이나 최솟값을 빠르게 찾아내도록 만들어진 자료구조이다.
+      힙은 일종의 반정렬 상태(느슨한 정렬 상태)를 유지한다.
+        큰 값이 상위 레벨에 있고 작은 값 이 하위 레벨에 있다는 정도
+        간단히 말하면 부모 노드의 키 값이 자식 노드의 키 값보다 항상큰 이진 트리를 말한다.
+      힙 트리에서는 중복된 값을 허용한다.
+
+      힙 정렬
+      가장 큰 값 또는 가장 작은 값 순서로 빠짐.
+      시간 복잡도는 데이터를 넣을때도 O(lgN) 뺄대도 O(lgN)
+    */
+
+    var Heap = (function () {
+      function Heap() {
+        this.arr = [];
+      }
+
+      function reheapUp(self, idx) {
+        if (idx) {
+          var parent = parseInt((idx - 1) / 2);
+          if (self.arr[idx] > self.arr[parent]) {
+            var temp = self.arr[idx];
+            self.arr[idx] = self.arr[parent];
+            self.arr[parent] = temp;
+            reheapUp(self, parent);
+          }
+        }
+      }
+
+      function reheapDown(self, idx) {
+        var left = 0;
+        var right = 0;
+        var large;
+        if (idx * 2 + 1 < self.arr.length) {
+          left = self.arr[idx * 2 + 1];
+          if (idx * 2 + 2 < self.arr.length - 1) {
+            right = self.arr[idx * 2 + 2];
+          }
+          if (left > right) {
+            large = idx * 2 + 1;
+          } else {
+            large = idx * 2 + 2;
+          }
+          if (self.arr[idx] < self.arr[large]) {
+            var temp = self.arr[idx];
+            self.arr[idx] = self.arr[large];
+            self.arr[large] = temp;
+            reheapDown(self, large);
+          }
+        }
+      }
+
+      Heap.prototype.insert = function (number) {
+        var last = this.arr.length;
+        this.arr[last] = number;
+        // debugger;
+        reheapUp(this, last);
+        return true;
+      };
+
+      Heap.prototype.delete = function () {
+        if (this.arr.length === 0) return false;
+        var del = this.arr[0];
+        this.arr[0] = this.arr.pop();
+        reheapDown(this, 0);
+        return del;
+      };
+
+      Heap.prototype.sort = function () {
+        var sort = [];
+        var count = this.arr.length;
+        for (var i = 0; i < count; i++) {
+          sort.push(this.delete());
+        }
+        return sort;
+      };
+      return Heap
+
+
+    })();
+
+    var heap = new Heap();
+    heap.insert(5);
+    heap.insert(3);
+    // heap.insert(7);
+    // heap.insert(4);
+    // heap.insert(2);
+    // heap.insert(6);
+    console.log(heap.arr);
+    // console.log(heap.sort());
+  </script>
+</body>
+
+</html>
