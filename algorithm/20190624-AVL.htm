@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    var AVL = (function () {
+      function AVL() {
+        this.count = 0;
+        this.root;
+        this.taller;
+        this.shorter;
+        this.success;
+      }
+
+
+      function Node(data) {
+        this.data = data;
+        this.left;
+        this.right;
+        this.bal = 0; // 왼쪽과 오른쪽의 차이를 저장
+      }
+      // 삽입부 코드를 여기에
+      // 삭제부 코드를 여기에
+      AVL.prototype.insert = function (data) {
+        this.taller = false;
+        var node = new Node(data);
+        this.root = this._insert(this.root, node);
+        this.count++;
+      };
+
+      AVL.prototype.delete = function (key) {
+        this.shorter = false;
+        this.success = false;
+        var newRoot = this._delete(this.root, key);
+        if (this.success) {
+          this.root = newRoot;
+          this.count--;
+          return true;
+        }
+        return false;
+      };
+
+      AVL.prototype.search = function (key) {
+        if (this.root) {
+          return this._search(key, this.root);
+        }
+        return false;
+      };
+
+      AVL.prototype._search = function (key, root) {
+        if (root) {
+          if (key < root.data) {
+            return this._search(key, root.left);
+          } else if (key > root.data) {
+            return this._search(key, root.right);
+          } else {
+            return root;
+          }
+        }
+        return;
+      };
+
+      AVL.prototype._rotateLeft = function (root) {
+        var temp = root.right;
+        root.right = temp.left;
+        temp.left = root;
+        return temp;
+      };
+
+      AVL.prototype._rotateRight = function (root) {
+        var temp = root.left;
+        root.left = temp.right;
+        temp.right = root;
+        return temp;
+      };
+
+      return AVL;
+    })();
+    // 여기까지가 정의부.
+
+    AVL.prototype._insert = function (root, node) { // 내부적 insert 메소드
+      if (!root) { // 트리의 말단 부분에 도달하면 바로 넣는다.
+        root = node;
+        this.taller = true;
+        console.log('no root', root);
+        return root;
+      }
+      if (node.data < root.data) { // 새 값이 루트 값보다 작으면
+        root.left = this._insert(root.left, node);
+        console.log('go left', this.taller, root.bal);
+        if (this.taller) { // 삽입으로 인해서 한 쪽이 더 길어졌으면
+          switch (root.bal) {
+            case 1: // 왼쪽이 더 긴 상태에서 또 왼쪽에 넣어줬으므로 LL 또는 RL
+              root = this._insLeftBal(root);
+              break;
+            case 0: // 균형이었던 상태에서 왼쪽에 넣어줬으므로 왼쪽이 길어짐
+              root.bal = 1;
+              break;
+            case -1: // 오른쪽이 길었던 상태에서 왼쪽에 넣어줬기 때문에 균형
+              root.bal = 0;
+              this.taller = false;
+              break;
+          }
+        }
+        return root;
+      } else { // 새 값이 루트 값보다 크면
+        root.right = this._insert(root.right, node);
+        console.log('go right', this.taller, root.bal);
+        if (this.taller) { // 삽입으로 인해서 한 쪽이 더 길어졌으면
+          switch (root.bal) {
+            case 1: // 왼쪽이 긴 상태에서 오른쪽에 넣어줬기 때문에 균형
+              root.bal = 0;
+              this.taller = false;
+              break;
+            case 0: // 균형이었던 상태에서 오른쪽에 넣어줬기 때문에 오른쪽이 길어짐
+              root.bal = -1;
+              break;
+            case -1: // 오른쪽이 긴 상태에서 또 오른쪽에 넣어줬으므로 RR 또는 LR
+              root = this._insRightBal(root);
+              break;
+          }
+        }
+        return root;
+      }
+    };
+
+    AVL.prototype._insLeftBal = function (root) {
+      var left = root.left;
+      console.log('insLeftBal', left.bal);
+      switch (left.bal) {
+        case 1: // LL의 경우입니다.
+          root.bal = 0;
+          left.bal = 0;
+          root = this._rotateRight(root); // 우회전 한 번
+          this.taller = false;
+          break;
+        case 0: // 균형인 경우는 없습니다.
+          throw new Error('불가능한 경우');
+        case -1: // RL의 경우입니다.
+          var right = left.right;
+          switch (right.bal) {
+            case 1:
+              root.bal = -1;
+              left.bal = 0;
+              break;
+            case 0:
+              root.bal = 0;
+              left.bal = 1;
+              break;
+            case -1:
+              root.bal = 0;
+              left.bal = 1;
+              break;
+          }
+          right.bal = 0;
+          root.left = this._rotateLeft(left); // 좌회전 후
+          root = this._rotateRight(root); // 우회전
+          this.taller = false;
+      }
+    };
+
+    AVL.prototype._insRightBal = function (root) {
+      var right = root.right;
+      console.log('insRightBal', right.bal);
+      switch (right.bal) {
+        case -1: // RR의 경우입니다.
+          root.bal = 0;
+          right.bal = 0;
+          root = this._rotateLeft(root); // 좌회전 한 번
+          this.taller = false;
+          break;
+        case 0: // 균형일 수는 없습니다.
+          throw new Error('불가능한 경우');
+        case 1:
+          var left = right.left;
+          switch (left.bal) { // LR의 경우입니다.
+            case 1:
+              root.bal = -1;
+              right.bal = 0;
+              break;
+            case 0:
+              root.bal = 0;
+              right.bal = 1;
+              break;
+            case -1:
+              root.bal = 0;
+              right.bal = 1;
+              break;
+          }
+          left.bal = 0;
+          root.right = this._rotateRight(right); // 우회전 후
+          root = this._rotateLeft(root); // 좌회전
+          this.taller = false;
+      }
+      return root;
+    };
+    //여기 까지는 삽입부
+
+    AVL.prototype._delete = function (root, key) {
+      if (!root) { // 지울 게 없습니다.
+        console.log('no root to delete');
+        this.shorter = false;
+        this.success = false;
+        return;
+      }
+      if (key < root.data) { // 지울 값이 루트 값보다 작으면
+        root.left = this._delete(root.left, key);
+        console.log('go left', root.left, this.shorter);
+        if (this.shorter) { // 삭제로 인해 짧아졌으면
+          root = this._delRightBal(root);
+        }
+      } else if (key > root.data) { // 지울 값이 루트 값보다 크면
+        root.right = this._delete(root.right, key);
+        console.log('go right', root.right, this.shorter);
+        if (this.shorter) { // 삭제로 인해 짧아졌으면
+          root = this._delLeftBal(root);
+        }
+      } else { // key와 일치하는 데이터를 찾았을 때
+        console.log('found', key, root);
+        if (!root.right) { // 오른쪽 자식이 없으면 노드가 제거됐을 때 왼쪽 자식이 루트
+          var newRoot = root.left;
+          this.success = true;
+          this.shorter = true;
+          return newRoot;
+        } else if (!root.left) { // 왼쪽 자식이 없으면 노드가 제거됐을 때 오른쪽 자식이 루트
+          var newRoot = root.right;
+          this.success = true;
+          this.shorter = true;
+          return newRoot;
+        } else { // 삭제할 노드를 계속 왼쪽으로 보내서 제거(트리 강좌 참고)
+          var temp = root.left;
+          while (temp.right) temp = temp.right;
+          root.data = temp.data;
+          root.left = this._delete(root.left, temp.data);
+          if (this.shorter) { // 삭제로 짧아졌으면
+            root = this._delRightBal(root);
+          }
+        }
+      }
+      return root;
+    };
+
+    AVL.prototype._delLeftBal = function (root) {
+      console.log('delLeftBal', root, root.bal, root.left);
+      switch (root.bal) {
+        case 1:
+          root.bal = 0;
+          break;
+        case 0:
+          root.bal = -1;
+          this.shorter = false;
+          break;
+        case -1:
+          var left = root.left;
+          if (left.bal === 1) { // RL의 경우
+            var right = left.right;
+            switch (right.bal) {
+              case 1:
+                left.bal = -1;
+                root.bal = 0;
+                break;
+              case 0:
+                root.bal = 0;
+                left.bal = 0;
+                break;
+              case -1:
+                root.bal = 1;
+                left.bal = 0;
+                break;
+            }
+            right.bal = 0;
+            root.left = this._rotateLeft(left);
+            root = this._rotateRight(root);
+          } else { // LL의 경우
+            switch (left.bal) {
+              case -1:
+                root.bal = 0;
+                left.bal = 0;
+                break;
+              case 0:
+                root.bal = -1;
+                left.bal = 1;
+                this.shorter = false;
+                break;
+            }
+            root = this._rotateRight(root);
+          }
+      }
+      return root;
+    };
+
+    AVL.prototype._delRightBal = function (root) {
+      console.log('delRightBal', root, root.bal);
+      switch (root.bal) {
+        case 1:
+          root.bal = 0;
+          break;
+        case 0:
+          root.bal = -1;
+          this.shorter = false;
+          break;
+        case -1:
+          right = root.right;
+          if (right.bal === 1) { // LR의 경우입니다.
+            left = right.left;
+            console.log('delRightBal LR', left.bal);
+            switch (left.bal) {
+              case 1:
+                right.bal = -1;
+                root.bal = 0;
+                break;
+              case 0:
+                root.bal = 0;
+                right.bal = 0;
+                break;
+              case -1:
+                root.bal = 1;
+                right.bal = 0;
+                break;
+            }
+            left.bal = 0;
+            root.right = this._rotateRight(right);
+            root = this._rotateLeft(root);
+          } else { // RR의 경우입니다.
+            console.log('delRightBal RR', right.bal);
+            switch (right.bal) {
+              case 0:
+                root.bal = -1;
+                right.bal = -1;
+                this.shorter = false;
+                break;
+              case -1:
+                root.bal = 0;
+                right.bal = 0;
+                break;
+            }
+            root = this._rotateLeft(root);
+          }
+      }
+      return root;
+    };
+    //여기까지가 삭제부
+
+
+    var avlTree = new AVL(); // 한 줄씩 치면서 어떻게 트리가 변하나 확인해보세요.
+    console.log(avlTree);
+    // avlTree.insert(8);
+    // avlTree.insert(12);
+    // avlTree.insert(14);
+    // avlTree.insert(18);
+    // avlTree.insert(20);
+    // avlTree.insert(23);
+    // avlTree.insert(44);
+    // avlTree.insert(52);
+    // avlTree.delete(20);
+  </script>
+</body>
+
+</html>

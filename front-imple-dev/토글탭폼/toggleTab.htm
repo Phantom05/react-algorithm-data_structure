@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+  <link rel="stylesheet" href="./toggleTab.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <!-- <div role="tabpanel">
+      <form action="" id="testForm">
+        <input type="text" name="tabName">
+      </form>
+      <ul class="nav nav-tabs" role="tablist" id="myTab">
+        <li role="presentation" class="active">
+          <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Home</a>
+        </li>
+        <li role="presentation">
+          <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Profile</a>
+        </li>
+        <li role="presentation">
+          <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Messages</a>
+        </li>
+        <li role="presentation">
+          <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a>
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="home">.1</div>
+        <div role="tabpanel" class="tab-pane" id="profile">2</div>
+        <div role="tabpanel" class="tab-pane" id="messages">3</div>
+        <div role="tabpanel" class="tab-pane" id="settings">4</div>
+      </div>
+    </div> -->
+
+    <div class="tab_box" data-tab-id="tabForm">
+        <form action="" id="tabForm">
+          <input type="text" value="" name="clickBtnInput">
+            <div class="tab_ul">
+                <div class="tab_list <%= expression(locals.tabName,'live','on') %> on" data-tab-title="live">
+                  <button type="submit" name="tabName" value="#live"  class="tab_btn">Live Project</button>
+                </div>
+                <div class="tab_list <%= expression(locals.tabName,'deal','on') %>" data-tab-title="deal">
+                  <button type="submit" name="tabName" value="#deal"class="tab_btn">Dealed Project</button>
+                </div>
+                <div class="tab_list <%= expression(locals.tabName,'completed','on') %>" data-tab-title="completed">
+                  <button type="submit" name="tabName" value="#completed"class="tab_btn">Completed Project</button>
+                </div>
+                <div class="tab_list <%= expression(locals.tabName,'reveiw','on') %>" data-tab-title="reveiw">
+                  <button type="submit" name="tabName" value="#reveiw"class="tab_btn">Reveiw</button>
+                </div>
+              </div>
+        </form>
+            
+        <div class="tab_content_box detail__tab_box">
+        <div class="tab_content_list <%= expression(locals.tabName,'live','on') %>" data-tab-content="live">
+          1
+        </div>
+        
+        <div class="tab_content_list <%= expression(locals.tabName,'deal','on') %>" data-tab-content="deal">
+          2
+        </div>
+    
+        <div class="tab_content_list <%= expression(locals.tabName,'completed','on') %>" data-tab-content="completed">
+          3
+        </div>
+    
+        <div class="tab_content_list <%= expression(locals.tabName,'reveiw','on') %>" data-tab-content="reveiw">
+          4
+        </div>
+    
+        </div>
+      </div>
+
+      <!--  -->
+      <div class="tab_box" data-tab-id="tabForm2">
+          <form action="/info/detail/client/256/1" id="tabForm2">
+            <input type="text" value="" name="clickBtnInput">
+              <div class="tab_ul">
+                  <div class="tab_list <%= expression(locals.tabName,'live','on') %> on" data-tab-title="live">
+                    <button type="submit" name="tabName" value="#live"  class="tab_btn">Live Project</button>
+                  </div>
+                  <div class="tab_list <%= expression(locals.tabName,'deal','on') %>" data-tab-title="deal">
+                    <button type="submit" name="tabName" value="#deal"class="tab_btn">Dealed Project</button>
+                  </div>
+                  <div class="tab_list <%= expression(locals.tabName,'completed','on') %>" data-tab-title="completed">
+                    <button type="submit" name="tabName" value="#completed"class="tab_btn">Completed Project</button>
+                  </div>
+                  <div class="tab_list <%= expression(locals.tabName,'reveiw','on') %>" data-tab-title="reveiw">
+                    <button type="submit" name="tabName" value="#reveiw"class="tab_btn">Reveiw</button>
+                  </div>
+                </div>
+          </form>
+              
+          <div class="tab_content_box detail__tab_box">
+          <div class="tab_content_list <%= expression(locals.tabName,'live','on') %>" data-tab-content="live">
+            1
+          </div>
+          
+          <div class="tab_content_list <%= expression(locals.tabName,'deal','on') %>" data-tab-content="deal">
+            2
+          </div>
+      
+          <div class="tab_content_list <%= expression(locals.tabName,'completed','on') %>" data-tab-content="completed">
+            3
+          </div>
+      
+          <div class="tab_content_list <%= expression(locals.tabName,'reveiw','on') %>" data-tab-content="reveiw">
+            4
+          </div>
+      
+          </div>
+        </div>
+
+        <form action="" name="lang" id="langForm" data-form="langForm">
+          <select name="country" id="">
+            <option value="ko">코리아</option>
+          </select>
+        </form>
+
+        <form action="" name="menu" id="menuForm" data-form="menuForm">
+          <input type="checkbox" name="project"> project
+        </form>
+  </div>
+
+  <script src="./toggleTab.js"></script>
+</body>
+
+</html>

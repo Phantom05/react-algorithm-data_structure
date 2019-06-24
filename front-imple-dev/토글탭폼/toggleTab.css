@@ -1,0 +1,49 @@
+.tab_box {
+  margin-top: 50px;
+}
+
+.tab_ul:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.tab_ul .tab_list {
+  width: calc(100% / 4);
+  height: 60px;
+  float: left;
+  border: 1px solid #DDDDDD;
+  border-bottom: 1px solid #333333;
+}
+.tab_ul .tab_list.on {
+  border: 1px solid #333;
+  border-bottom: 0;
+}
+.tab_ul .tab_list.on > .tab_btn {
+  font-weight: bold;
+}
+.tab_ul .tab_btn {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: transparent;
+  border: 0;
+  font-weight: 500;
+}
+
+.tab_content_box {
+  margin-bottom: 20px;
+}
+
+.tab_content_list {
+  display: none;
+  min-height: 200px;
+}
+.tab_content_list.on {
+  display: block;
+}
+
+
+.hidden{
+  display: none;
+}
