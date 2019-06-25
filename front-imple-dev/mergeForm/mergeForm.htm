@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./mergeForm.css">
+</head>
+
+<body>
+  <div class="tie"></div>
+  <form action="" id="menuForm" data-merge-form="true">
+    <h2>Menu</h2>
+    <div>
+      <input type="checkbox" name="projectChkBox"> Project
+    </div>
+    <div>
+      <input type="checkbox" name="dealChkBox" checked> Deal
+    </div>
+    <div>
+      <input type="checkbox" name="completeChkBox"> Complete
+    </div>
+    <div>
+      <input type="radio" name="gender" checked> male
+      <input type="radio" name="gender"> female
+    </div>
+    <div>
+      <input type="search" name="search" autocomplete="off" value="가악">
+    </div>
+  </form>
+
+
+  <div class="tie"></div>
+  <form action="" id="langForm" data-merge-form="true">
+    <h2>Lang</h2>
+    <select name="langSelectBox" id="">
+      <option value="ko">Korea</option>
+      <option value="en">English</option>
+    </select>
+  </form>
+
+  <div class="tie"></div>
+  <h2>sort</h2>
+  <form action="" id="sortForm" data-merge-form="true">
+    <select name="sortSelectBox" id="">
+      <option value="hight">hight</option>
+      <option value="latest">latest</option>
+    </select>
+  </form>
+
+  <div class="groupt">
+
+    <div class="tie"></div>
+    <h2>Pagination</h2>
+    <form action="" id="pageForm" data-merge-form="true">
+
+    </form>
+
+  </div>
+
+
+
+  <div class="tie"></div>
+  <br><br><br>
+  <div class="tie"></div>
+  <h2>아래가 merge Form</h2>
+
+
+
+  <script src="./mergeForm.js"></script>
+  <script>
+    //mergeForm을 사용하려면, 머지폼 다음에 페이지네이션을 선언해야함.
+    let mergeFormConfig = {
+      method: "post",
+      action: '/',
+      ajax: false,
+      exceptForm: ['#tabForm']
+    }
+
+    // mergeForm(mergeFormConfig);
+
+
+    let pageConfig = {
+      startPage: 1,
+      endPage: 5,
+      pageLimit: 5,
+      curPage: 5,
+      totalPage: 201,
+      formId: "pageForm",
+      action: '/info/client/245',
+      method: "get",
+      ajax: false,
+      btnClass: "pageNum",
+      includesForm: ["#menuForm"]
+    }
+    setPageNation(pageConfig);
+
+    // 
+  </script>
+</body>
+
+</html>

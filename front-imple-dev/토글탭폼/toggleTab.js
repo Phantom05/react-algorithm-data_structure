@@ -202,7 +202,7 @@ function getTabTemplate(config) {
           `${targetTab} [${config.tab}]`,
           `${targetTab}  [${config.contents}]`
         ];
-        Module.getManyAtrrControl(attrArr, 'remove', 'on', 'all');
+        getManyAtrrControl(attrArr, 'remove', 'on', 'all');
         this.classList.add('on');
 
         document.querySelector(`${targetTab} [${config.contents}="${targetText}"]`).classList.add('on');

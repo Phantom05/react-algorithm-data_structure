@@ -1,0 +1,15 @@
+.tie {
+  border-bottom: 1px solid #ddd;
+}
+.pageNum{
+  text-decoration: none;
+  margin: 0 5px;
+}
+.pageNum.on{
+  font-weight: bold;
+}
+.pageNum{
+  background: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
