@@ -1,0 +1,13 @@
+
+Todo:
+  ✔ AppendChild 막음 @started(19-06-26 14:02) @done(19-06-26 14:02) @lasted(28s)
+
+  ✔ 머지폼으로 모두 모아주기. @started(19-06-26 14:03) @done(19-06-26 14:54) @lasted(51m34s)
+
+  ✔ 각폼의 데이터 변경시에도 머지폼으로 보내야함. @started(19-06-26 15:30) @done(19-06-26 15:50) @lasted(20m52s)
+
+  ☐ 페이지네이션 숫자에 따라 화살표 생성
+
+  ☐  적용하기..
+
+  checkbox radio, select
