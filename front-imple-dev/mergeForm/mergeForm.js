@@ -1,3 +1,8 @@
+
+
+/**
+ * 
+ */
 class mergeFormModule {
   constructor() {
 
@@ -104,20 +109,6 @@ class mergeFormModule {
 
         formObj.setAttr(childList.hasAttribute('hidden') && valueArr.includes(childList.type));
 
-        // if (checkArr.includes(childList.type) && childList.checked) {
-        //   setAttr(childList);
-        //   elmArr.push(childList);
-        // }
-
-        // if (childList.hasAttribute('hidden') && valueArr.includes(childList.type)) { //FIXME:
-        //   setAttr(childList)
-        // }
-
-        // if (valueArr.includes(childList.type) && this.nullCheck(childList.value)) {
-        //   setAttr(childList);
-        //   elmArr.push(childList);
-        // }
-
       } else if (this.equal(childNodeName, "SELECT")) {
         this.setSelectBoxSelected(childList);
         formObj.setAttrPush(1)
@@ -133,56 +124,90 @@ class mergeFormModule {
   }
 }
 
+
+/**
+ * 
+ */
 class mergeForm extends mergeFormModule {
   constructor() {
     super();
     this.mergeIdx = 1;
   }
 
+  /**
+   * 
+   * @param {*} config 
+   */
   setPageNation(config) {
+
     if (config.ajax) {
 
     } else {
 
+
       const pageForm = document.getElementById(config.formId);
-      const tempElm = this.elt("div", {
-        id: 'tempElm'
-      });
+      const tempElm = this.elt("div", {id: 'tempElm'});
       const hiddenInput = this.elt("input", {
         type: "text",
         name: "pageHiddenInput",
         value: config.curPage,
-        // hidden:true
+        hidden:true
       })
       pageForm.setAttribute('method', config.method);
       pageForm.after(tempElm);
       pageForm.appendChild(hiddenInput);
 
-      // button 생성
-      for (let i = config.startPage; i < config.startPage + config.pageLimit; i++) {
+      // paging button 생성
+      if(config.curPage > config.endPage){
+        let prevBtn = this.elt("button",{
+          type:"button",
+          class:(config.prevArrowClass) ? config.nextArrowClass : ''
+        },"<");
+        prevBtn.addEventListener('click', function (e) {
+          let clickBtn = this;
+          clickBtn.setAttribute('value', config.startPage -1);
+          setForm(clickBtn); // click setting
+        })
+        tempElm.prepend(prevBtn);
+      }
+
+      for (let i = config.startPage; i < config.startPage + config.endPage; i++) {
         let postBtnElm = this.elt("button", {
           type: "button",
           class: (config.btnClass) ? config.btnClass : ''
         }, String(i));
 
-        if (this.equal(i, config.curPage)) postBtnElm.setAttribute('value', 'click'); // init value setting
-
+        if(i === config.curPage) postBtnElm.classList.add('on'); // 현재 페이지 클래스 add on 
         postBtnElm.addEventListener('click', function (e) {
           let clickBtn = this;
+          clickBtn.setAttribute('value', this.textContent); // click setting
           setForm(clickBtn)
-          clickBtn.setAttribute('value', 'click'); // click setting
-
         })
         tempElm.appendChild(postBtnElm);
       }
 
+      if(config.curPageSet !== config.totalPageSet){
+        let nextBtn = this.elt("button",{
+          type:"button",
+          class:(config.nextArrowClass) ? config.nextArrowClass : ''
+        },">");
+        nextBtn.addEventListener('click', function (e) {
+          let clickBtn = this;
+          clickBtn.setAttribute('value', config.endPage +1);
+          setForm(clickBtn); // click setting
+        })
+        tempElm.append(nextBtn);
+      }
+
+      // if(config.pageSet !== config.totalPageSet && )
+
       // 페이지네이션 안에 버튼 넣기.
       let setForm = (clickButton) => {
 
-        this.getElm(`#${tempElm.id} button`).forEach(list => list.removeAttribute('value')); // init
+        hiddenInput.setAttribute('value', clickButton.getAttribute('value'));
+        pageForm.setAttribute('action', `${config.action}/${clickButton.getAttribute('value')}`);
 
-        hiddenInput.setAttribute('value', clickButton.textContent);
-        pageForm.setAttribute('action', `${config.action}/${clickButton.textContent}`);
+        this.getElm(`#${tempElm.id} button`).forEach(list => list.removeAttribute('value')); // init
 
         if (this.mergeIdx) { //안에 초기화하고 
           let includeForm = config.includesForm;
@@ -194,7 +219,7 @@ class mergeForm extends mergeFormModule {
               type: "text",
               value: clickButton.textContent,
               name: "pageHiddenInput",
-              // hidden:true
+              hidden:true
             });
             pageForm.innerHTML = '';
             pageForm.appendChild(crtHiddenInput);
@@ -231,10 +256,17 @@ class mergeForm extends mergeFormModule {
     }
   }
 
+
+
+  /**
+   * 
+   * @param {*} config 
+   * data-merge-form="true"
+   */
   mergeForm(config) {
     this.mergeIdx = 0
     let allForm = Array.from(document.querySelectorAll('[data-merge-form="true"]'));
-    // console.log(allForm);
+
     // 머지폼 할때 어차피 data-merge-form으로 잡기때문에 머지폼 안할껀 그냥 폼에다가 넣지 않으면 됨.
     let main = this;
 
@@ -242,16 +274,14 @@ class mergeForm extends mergeFormModule {
     let mergeForm = this.elt("form", {
       id: 'mergeForm',
       method: config.method,
-      action: config.action,
+      action:config.action,
       // hidden:true
     });
-
     document.body.appendChild(mergeForm); // form 생성
 
     // temp event prevent
     mergeForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      console.log('머지폼 전송');
+      // e.preventDefault();
     })
 
     function getAllFormDataPush() {
@@ -260,25 +290,21 @@ class mergeForm extends mergeFormModule {
         name: "mergeFormBtn"
       })
       mergeForm.innerHTML = '';
-
       allForm.map(mergeList => {
         let getElmListFromForm = main.getExistElmInForm(`#${mergeList.id}`);
-        // let crtHiddenInput = main.elt("input",
-        // {type:"submit",name:"mergeFormBtn"})
-        // mergeForm.appendChild(crtHiddenInput)
         if (getElmListFromForm) {
           getElmListFromForm.map(elmList => {
+            if(elmList.name == 'pageHiddenInput') mergeForm.action = `${config.action}/${elmList.getAttribute('value')}`
+
             let tempElm = main.getCloneNode(elmList)
-            // tempElm.setAttribute('hidden', true);
+            tempElm.setAttribute('hidden', true);
             mergeForm.appendChild(tempElm)
           })
         }
       })/
-
        // 각폼들 전송시 머지폼 전송
       mergeForm.appendChild(mergeFormBtn);
       mergeFormBtn.click(); 
-
     }
 
     // all form change event for checkbox radio selectbox elements

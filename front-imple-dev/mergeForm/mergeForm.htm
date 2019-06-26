@@ -8,20 +8,20 @@
   <title>Document</title>
   <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   <!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
-<!-- 부가적인 테마 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+  <!-- 부가적인 테마 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 
-<!-- 합쳐지고 최소화된 최신 자바스크립트 -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="./mergeForm.css">
 </head>
 
 <body>
   <div class="container">
 
-    
+
   </div>
   <div class="tie"></div>
   <form action="" id="menuForm" data-merge-form="true">
@@ -43,7 +43,7 @@
       <input type="search" name="search" autocomplete="off" value="가악">
       <input type="submit" value="search">
     </div>
-    
+
   </form>
 
 
@@ -74,14 +74,13 @@
 
     <div class="tie"></div>
     <h2>Pagination</h2>
-    <form action="" id="pageForm" data-merge-form="true">
-    </form>
+    <form action="" id="pageForm" data-merge-form="true"></form>
 
   </div>
 
   <div>
-      <div class="tie"></div>
-      <h2>Not in merge Form</h2>
+    <div class="tie"></div>
+    <h2>Not in merge Form</h2>
     <form action="" id="tabForm" data-merge-form="false">
       <input type="text" value="tabForm" name="tabForm">
     </form>
@@ -102,7 +101,7 @@
 
     let mergeFormConfig = {
       method: "get",
-      action: '/',
+      action: '/info/client/245',
       ajax: false,
     }
 
@@ -110,45 +109,22 @@
 
     let pageConfig = {
       startPage: 1,
-      endPage: 5,
-      pageLimit: 5,
-      curPage: 5,
+      endPage: 10,
+      curPage: 1,
+      curPageSet:1,
+      totalPageSet:2,
       totalPage: 201,
       formId: "pageForm",
       action: '/info/client/245',
       method: "get",
       ajax: false,
       btnClass: "pageNum",
-      includesForm: ["#menuForm",'#langForm','#sortForm']
+      prevArrowClass:"pagePrevArrow prev",
+      nextArrowClass:"pagePrevArrow next",
+      includesForm: ["#menuForm", '#langForm', '#sortForm']
     }
     mergeForm1.setPageNation(pageConfig);
-    //mergeForm을 사용하려면, 머지폼 다음에 페이지네이션을 선언해야함.
-    // let mergeFormConfig = {
-    //   method: "post",
-    //   action: '/',
-    //   ajax: false,
-    //   exceptForm: ['#tabForm']
-    // }
 
-    // mergeForm(mergeFormConfig);
-
-
-    // let pageConfig = {
-    //   startPage: 1,
-    //   endPage: 5,
-    //   pageLimit: 5,
-    //   curPage: 5,
-    //   totalPage: 201,
-    //   formId: "pageForm",
-    //   action: '/info/client/245',
-    //   method: "get",
-    //   ajax: false,
-    //   btnClass: "pageNum",
-    //   includesForm: ["#menuForm"]
-    // }
-    // setPageNation(pageConfig);
-
-    // 
   </script>
 </body>
 
