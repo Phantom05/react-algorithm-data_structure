@@ -74,8 +74,8 @@
 
     <div class="tie"></div>
     <h2>Pagination</h2>
-    <form action="" id="pageForm" data-merge-form="true"></form>
-
+    <form action="" id="pageForm1" data-merge-form="true"></form>
+    <form action="" id="pageForm2" data-merge-form="true"></form>
   </div>
 
   <div>
@@ -89,42 +89,88 @@
   <div class="tie"></div>
   <br><br><br>
   <div class="tie"></div>
+  <!-- <button id="button1">머지1</button>
+  <button id="button2">머지2</button> -->
   <h2>아래가 merge Form</h2>
 
 
 
-  <form action="" id="test"></form>
-
   <script src="./mergeForm.js"></script>
   <script>
-    let mergeForm1 = new mergeForm();
+    // multiple 하려는것 끼리 묶어줌.
+    let formModule1 = new FormModule({multiple:true}); //TODO:
 
-    let mergeFormConfig = {
+    console.log();
+    let mergeFormConfig1 = {
       method: "get",
       action: '/info/client/245',
       ajax: false,
+      formId:"mergeForm1",
+      status:true,
     }
 
-    mergeForm1.mergeForm(mergeFormConfig);
+    formModule1.mergeForm(mergeFormConfig1);
 
-    let pageConfig = {
+    // rel - first, last
+    let pageConfig1 = {
       startPage: 1,
       endPage: 10,
-      curPage: 1,
-      curPageSet:1,
-      totalPageSet:2,
+      page: 1,
+      pageSet: 1,
+      totalPageSet: 2,
       totalPage: 201,
-      formId: "pageForm",
+      formId: "pageForm1",
       action: '/info/client/245',
       method: "get",
       ajax: false,
       btnClass: "pageNum",
-      prevArrowClass:"pagePrevArrow prev",
-      nextArrowClass:"pagePrevArrow next",
+      prevArrowClass: "pagePrevArrow prev",
+      nextArrowClass: "pagePrevArrow next",
       includesForm: ["#menuForm", '#langForm', '#sortForm']
     }
-    mergeForm1.setPageNation(pageConfig);
+    formModule1.setPageNation(pageConfig1);
 
+    /*
+    let allFormObj = {
+      action:"/",
+      formId:"mergeForm1"
+    }
+    formModule1.allForm(allFormObj)
+    */
+
+    //-----------------------------*
+
+    
+    let formModule2 = new FormModule({multiple:true}); //TODO:
+    let mergeFormConfig2 = {
+      method: "get",
+      action: '/info/client/245',
+      ajax: false,
+      formId:"mergeForm2",
+      status:false,
+    }
+    formModule2.mergeForm(mergeFormConfig2, true);
+    
+
+    let pageConfig2 = {
+      startPage: 1,
+      endPage: 10,
+      page: 1,
+      pageSet: 1,
+      totalPageSet: 2,
+      totalPage: 201,
+      formId: "pageForm2",
+      action: '/info/client/245',
+      method: "get",
+      ajax: false,
+      btnClass: "pageNum",
+      prevArrowClass: "pagePrevArrow prev",
+      nextArrowClass: "pagePrevArrow next",
+      includesForm: ["#menuForm", '#langForm', '#sortForm']
+    }
+    formModule2.setPageNation(pageConfig2);
+   
+    
   </script>
 </body>
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+
+
+  <script>
+    // function isMerge(s, part1, part2) {
+    //   const reg = /\s/g;
+    //   [s,part1,part2] = [s.replace(reg,""),part1.replace(reg,""),part2.replace(reg,"")];
+
+
+    // }
+
+    // function isMerge(s,p1,p2) {
+    //   const reg = /\s/g;
+    //   [s,p1,p2]=Array.from(arguments).map(x=>x.replace(reg,""));
+    //   [a1,a2] = [s.split(''),(p1+p2).split('')];
+
+    //   let arr1 = [];
+    //   let arr2 = [];
+    //   let com = [];
+
+
+    //   a2.forEach(list=>{
+    //     arr1.push(list);
+    //     if(!arr2.includes(arr1[0])){
+    //       arr2.push(arr1[0]);
+    //       arr1.pop();
+    //     }else{
+    //       com.push(arr1[0])
+    //     }
+    //     console.log(list);
+    //   })
+    //   return (com.length)?false:true
+    // }
+
+
+    stSr = (arr) => arr.sort().toString();
+
+    function isMerge(s, p1, p2) {
+      [s, p1, p2] = Array.from(arguments).map(x => x.replace(/\s/g, "").split(''));
+      return stSr(s) == stSr(p1.concat(p2))
+    }
+
+    console.log(
+      isMerge('codewars', 'code', 'wars')
+      // isMerge('Makingprogress','Makpross','inggre')
+      // isMerge('c o d e w ars', 'aodw', 'ecrss')
+    );
+
+
+    function isMerge(s, part1, part2) {
+      return !s ? !(part1 || part2) :
+        s[0] == part1[0] && isMerge(s.slice(1), part1.slice(1), part2) ||
+        s[0] == part2[0] && isMerge(s.slice(1), part1, part2.slice(1));
+    }
+
+    var isMerge = (s, x, y) => !s ? !(x || y) : check(s, x, y) || check(s, y, x);
+    var check = (a, b, c) => a[0] == b[0] && isMerge(a.slice(1), b.slice(1), c);
+
+    function isMerge(s = '', part1, part2) {
+      part1 = part1.split('');
+      part2 = part2.split('');
+      for (var i = 0; i < s.length && part1.length; i++)
+        if (s[i] != part2[i]) part2.splice(i--, 0, part1.shift())
+      return part2.join('') == s && !part1.length;
+    }
+  </script>
+</body>
+
+</html>
