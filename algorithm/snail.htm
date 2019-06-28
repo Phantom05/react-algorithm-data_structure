@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    /*
+    array = [ [1,2,3],
+              [4,5,6],
+              [7,8,9]]
+*/
+
+    snail = (array) => {
+      const res = [];
+      const arrLen = array.length
+
+
+ 
+      for(let cnt = 0; cnt < array.length; cnt++){
+
+        for(let i = 0; i< array[cnt.length-1];i++){
+           res.push(array[cnt][i])
+        } 
+        array.shift() // 아에제거
+
+        //모두 순회하면서 맨마지막꺼
+        for(let i = 0 ; i < array.length-1; i++){
+          res.push(array[cnt][array[cnt].length-1])
+          array[cnt].pop()
+        }
+
+        for(let i = array.length-1 ; i >= 0; i--){
+          res.push(array[cnt.length-1][i])
+        }
+        array.pop();
+      }
+
+
+      // for(let i = 0 ; i < array[0].length; i++){
+      //   res.push(array[0][i])
+      // }
+      // array[0] = [];
+      
+
+      // res.push(array[1][array[1].length-1])
+      // array[1].pop()
+      // res.push(array[2][array[2].length-1])
+      // array[2].pop()
+
+
+      // for(let i = array[3].length-1 ; i >= 0 ; i--){
+      //   res.push(array[3][i])
+      // }
+      // array[3] = [];
+
+
+      // res.push(array[2][0])
+      // array[2].shift()
+      // res.push(array[1][0])
+      // array[1].shift()
+
+
+      // for(let i = 0 ; i < array[1].length; i++){
+      //   res.push(array[1][i])
+      // }
+      // array[1] = [];
+
+
+      // res.push(array[2][array[2].length-1])
+      // array[2].pop();
+
+
+      // for(let i = array[2].length-1 ; i >=0; i--){
+      //   res.push(array[2][i])
+      // }
+      // array[2]=[]
+      
+      
+      // console.log(array);
+      return res;
+    }
+
+
+
+
+
+    console.log(
+      snail([ [1,2,3,4],
+              [5,6,7,8],
+              [9,10,11,12],
+              [13,14,15,16]])
+    );
+    //  [1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5, 6, 7, 11, 10]
+    // [1,2,3,6,9,8,7,4,5]
+  </script>
+</body>
+
+</html>
