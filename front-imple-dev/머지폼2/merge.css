@@ -1,0 +1,35 @@
+.tie {
+  border-bottom: 1px solid #ddd;
+}
+.pageNum{
+  text-decoration: none;
+  margin: 0 5px;
+}
+.pageNum.on{
+  font-weight: bold;
+}
+.pageNum{
+  background: #fff;
+  border: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.box{
+  position: relative;
+  border: 1px solid #ececec;
+  min-height: 400px;
+  margin-top: 10px;
+}
+.page__navigation{
+  position: absolute;
+  width: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+  text-align: center;
+}
+.formro{
+  margin-bottom: 40px;
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}

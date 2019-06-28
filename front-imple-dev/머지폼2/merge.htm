@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./merge.css">
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <!-- 합쳐지고 최소화된 최신 CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+  <!-- 부가적인 테마 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+  <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="formro">
+      <div class="row">
+        <div class="col-md-4">
+          <form action="" id="langForm">
+            <select name="langSelectBox" id="">
+              <option value="ko">Korean</option>
+              <option value="en">English</option>
+            </select>
+          </form>
+        </div>
+        <div class="col-md-4">
+          <form action="" id="menuForm">
+            <div>
+              <input type="checkbox" name="project" id=""> project
+            </div>
+            <div>
+              <input type="radio" name="gder" id=""> male
+              <input type="radio" name="gder" id=""> feFail
+            </div>
+            <div>
+              <input type="checkbox" name="deal" id="" checked> deal
+            </div>
+            <input type="text"> <br>
+            <input type="text">
+          </form>
+        </div>
+        <div class="col-md-4">
+          <form action="" id="sortForm">
+            <select name="sortelectBox" id="">
+              <option value="latest">latest</option>
+              <option value="high">high</option>
+            </select>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-sm-6 ">
+        <div class="box">
+          <div class="page__navigation">
+            <form action="" id="pageForm1" class=""></form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-sm-6 ">
+        <div class="box">
+          <div class="page__navigation">
+            <form action="" id="pageForm2" class=""></form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-lg-6 col-sm-6 ">
+        <div class="box">
+          <div class="page__navigation">
+            <form action="" id="pageForm3" class=""></form>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-6 col-sm-6 ">
+        <div class="box">
+          <div class="page__navigation">
+            <form action="" id="pageForm4" class=""></form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <script src="./merge.js"></script>
+  <script>
+    let pageConfig1 = {
+      startPage: 1,
+      endPage: 10,
+      page: 1,
+      pageSet: 1,
+      totalPageSet: 2,
+      totalPage: 201,
+      formId: "pageForm1",
+      action: '/info/client/245',
+      method: "get",
+      ajax: false,
+      btnClass: "pageNum",
+      prevArrowClass: "pagePrevArrow prev",
+      nextArrowClass: "pagePrevArrow next",
+    }
+    let pageConfig2 = {
+      startPage: 1,
+      endPage: 10,
+      page: 1,
+      pageSet: 1,
+      totalPageSet: 2,
+      totalPage: 201,
+      formId: "pageForm2",
+      action: '/info/client/245',
+      method: "get",
+      ajax: false,
+      btnClass: "pageNum",
+      prevArrowClass: "pagePrevArrow prev",
+      nextArrowClass: "pagePrevArrow next",
+    }
+    let pageConfig3 = {
+      startPage: 1,
+      endPage: 10,
+      page: 1,
+      pageSet: 1,
+      totalPageSet: 2,
+      totalPage: 201,
+      formId: "pageForm3",
+      action: '/info/client/245',
+      method: "get",
+      ajax: false,
+      btnClass: "pageNum",
+      prevArrowClass: "pagePrevArrow prev",
+      nextArrowClass: "pagePrevArrow next",
+    }
+    let pageConfig4 = {
+      startPage: 1,
+      endPage: 10,
+      page: 512,
+      pageSet: 1,
+      totalPageSet: 2,
+      totalPage: 201,
+      formId: "pageForm4",
+      action: '/info/client/245',
+      method: "get",
+      ajax: false,
+      btnClass: "pageNum",
+      prevArrowClass: "pagePrevArrow prev",
+      nextArrowClass: "pagePrevArrow next",
+    }
+
+    let mergeFormConfig = {
+      method: "get",
+      action: '/info/client/245',
+      ajax: false,
+      formId: "mergeForm",
+      status: false,
+    }
+
+    let formModule = new FormConrtol();
+    console.log(formModule);
+    
+    formModule.add(pageConfig1, pageConfig2, pageConfig3, pageConfig4)
+    formModule.include(['#menuForm', '#langForm', '#sortForm']);
+    formModule.mergeForm(mergeFormConfig);
+
+  </script>
+</body>
+
+</html>
