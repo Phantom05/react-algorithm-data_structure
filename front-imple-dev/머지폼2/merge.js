@@ -87,6 +87,12 @@ class FormComponent {
     }
     opts[selecbox.selectedIndex].setAttribute('selected', true);
   }
+  preventDefault(e) {
+    e.preventDefault();
+    let defaultWasPrevented = e.defaultPrevented;
+    if (!defaultWasPrevented) { //  막혀있지 않으면.
+    }
+  }
 
   getExistElmInForm(formAttr) { // NOTE: 이건됬음.
     const form = document.querySelector(formAttr);
@@ -283,65 +289,54 @@ class FormConrtol extends FormComponent {
       const formInfo = config[i];
       const pageForm = document.getElementById(formInfo.formId);
       const tempElm = this.elt("div", {id: 'tempElm'});
-      const hiddenInput = this.elt("input", {
-        type: "text",
-        name: "pageHiddenInput",
-        value: formInfo.page,
+      const hiddenInput = this.elt("input", {type: "text",name: "pageHiddenInput",value: formInfo.page,
         // hidden: true
       })
       const btnClass = formInfo.btnClass ;
-      const submitBtn = this.elt("button", {
-        type: 'submit',
+      const submitBtn = this.elt("button", {type: 'submit',
         // hidden: true
       });
       const prevArrowClass = formInfo.prevArrowClass;
       const nextArrowClass = formInfo.nextArrowClass;
 
       pageForm.appendChild(submitBtn);
+      pageForm.appendChild(hiddenInput);
       pageForm.setAttribute('method', formInfo.method);
       pageForm.after(tempElm);
-      pageForm.appendChild(hiddenInput);
+      
 
       // let commonParameter = [main,formInfo,hiddenInput,pageForm,submitBtn];
       let commonParameter = {
-        main:main,formInfo:formInfo,hiddenInput:hiddenInput,pageForm:pageForm,submitBtn:submitBtn
+        main:main,
+        formInfo:formInfo,
+        hiddenInput:hiddenInput,
+        pageForm:pageForm,
+        submitBtn:submitBtn
       }
- 
+
       // paging button 생성
       if (formInfo.page > formInfo.endPage) {
         let prevBtn = pageBtnElt(main,formInfo,prevArrowClass && prevArrowClass,'<')
-        prevBtn.addEventListener('click', setBtnClickEvent(formInfo.startPage - 1,commonParameter))
+        prevBtn.addEventListener('click', setForm(formInfo.startPage - 1,commonParameter))
         tempElm.prepend(prevBtn);
       }
 
       for (let j = formInfo.startPage; j < formInfo.startPage + formInfo.endPage; j++) {
         let postBtnElm  = pageBtnElt(main,formInfo,btnClass && btnClass,String(j))
         if (j === formInfo.page) main.addClass(postBtnElm,'on'); // 현재 페이지 클래스 add on 
-        postBtnElm.addEventListener('click', setBtnClickEvent(postBtnElm.textContent, commonParameter))
+        postBtnElm.addEventListener('click', setForm(postBtnElm.textContent, commonParameter))
         tempElm.append(postBtnElm);
       }
 
-
       if (formInfo.pageSet !== formInfo.totalPageSet) {
         let nextBtn = pageBtnElt(main,formInfo,nextArrowClass && nextArrowClass,'>')
-        nextBtn.addEventListener('click', setBtnClickEvent(formInfo.endPage + 1,commonParameter))
+        nextBtn.addEventListener('click', setForm(formInfo.endPage + 1,commonParameter))
         tempElm.append(nextBtn);
       }
-      pageForm.addEventListener('submit', submitPageForm);
-
-
+      pageForm.addEventListener('submit', main.preventDefault);
 
     }
     // function
-    function submitPageForm(e) {
-      e.preventDefault();
-      let defaultWasPrevented = e.defaultPrevented;
-      if (!defaultWasPrevented) { //  막혀있지 않으면.
-      }
-    }
-
-    
-
     function pageBtnElt(main,config,condi,text){
       return main.elt("button",{
         type:"button",
@@ -351,12 +346,16 @@ class FormConrtol extends FormComponent {
     }
 
     // 클릭시 페이지네이션 안에 히든 벨류 바꾸기 넣기.
-    function setForm(clickButton, common) {
-      main.setAttr(common.hiddenInput, ['value', main.getAttr(clickButton, 'value')]);
-      main.setAttr(common.pageForm, ['action', `${common.formInfo.action}/${main.getAttr(clickButton,'value')}`]);
-      main.getElm(`#${tempElm.id} button`).forEach(list => main.rmAttr(list, 'value')); // init
-      getInclufrsFormData(main.includesForm,clickButton,common.pageForm)
-      common.submitBtn.click();
+    function setForm(data,  common) {
+      return function(e){
+        let clickBtn = this;
+        clickBtn.setAttribute('value', data);
+        main.setAttr(common.hiddenInput, ['value', main.getAttr(clickBtn, 'value')]);
+        main.setAttr(common.pageForm, ['action', `${common.formInfo.action}/${main.getAttr(clickBtn,'value')}`]);
+        main.getElm(`#${tempElm.id} button`).forEach(list => main.rmAttr(list, 'value')); // init
+        getInclufrsFormData(main.includesForm,clickBtn,common.pageForm)
+        common.submitBtn.click();
+      }
     }
 
     function getInclufrsFormData(includesForm,clickButton,pageForm) {
@@ -386,18 +385,6 @@ class FormConrtol extends FormComponent {
         }
       }
     }
-    function setBtnClickEvent(data,commonParameter) {
-      const setNum = data;
-      const commonInfo = commonParameter;
-      return function (e) {
-        let clickBtn = this;
-        console.log(commonInfo);
-        clickBtn.setAttribute('value', setNum);
-        setForm(clickBtn,commonInfo); // click setting
-      }
-    }
-
-
   }
 
   mergeForm() {
@@ -413,6 +400,7 @@ class FormConrtol extends FormComponent {
  * 머지할 폼에 아래처럼 써주고
  * data-merge-form="true"
  * 페이지네이션을 사용할거면
+ * <form action="" id="pageForm" 
  * <form action="" id="pageForm" data-merge-form="true"></form>
  * 이걸 추가해주면된다.
  */
