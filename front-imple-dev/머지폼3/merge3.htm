@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+  <form action="" id="langForm">
+
+  </form>
+
+  <form action="" id="menuForm">
+    <input type="search" name="search">
+  </form>
+  
+  <form action="" id="pageForm1"></form> <br>
+
+  <form action="" id="pageForm2"></form>
+
+  <script src="./merge3.js"></script>
+
+  <script>
+  
+  let pageConfig1 = {
+      startPage: 1,
+      endPage: 10,
+      page: 1,
+      pageSet: 1,
+      totalPageSet: 2,
+      totalPage: 201,
+      formId: "#pageForm1",
+      action: '/info/client/245',
+      method: "get",
+      ajax: false,
+      btnClass: "pageNum",
+      prevArrowClass: "pagePrevArrow prev",
+      nextArrowClass: "pagePrevArrow next",
+      includeForms:['#langForm','#menuForm'],
+      realTime:true
+    }
+    let pageConfig2 = {
+      startPage: 1,
+      endPage: 10,
+      page: 1,
+      pageSet: 1,
+      totalPageSet: 2,
+      totalPage: 201,
+      formId: "#pageForm2",
+      action: '/info/client/245',
+      method: "get",
+      ajax: false,
+      btnClass: "pageNum",
+      prevArrowClass: "pagePrevArrow prev",
+      nextArrowClass: "pagePrevArrow next",
+    }
+
+    let mergeFormConfig = {
+      method: "get",
+      action: '/info/client/245',
+      ajax: false,
+      formId: "mergeForm",
+      status: false,
+    }
+
+    let formModule = new FormModule();
+
+    formModule.add(pageConfig1, pageConfig2);
+
+  </script>
+</body>
+</html>

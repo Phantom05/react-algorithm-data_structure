@@ -1,4 +1,3 @@
-
 class FormComponent {
   constructor() {
 
@@ -61,7 +60,7 @@ class FormComponent {
       if (typeof child == "string") {
         child = document.createTextNode(child);
       }
-      node.append(child);
+      node.appendChild(child);
     }
     return node;
   }

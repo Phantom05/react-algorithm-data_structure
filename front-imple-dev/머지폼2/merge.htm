@@ -102,13 +102,15 @@
       pageSet: 1,
       totalPageSet: 2,
       totalPage: 201,
-      formId: "pageForm1",
+      formId: "#pageForm1",
       action: '/info/client/245',
       method: "get",
       ajax: false,
       btnClass: "pageNum",
       prevArrowClass: "pagePrevArrow prev",
       nextArrowClass: "pagePrevArrow next",
+      includeForms:['#langForm','#menuForm'],
+      realTime:true
     }
     let pageConfig2 = {
       startPage: 1,
@@ -117,7 +119,7 @@
       pageSet: 1,
       totalPageSet: 2,
       totalPage: 201,
-      formId: "pageForm2",
+      formId: "#pageForm2",
       action: '/info/client/245',
       method: "get",
       ajax: false,
@@ -132,7 +134,7 @@
       pageSet: 1,
       totalPageSet: 2,
       totalPage: 201,
-      formId: "pageForm3",
+      formId: "#pageForm3",
       action: '/info/client/245',
       method: "get",
       ajax: false,
@@ -147,13 +149,15 @@
       pageSet: 1,
       totalPageSet: 2,
       totalPage: 201,
-      formId: "pageForm4",
+      formId: "#pageForm4",
       action: '/info/client/245',
       method: "get",
       ajax: false,
       btnClass: "pageNum",
       prevArrowClass: "pagePrevArrow prev",
       nextArrowClass: "pagePrevArrow next",
+      includeForms:['#menuForm', '#langForm', '#sortForm'],
+      realTile:true
     }
 
     let mergeFormConfig = {
@@ -164,12 +168,15 @@
       status: false,
     }
 
-    let formModule = new FormConrtol();
+    let formModule = new FormModule();
     console.log(formModule);
     
-    formModule.add(pageConfig1, pageConfig2, pageConfig3, pageConfig4)
-    formModule.include(['#menuForm', '#langForm', '#sortForm']);
-    formModule.mergeForm(mergeFormConfig);
+    formModule.add(pageConfig1, pageConfig2, pageConfig3, pageConfig4);
+    // formModule.prevent()
+    // FIXME: 인클루드가 없을떄 커먼폼이 실행 안되는 버그 발견. 수정
+
+    // formModule.include();
+    // formModule.mergeForm(mergeFormConfig);
 
   </script>
 </body>

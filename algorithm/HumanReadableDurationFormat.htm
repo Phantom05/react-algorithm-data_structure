@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // #define ONE_YEAR 31104000 // 360일 기준 1년 초
+
+    // #define ONE_MONTH 2592000 // 30일 기준 1달 초
+
+    // #define ONE_DAY 86400 // 1일 기준 24시간 초
+
+    // #define ONE_HOUR 3600 // 1시간 24시간 초
+
+    // #define ONE_MINUTE 60
+
+    // scanf_s("%d", &input); // 사용자에게 시간초를 입력받음
+
+    // year = input / ONE_YEAR; // 입력값을 1년으로 나눔
+
+    //  month = input / ONE_MONTH % 12; // ‥ 1달로 나눈 후 12로 나눈 나머지값이 됨
+
+    //  day = input / ONE_DAY % 30; // ‥ 1일으로 나눈 후 30으로 나눈 나머지값이 됨
+
+    //  hour = input / ONE_HOUR % 24; // ‥ 1시간으로 나눈 후 24로 나눈 나머지값이 됨
+
+    //  minute = input / ONE_MINUTE % 60; // ‥ 1분으로 나눈 후 60으로 나눈 나머지값이 됨
+
+    //  second = input % 60; // ‥ 60초로 나눈 나머지값이 됨
+
+
+
+    function check(obj) {
+      let [key, val] = obj;
+      if (val > 1) key = key + 's';
+      return [key, val]
+    }
+
+    function formatDuration(seconds) {
+      if (!seconds) return "now";
+      var strout = "";
+      var s = seconds % 60;
+      seconds = (seconds - s) / 60;
+      var m = seconds % 60;
+      seconds = (seconds - m) / 60;
+      var h = seconds % 24;
+      seconds = (seconds - h) / 24;
+      var d = seconds % 365;
+      seconds = (seconds - d) / 365;
+      var y = seconds;
+
+      var english = [];
+      if (y) english.push(y + " year" + (y > 1 ? 's' : ''));
+      if (d) english.push(d + " day" + (d > 1 ? 's' : ''));
+      if (h) english.push(h + " hour" + (h > 1 ? 's' : ''));
+      if (m) english.push(m + " minute" + (m > 1 ? 's' : ''));
+      if (s) english.push(s + " second" + (s > 1 ? 's' : ''));
+
+      return english.join(", ").replace(/,([^,]*)$/, " and$1");
+
+    }
+
+    function formatDuration(seconds) {
+      var time = {
+          year: 31536000,
+          day: 86400,
+          hour: 3600,
+          minute: 60,
+          second: 1
+        },
+        res = [];
+
+      if (seconds === 0) return 'now';
+
+      for (var key in time) {
+        if (seconds >= time[key]) {
+          var val = Math.floor(seconds / time[key]);
+          res.push((val += val > 1)? ' '+ key + 's' : ' ' + key);
+          seconds = seconds % time[key];
+        }
+      }
+      return res.length > 1 ? res.join(', ').replace(/,([^,]*)$/, ' and' + '$1') : res[0]
+    }
+
+
+
+    //["1 year", "57 days", "23 hours", "25 minutes", "2 seconds"]
+    function formatTime(seconds){
+      const time={year: 31536000,day: 86400,hour:3600,minute:60,second:1},res = [];
+
+      for(var key in time){
+        var val =  Math.floor(seconds / time[key])
+        if(val) res.push(val += val >1 ? ` ${key}s`:` ${key}`);
+        seconds = seconds % time[key];
+      }
+      
+      return res
+    }
+    console.log(
+      formatTime(36545102)
+    );
+
+    // function formatDuration(sec) {
+    //   if(!sec) return "now";
+    //   let res ="";
+    //   const one_year =31104000;
+    //   const one_mon = 2592000;
+    //   const one_day = 86400;
+    //   const one_hour = 3600;
+    //   const one_min = 60;
+
+    //   const year = parseInt(sec / one_year);
+    //   const month = parseInt(sec / one_mon % 12);
+    //   const day = parseInt(sec / one_day %30);
+    //   const hour = parseInt(sec / one_hour % 24);
+    //   const minute = parseInt(sec / one_min % 60);
+    //   const second = parseInt(sec % 60);
+
+    //   const obj = {
+    //     year:year,
+    //     month:month,
+    //     day:day,
+    //     hour:hour,
+    //     minute:minute,
+    //     second:second
+    //   }
+    //   const tmp = {}
+    //   const arr = [];
+
+    //   for(let key in obj){
+    //     if(obj[key])  tmp[key] = obj[key];
+    //   }
+
+    //   Object.entries(tmp).map(list=>{
+    //     arr.push(check(list))
+    //   })
+
+    //   const resArr = arr.map((list,idx) => `${list[1]} ${list[0]}`);
+    //   const resArrLen = resArr.length;
+
+    //   console.log(resArr);
+
+    //   // for(let i = resArr.length; i--;){
+    //   //   if(resArrLen == 1)
+    //   //   console.log(
+    //   //     resArr[i]
+    //   //   );
+    //   // }
+
+
+    //   const tmpLen = Object.keys(tmp).length;
+
+    //   if(tmpLen == 1){
+    //     return resArr[0] + ','
+    //   }else if (tmpLen == 2){
+    //     return  `${resArr[0]} and ${arr[1]}`        //  and
+    //   }else if (tmpLen >2){
+    //     let newStr = "";
+    //     for(let i =1 ; i < resArr.length; i++){
+    //       newStr+= ` and ${resArr[i]}` 
+    //     }
+    //     console.log(newStr);
+    //     return `${resArr[0]}, ${newStr}`
+    //     //  , and
+    //   }
+
+    //   // '6 years, 192 days, 13 hours, 3 minutes and 54 seconds',
+
+
+
+    // }
+
+    // 한글자만 있으면 그냥 표시
+    // 두글자가 있으면 and표기
+    // 3글자가 있으면 ,후 and 표기
+    // 1이면 s를붙이지 않음
+    console.log(
+      formatDuration(3662)
+    );
+  </script>
+</body>
+
+</html>
