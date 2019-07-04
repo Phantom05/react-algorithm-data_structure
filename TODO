@@ -1,30 +1,24 @@
 
 Todo:
-  ✔ 집에서 짠거 적용하기. @started(19-07-01 14:22) @done(19-07-01 14:22) @lasted(24s)
-  ☐ 1시간 퍼블리싱
-  ☐ privacy 페이지 퍼블리싱
-  ☐ 머지폼 함수 제작
   ☐ 클론노드 알아보기 카톡에
   ☐ 반바지알아보기
   ☐ 단축키 헬로월드
   ☐ 삭제하고 다시 넣지 말고 클론하고 클론내용을 변경하고 원래 위치와 리플레이스.
   ☐ ejs에서 데이터 js로 뿌려주는패턴, 카톡보기.
   ☐ 도큐멘테이션 하기 main.js
-
-
-  ☐ 3시까지 어바웃탭, 프라이버시 퍼블리싱. @started(19-07-01 14:22)
-
-
-
   ☐ 머지폼 리팩토링..
+  ☐ 해더 상단 알림
+  ☐ 글씨 쓸때 - 자동으로 붙는 기능 넣기.
+  ☐ 프라이싱 페이지 기능작업
+  ☐ process.env.NODE_ENV 알아보기
+  ☐ env파일로 조절할건지 정하기.(사용법 자세히 알아보기)
+  ☐ 프로덕션이랑 디벨롶이랑 나눠서 파일 업로드하기.
+  ☐ 업로드할건 dist파일만 업로드.
   
   checkbox radio, select
 Archive:
-  ✔ AppendChild 막음 @started(19-06-26 14:02) @done(19-06-26 14:02) @lasted(28s) @project(Todo)
-  ✔ 머지폼으로 모두 모아주기. @started(19-06-26 14:03) @done(19-06-26 14:54) @lasted(51m34s) @project(Todo)
-  ✔ 각폼의 데이터 변경시에도 머지폼으로 보내야함. @started(19-06-26 15:30) @done(19-06-26 15:50) @lasted(20m52s) @project(Todo)
-  ✔ 페이지네이션 숫자에 따라 화살표 생성 @started(19-06-26 18:04) @done(19-06-26 18:04) @lasted(17s) @project(Todo)
-  ✔ 머지폼중에 페이지네이션이 있으면 액션을 조져줘야하고 없으면 그냥 보내야하는 기능 @started(19-06-26 18:41) @done(19-06-26 18:41) @lasted(41s) @project(Todo)
-  ✔ setTabTemplate 수정... @started(19-06-28 17:16) @done(19-06-28 17:16) @lasted(23s) @project(Todo)
-  ✔ 클라이언트 탭 수정, 클릭했을떄 인풋히든으로 두기 @started(19-06-28 17:16) @done(19-06-28 17:16) @lasted(43s) @project(Todo)
-  ✔  적용하기.. @started(19-06-28 17:16) @done(19-06-28 17:16) @lasted(46s) @project(Todo)
+  ✔ 머지폼 함수 제작 @started(19-07-04 09:59) @done(19-07-04 09:59) @lasted(49s) @project(Todo)
+  ✔ 1시간 퍼블리싱 (privacy) @started(19-07-03 11:12) @done(19-07-04 09:59) @lasted(22h47m41s) @project(Todo)
+  ✔ gulp 주석 없애기 @started(19-07-03 11:22) @done(19-07-03 11:22) @lasted(34s) @project(Todo)
+  ✔ 3시까지 어바웃탭, 프라이버시 퍼블리싱. @started(19-07-01 14:22) @done(19-07-03 11:12) @lasted(1d20h50m20s) @project(Todo)
+

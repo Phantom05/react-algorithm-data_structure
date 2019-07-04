@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <!-- 4큐부터는 한문제를 풀고 그 문제에 대한 여러 답들을 분석해봐야함. -->
+
+  <script>
+    function solution(input, markers) {
+      const res = [];
+      input.split(/\n/).map(list => res.push(forE(list, markers)))
+      return res.join('\n').trim()
+    };
+
+    function forE(str, markers) {
+      let res = "";
+      for (let i = 0; i < str.length; i++) {
+        if (markers.includes(str[i])) break;
+        res += str[i]
+      }
+      return res;
+    }
+    console.log(
+      solution("apples, plums # and bananas\npears\noranges -applesauce", ["#", '-'])
+    );
+
+
+    function solution(input, markers) {
+      return input.replace(new RegExp("\\s?[" + markers.join("") + "].*(\\n)?", "gi"), "$1");
+    }
+
+    function solution(input, markers) {
+      return input.split('\n').map(
+        line => markers.reduce(
+          (line, marker) => line.split(marker)[0].trim(), line
+        )
+      ).join('\n')
+    }
+
+    function solution(input, markers) {
+      var lines = input.split("\n");
+      for (var i = 0; i < lines.length; ++i)
+        for (var j = 0; j < markers.length; ++j)
+          lines[i] = lines[i].split(markers[j])[0].trim();
+      return lines.join("\n");
+    }
+
+    function solution(input, markers) {
+      return input.split('\n').map(function (line) { // each line
+        return line.replace(new RegExp('\\s*[' + markers.join('|') + '].*$'), '');
+      }).join('\n');
+    }
+    // apples, plums
+    // pears
+    // oranges"
+
+    // 주석처리만나면 뒤에다 막다가, 개해되는행부터 다시 풀어야함. 
+  </script>
+</body>
+
+</html>
