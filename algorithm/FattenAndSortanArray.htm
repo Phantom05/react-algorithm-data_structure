@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+
+function flat(input) {
+const stack = [...input];
+const res = [];
+while (stack.length) {
+const next = stack.pop();
+if (Array.isArray(next)) stack.push(...next);
+else res.push(next);
+}
+return res.reverse();
+}
+
+
+
+function flattenAndSort(array) {
+const [st,res] = [[...array],[]];
+st.forEach(x=>res.push(...x))
+return res.sort((x,y)=>x-y)
+}
+
+function flattenAndSort(array) {
+return [].concat(...array).sort((a,b) => a - b);
+}
+
+function flattenAndSort(array) {
+return array
+.reduce((result, current) => [...result, ...current],[])
+.sort((a, b) => a - b)
+;
+}
+
+
+
+    console.log(
+      flattenAndSort([[1, 3, 5], [100], [2, 4, 6]])
+    );
+    console.log(
+      flattenAndSort([[]])
+    );
+  </script>
+</body>
+
+</html>

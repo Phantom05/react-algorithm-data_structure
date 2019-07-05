@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+String.prototype.reverse = function() {
+  return this.split('').reverse().join('');
+}
+// 293151596823753466213965217 7399669623035404280018
+function sumStrings(a,b) {
+  a = a.reverse(); b = b.reverse();
+  var [carry,index,sumDigits] = [0,0,[]];
+  while (index < a.length || index < b.length || carry != 0) {  
+    var aDigit = index < a.length ? parseInt(a[index]) : 0;
+    var bDigit = index < b.length ? parseInt(b[index]) : 0;
+    var digitSum = aDigit + bDigit + carry;
+   
+    sumDigits.push((digitSum % 10).toString());
+    carry = Math.floor(digitSum / 10);
+
+    console.log(sumDigits);
+    index++;
+  }
+  sumDigits.reverse();
+  while (sumDigits[0] == '0') sumDigits.shift();
+  return sumDigits.join('');
+}
+
+function sumStrings(a, b) {
+  var res = '', c = 0;
+  a = a.split('');
+  b = b.split('');
+  while (a.length || b.length || c) {
+    c += ~~a.pop() + ~~b.pop();
+    res = c % 10 + res;
+    c = c > 9;
+  }
+  return res.replace(/^0+/, '');
+}
+
+
+BigNumber = function(n, p, r){
+    var o = this, i;
+    if(n instanceof BigNumber){
+        for(i in {precision: 0, roundType: 0, _s: 0, _f: 0}) o[i] = n[i];
+        o._d = n._d.slice();
+        return;
+    }
+    o.precision = isNaN(p = Math.abs(p)) ? BigNumber.defaultPrecision : p;
+    o.roundType = isNaN(r = Math.abs(r)) ? BigNumber.defaultRoundType : r;
+    o._s = (n += "").charAt(0) == "-";
+    o._f = ((n = n.replace(/[^\d.]/g, "").split(".", 2))[0] = n[0].replace(/^0+/, "") || "0").length;
+    for(i = (n = o._d = (n.join("") || "0").split("")).length; i; n[--i] = +n[i]);
+    o.round();
+};
+with({$: BigNumber, o: BigNumber.prototype}){
+    $.ROUND_HALF_EVEN = ($.ROUND_HALF_DOWN = ($.ROUND_HALF_UP = ($.ROUND_FLOOR = ($.ROUND_CEIL = ($.ROUND_DOWN = ($.ROUND_UP = 0) + 1) + 1) + 1) + 1) + 1) + 1;
+    $.defaultPrecision = 40;
+    $.defaultRoundType = $.ROUND_HALF_UP;
+    o.add = function(n){
+        if(this._s != (n = new BigNumber(n))._s)
+            return n._s ^= 1, this.subtract(n);
+        var o = new BigNumber(this), a = o._d, b = n._d, la = o._f,
+        lb = n._f, n = Math.max(la, lb), i, r;
+        la != lb && ((lb = la - lb) > 0 ? o._zeroes(b, lb, 1) : o._zeroes(a, -lb, 1));
+        i = (la = a.length) == (lb = b.length) ? a.length : ((lb = la - lb) > 0 ? o._zeroes(b, lb) : o._zeroes(a, -lb)).length;
+        for(r = 0; i; r = (a[--i] = a[i] + b[i] + r) / 10 >>> 0, a[i] %= 10);
+        return r && ++n && a.unshift(r), o._f = n, o.round();
+    };
+    o.subtract = function(n){
+        if(this._s != (n = new BigNumber(n))._s)
+            return n._s ^= 1, this.add(n);
+        var o = new BigNumber(this), c = o.abs().compare(n.abs()) + 1, a = c ? o : n, b = c ? n : o, la = a._f, lb = b._f, d = la, i, j;
+        a = a._d, b = b._d, la != lb && ((lb = la - lb) > 0 ? o._zeroes(b, lb, 1) : o._zeroes(a, -lb, 1));
+        for(i = (la = a.length) == (lb = b.length) ? a.length : ((lb = la - lb) > 0 ? o._zeroes(b, lb) : o._zeroes(a, -lb)).length; i;){
+            if(a[--i] < b[i]){
+                for(j = i; j && !a[--j]; a[j] = 9);
+                --a[j], a[i] += 10;
+            }
+            b[i] = a[i] - b[i];
+        }
+        return c || (o._s ^= 1), o._f = d, o._d = b, o.round();
+    };
+    o.multiply = function(n){
+        var o = new BigNumber(this), r = o._d.length >= (n = new BigNumber(n))._d.length, a = (r ? o : n)._d,
+        b = (r ? n : o)._d, la = a.length, lb = b.length, x = new BigNumber, i, j, s;
+        for(i = lb; i; r && s.unshift(r), x.set(x.add(new BigNumber(s.join("")))))
+            for(s = (new Array(lb - --i)).join("0").split(""), r = 0, j = la; j; r += a[--j] * b[i], s.unshift(r % 10), r = (r / 10) >>> 0);
+        return o._s = o._s != n._s, o._f = ((r = la + lb - o._f - n._f) >= (j = (o._d = x._d).length) ? this._zeroes(o._d, r - j + 1, 1).length : j) - r, o.round();
+    };
+    o.divide = function(n){
+        if((n = new BigNumber(n)) == "0")
+            throw new Error("Division by 0");
+        else if(this == "0")
+            return new BigNumber;
+        var o = new BigNumber(this), a = o._d, b = n._d, la = a.length - o._f,
+        lb = b.length - n._f, r = new BigNumber, i = 0, j, s, l, f = 1, c = 0, e = 0;
+        r._s = o._s != n._s, r.precision = Math.max(o.precision, n.precision),
+        r._f = +r._d.pop(), la != lb && o._zeroes(la > lb ? b : a, Math.abs(la - lb));
+        n._f = b.length, b = n, b._s = false, b = b.round();
+        for(n = new BigNumber; a[0] == "0"; a.shift());
+        out:
+        do{
+            for(l = c = 0, n == "0" && (n._d = [], n._f = 0); i < a.length && n.compare(b) == -1; ++i){
+                (l = i + 1 == a.length, (!f && ++c > 1 || (e = l && n == "0" && a[i] == "0")))
+                && (r._f == r._d.length && ++r._f, r._d.push(0));
+                (a[i] == "0" && n == "0") || (n._d.push(a[i]), ++n._f);
+                if(e)
+                    break out;
+                if((l && n.compare(b) == -1 && (r._f == r._d.length && ++r._f, 1)) || (l = 0))
+                    while(r._d.push(0), n._d.push(0), ++n._f, n.compare(b) == -1);
+            }
+            if(f = 0, n.compare(b) == -1 && !(l = 0))
+                while(l ? r._d.push(0) : l = 1, n._d.push(0), ++n._f, n.compare(b) == -1);
+            for(s = new BigNumber, j = 0; n.compare(y = s.add(b)) + 1 && ++j; s.set(y));
+            n.set(n.subtract(s)), !l && r._f == r._d.length && ++r._f, r._d.push(j);
+        }
+        while((i < a.length || n != "0") && (r._d.length - r._f) <= r.precision);
+        return r.round();
+    };
+    o.mod = function(n){
+        return this.subtract(this.divide(n).intPart().multiply(n));
+    };
+    o.pow = function(n){
+        var o = new BigNumber(this), i;
+        if((n = (new BigNumber(n)).intPart()) == 0) return o.set(1);
+        for(i = Math.abs(n); --i; o.set(o.multiply(this)));
+        return n < 0 ? o.set((new BigNumber(1)).divide(o)) : o;
+    };
+    o.set = function(n){
+        return this.constructor(n), this;
+    };
+    o.compare = function(n){
+        var a = this, la = this._f, b = new BigNumber(n), lb = b._f, r = [-1, 1], i, l;
+        if(a._s != b._s)
+            return a._s ? -1 : 1;
+        if(la != lb)
+            return r[(la > lb) ^ a._s];
+        for(la = (a = a._d).length, lb = (b = b._d).length, i = -1, l = Math.min(la, lb); ++i < l;)
+            if(a[i] != b[i])
+                return r[(a[i] > b[i]) ^ a._s];
+        return la != lb ? r[(la > lb) ^ a._s] : 0;
+    };
+    o.negate = function(){
+        var n = new BigNumber(this); return n._s ^= 1, n;
+    };
+    o.abs = function(){
+        var n = new BigNumber(this); return n._s = 0, n;
+    };
+    o.intPart = function(){
+        return new BigNumber((this._s ? "-" : "") + (this._d.slice(0, this._f).join("") || "0"));
+    };
+    o.valueOf = o.toString = function(){
+        var o = this;
+        return (o._s ? "-" : "") + (o._d.slice(0, o._f).join("") || "0") + (o._f != o._d.length ? "." + o._d.slice(o._f).join("") : "");
+    };
+    o._zeroes = function(n, l, t){
+        var s = ["push", "unshift"][t || 0];
+        for(++l; --l;  n[s](0));
+        return n;
+    };
+    o.round = function(){
+        if("_rounding" in this) return this;
+        var $ = BigNumber, r = this.roundType, b = this._d, d, p, n, x;
+        for(this._rounding = true; this._f > 1 && !b[0]; --this._f, b.shift());
+        for(d = this._f, p = this.precision + d, n = b[p]; b.length > d && !b[b.length -1]; b.pop());
+        x = (this._s ? "-" : "") + (p - d ? "0." + this._zeroes([], p - d - 1).join("") : "") + 1;
+        if(b.length > p){
+            n && (r == $.DOWN ? false : r == $.UP ? true : r == $.CEIL ? !this._s
+            : r == $.FLOOR ? this._s : r == $.HALF_UP ? n >= 5 : r == $.HALF_DOWN ? n > 5
+            : r == $.HALF_EVEN ? n >= 5 && b[p - 1] & 1 : false) && this.add(x);
+            b.splice(p, b.length - p);
+        }
+        return delete this._rounding, this;
+    };
+}
+ 
+function sumStrings(a,b) { 
+  if(a === ""){
+      a = "0";
+  }else if ( b === ""){
+      b = "0";
+  }; 
+  var result = new BigNumber(a).add(b);
+  
+  return result.toString();
+}
+
+
+function sum(n1, n2) {
+  return (parseInt(n1) || 0) + (parseInt(n2) || 0);
+}
+
+function sumStrings(a,b) { 
+  a = a.split("").reverse();
+  b = b.split("").reverse();
+  total = [];
+  var length = (a.length > b.length) ? a.length : b.length;
+  
+  //make the sum digit by digit
+  for (var i = 0; i < length; i++) {
+    s = sum(a[i], b[i]);
+    total[i] = sum(total[i], s);
+    if (total[i]>9) {
+      total[i] -= 10;
+      total[i+1] = 1;
+    }
+  }
+  
+  //remove fruitless zero
+  if (total[total.length-1] == 0) 
+    total[total.length-1] = "";
+    
+  //reverse the array and return the string
+  return total.reverse().join("");
+}
+
+function sumStrings(a, b) {
+  a = "0" + a.replace(/\D/g,"");
+  b = "0" + b.replace(/\D/g,"");
+  var c = 0;
+  var result = "";
+
+  for(var i=b.length-a.length; i>0; --i) a = "0" + a;
+  for(var i=a.length-b.length; i>0; --i) b = "0" + b;
+
+  for(var i=a.length-1; i>-1; --i) {
+    c = +a[i] + +b[i] + c;
+    result = (c%10) + result;
+    c = Math.floor(c/10);
+  }
+  
+  return result.replace(/^0+/,"");
+}
+
+function sumStrings(a, b) {
+  a = a.split('').reverse(), b = b.split('').reverse();
+  return Array.apply(null, new Array(1 + Math.max(a.length, b.length))).reduce(function (acc, _, i) {
+    var n = (parseInt(a[i], 10) || 0) + (parseInt(b[i], 10) || 0) + acc[1];
+    return [(n % 10) + acc[0], Math.floor(n / 10)];
+  }, ['', 0])[0].replace(/^0+/, '');
+}
+
+sumStrings('712569312664357328695151392', '8100824045303269669937') ;
+
+console.log(
+      sumStrings('712569312664357328695151392', '8100824045303269669937')
+    );
+
+
+// // toString
+// // @return (String) value of bignumber string with sign
+// scope.BigInt.prototype.toString = function() {
+//     var str = this._arrBigInt.slice(0).reverse().join("");
+//     return (this._sign<0 && !(this._arrBigInt.length === 1 && this._arrBigInt[0] === '0'))?('-'+str):str;
+// };
+
+
+// // clone
+// // @return (BigInt) deep copy of BigInt
+// scope.BigInt.prototype.clone = function() {
+//     var copyObj = new BigInt();
+//     copyObj._sign = this._sign;
+//     copyObj._arrBigInt = this._arrBigInt.slice(0);
+//     return copyObj;
+// };
+// // add
+// // @param (BigInt) x
+// // @return (BigInt) sum value;
+// scope.BigInt.prototype.add = function(x) {
+// 	/* Function implementations .... */
+// };
+
+
+
+// var A = new BigInt("567");
+// var B = new BigInt("98765");
+// var result = A.add(B);
+
+// console.log(A.toString() + " + " + B.toString() + " = " + result.toString());
+
+
+    // //calculate sum and overflow of each digits.
+    // var result = new BigInt(base._sign);
+    // result._arrBigInt = [];
+    // overflow = 0;
+    // for (var n = 0; n < base._arrBigInt.length; n++) {
+    //   sum = parseInt(base._arrBigInt[n]) + overflow;
+    //   if (n < addee._arrBigInt.length) sum += parseInt(addee._arrBigInt[n]);
+
+    //   overflow = parseInt(sum / 10);
+    //   sum = sum % 10;
+
+    //   result._arrBigInt.push("" + sum);
+    // }
+
+    // //if overflow remains, add magnificient value of result
+    // if (overflow > 0) result._arrBigInt.push("" + overflow);
+  </script>
+</body>
+
+</html>
