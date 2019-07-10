@@ -1,30 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-</head>
+  <style>
+    .mergeForm{
+      border: 1px solid red;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <!-- 합쳐지고 최소화된 최신 CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+  <!-- 부가적인 테마 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+  <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
 <body>
+  <div class="container">
 
-  <form action="" id="langForm">
+    <div class="row">
 
-  </form>
+    </div>
+    <div class="row">
 
-  <form action="" id="menuForm">
-    <input type="search" name="search">
-  </form>
-  
-  <form action="" id="pageForm1"></form> <br>
+      <div class="col-lg-6">
+        <form action="" id="langForm">
+          <select name="lang" id="">
+            <option value="ko">ko</option>
+            <option value="en">en</option>
+          </select>
+          <input type="search" name="search">
+        </form>
 
-  <form action="" id="pageForm2"></form>
+        <form action="" id="menuForm">
+          <select name="menu" id="">
+            <option value="le">le</option>
+            <option value="eh">eh</option>
+          </select>
+          <input type="checkbox" name="test" checked>
+          <input type="search" name="search2" value="s">
+        </form>
 
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <form action="" id="pageForm1"></form>
+      </div>
+      <div class="col-lg-6">
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <form action="" id="pageForm2"></form>
+      </div>
+
+    </div>
+  </div>
   <script src="./merge3.js"></script>
 
   <script>
-  
-  let pageConfig1 = {
+    // mergeForm이 있을땐 pageConfig에 include 하지 말기..
+    let pageConfig1 = {
       startPage: 1,
       endPage: 10,
       page: 1,
@@ -35,12 +81,13 @@
       action: '/info/client/245',
       method: "get",
       ajax: false,
-      btnClass: "pageNum",
+      pageNumClass: "pageNum",
       prevArrowClass: "pagePrevArrow prev",
       nextArrowClass: "pagePrevArrow next",
-      includeForms:['#langForm','#menuForm'],
-      realTime:true
+      // includeForms: ['#langForm', '#menuForm'],
+      realTime: true
     }
+
     let pageConfig2 = {
       startPage: 1,
       endPage: 10,
@@ -49,26 +96,34 @@
       totalPageSet: 2,
       totalPage: 201,
       formId: "#pageForm2",
-      action: '/info/client/245',
+      action: '/info/client/246',
       method: "get",
       ajax: false,
-      btnClass: "pageNum",
+      pageNumClass: "pageNum",
       prevArrowClass: "pagePrevArrow prev",
       nextArrowClass: "pagePrevArrow next",
+      // includeForms: ['#menuForm'],
+      realTime: true
     }
 
     let mergeFormConfig = {
       method: "get",
       action: '/info/client/245',
       ajax: false,
-      formId: "mergeForm",
+      formId: "#mergeForm",
+      includeForms: ['#menuForm','#pageForm1'],
       status: false,
+      // prevent:true,
+      realTime:true
     }
 
     let formModule = new FormModule();
 
     formModule.add(pageConfig1, pageConfig2);
-
+    
+    formModule.mergeForm(mergeFormConfig)
+    formModule.prevent()
   </script>
 </body>
+
 </html>

@@ -1,0 +1,26 @@
+body{
+  height: 2000px;
+}
+.box{
+  background: blue;
+  padding: 25px;
+}
+.in{
+  background: orange;
+  color: #fff;
+  padding: 15px;
+}
+#menu{
+  position: fixed;
+  right: -50%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(221, 221, 221, 0.719);
+  transition: .5s;
+  opacity: 0;
+}
+#menu.on{
+  right: 0;
+  opacity: 1;
+}
