@@ -1,0 +1,98 @@
+body{
+  height: 2000px;
+}
+.box{
+  background: blue;
+  padding: 25px;
+}
+.in{
+  background: orange;
+  color: #fff;
+  padding: 15px;
+}
+#menu{
+  position: fixed;
+  right: -50%;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  background: rgba(221, 221, 221, 0.719);
+  transition: .5s;
+  opacity: 0;
+}
+#menu.on{
+  right: 0;
+  opacity: 1;
+}
+
+
+body {
+	margin: 0;
+	font-family: 'Liberation Sans', Arial, sans-serif;
+}
+
+h1 {
+	text-align: center;
+}
+
+#posts {
+	margin: 0 auto;
+	padding: 0;
+  width: 700px;
+  height: 500px;
+  overflow: auto;
+	list-style-type: none;
+}
+
+article h1 {
+	text-align: left;
+	border-bottom: 1px dotted #E3E3E3;
+}
+
+article p {
+	text-align: justify;
+	line-height: 1.5;
+	font-size: 1.1em;
+}
+
+#button{
+  z-index: 5000000;
+}
+
+#loading {
+	display: none;
+	text-align: center;
+}
+
+
+#headerArea{
+  background-color:greenyellow;
+  height:200px;
+  /* width:200px; */
+  border: 1px solid red;
+  
+}
+#slide{
+  background-color:aqua;
+  height:200px;
+  width:200px;
+}
+
+#modal{
+  position: fixed;
+  left: 50%;
+  top:100px;
+  transform: translateX(-50%,-50%);
+  width: 200px;
+  height: 200px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 5px 5px 5px rgba(0,0,0,.5);
+  opacity: 0;
+  transition: .5s;
+}
+#modal.on{
+  opacity: 1;
+  top:140px;
+}
