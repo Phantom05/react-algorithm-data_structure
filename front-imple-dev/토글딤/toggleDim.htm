@@ -16,7 +16,7 @@
   <!-- 합쳐지고 최소화된 최신 자바스크립트 -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="./toggleDim.css">
-  <script src="./toggleDim.js"></script>
+
 </head>
 
 <body>
@@ -31,8 +31,13 @@
   <button class="btn btn-default" data-toggle-target="#menu">Menu</button>
   <div id="menu" class="menu">
     Hello world
+
+    <div>
+      <button id="inBtn">버튼!</button>
+    </div>
   </div>
-  
+
+  <script src="./toggleDim.js"></script>
   <script>
     new toggleDim({
       attr: "data-toggle-target",
@@ -40,6 +45,13 @@
         class: "on"
       }
     })
+
+
+    document.getElementById('inBtn').addEventListener('click', function (e) {
+      console.log('click');
+    });
+
+
   </script>
 </body>
 

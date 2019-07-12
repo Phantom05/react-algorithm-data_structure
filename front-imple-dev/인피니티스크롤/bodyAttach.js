@@ -280,28 +280,30 @@ class toggleDim {
     this.config = config;
     this.setting(config)
   }
-  setting(config){
+  setting(config) {
     const configElmList = Array.from(document.querySelectorAll(`[${config.attr}]`));
-    configElmList.map(list => {
-      list.addEventListener('click', function (e) {
-        e.stopPropagation();
-        document.querySelector(list.getAttribute(`${config.attr}`)).classList.add(config.control.class);
+    if (configElmList.length) {
+      configElmList.map(list => {
+        list.addEventListener('click', function (e) {
+          e.stopPropagation();
+          document.querySelector(list.getAttribute(`${config.attr}`)).classList.add(config.control.class);
+        })
       })
-    })
-    
-    this.bodySetting(configElmList,config);
+
+      this.bodySetting(configElmList, config);
+    }
   }
-  bodySetting(list,config){
+  bodySetting(list, config) {
     const main = this;
     document.body.addEventListener('click', function (e) {
-      list.map(in_list=>{
+      list.map(in_list => {
         const targetId = in_list.getAttribute(config.attr).substr(1);
         main.toggleDimControl({
           id: targetId
         }, function () {
           document.getElementById(`${targetId}`).classList.remove(config.control.class);
         })(e)
-        
+
       })
     })
   }
