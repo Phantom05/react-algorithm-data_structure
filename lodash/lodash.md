@@ -1,4 +1,8 @@
-lodash
+# lodash
+
+<i>함수형 프로그래밍 로대쉬</i>
+
+## Array
 
 + chunk
 
@@ -754,5 +758,558 @@ var others = [{ 'x': 1, 'y': 1 }, { 'x': 1, 'y': 2 }];
  
 _.xorWith(objects, others, _.isEqual);
 // => [{ 'x': 2, 'y': 1 }, { 'x': 1, 'y': 1 }]
+```
+
+
+
+
+
+## Collection
+
+
+
++ countBy (collection, [iteratee=_.identity])
+
+iteratee를 통해 컬렉션의 각 요소를 실행 한 결과로 생성 된 키로 구성된 객체를 만듭니다. 각 키의 해당 값은 iteratee가 키를 리턴 한 횟수입니다. iteratee는 (value) 하나의 인수로 호출됩니다.
+
+두번째 인자로 들어간 조건으로 숫자를 새서 객체로 반환
+
+```js
+_.countBy([6.1, 4.2, 6.3], Math.floor);
+// => { '4': 1, '6': 2 }
+ 
+// The `_.property` iteratee shorthand.
+_.countBy(['one', 'two', 'three'], 'length');
+// => { '3': 2, '5': 1 }
+```
+
+
+
++ every(collection, [predicate=_.identity])
+
+술어가 컬렉션의 모든 요소에 대해 진실성을 반환하는지 확인합니다. 술어가 거짓을 반환하면 반복이 중지됩니다. 술어는 (value, index | key, collection) 세 개의 인수로 호출됩니다.
+
+```js
+_.every([true, 1, null, 'yes'], Boolean);
+// => false
+ 
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': false },
+  { 'user': 'fred',   'age': 40, 'active': false }
+];
+ 
+// The `_.matches` iteratee shorthand.
+_.every(users, { 'user': 'barney', 'active': false });
+// => false
+ 
+// The `_.matchesProperty` iteratee shorthand.
+_.every(users, ['active', false]);
+// => true
+ 
+// The `_.property` iteratee shorthand.
+_.every(users, 'active');
+// => false
+```
+
+
+
++ fillter(collection, [predicate=_.identity])
+
+모든 요소의 배열을 반환하는 컬렉션의 요소를 반복하고 predicate가 truthy를 반환합니다. 술어는 (value, index | key, collection) 세 개의 인수로 호출됩니다.
+
+```js
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': true },
+  { 'user': 'fred',   'age': 40, 'active': false }
+];
+ 
+_.filter(users, function(o) { return !o.active; });
+// => objects for ['fred']
+ 
+// The `_.matches` iteratee shorthand.
+_.filter(users, { 'age': 36, 'active': true });
+// => objects for ['barney']
+ 
+// The `_.matchesProperty` iteratee shorthand.
+_.filter(users, ['active', false]);
+// => objects for ['fred']
+ 
+// The `_.property` iteratee shorthand.
+_.filter(users, 'active');
+// => objects for ['barney']
+```
+
+
+
++ find(collection, [predicate=_.identity], [fromIndex=0])
+
+컬렉션 요소를 반복하고, 첫 번째 요소 조건자를 반환하면 true를 반환합니다. 술어는 (value, index | key, collection) 세 개의 인수로 호출됩니다.
+
+```js
+var users = [
+  { 'user': 'barney',  'age': 36, 'active': true },
+  { 'user': 'fred',    'age': 40, 'active': false },
+  { 'user': 'pebbles', 'age': 1,  'active': true }
+];
+ 
+_.find(users, function(o) { return o.age < 40; });
+// => object for 'barney'
+ 
+// The `_.matches` iteratee shorthand.
+_.find(users, { 'age': 1, 'active': true });
+// => object for 'pebbles'
+ 
+// The `_.matchesProperty` iteratee shorthand.
+_.find(users, ['active', false]);
+// => object for 'fred'
+ 
+// The `_.property` iteratee shorthand.
+_.find(users, 'active');
+// => object for 'barney'
+```
+
+
+
++ findLast(collection, [predicate=.identity], [fromIndex=collection.length-1])
+
+이 메소드는 컬렉션의 요소를 오른쪽에서 왼쪽으로 반복한다는 점을 제외하면 _.find와 유사합니다.
+
+모두 맞는 존재들에서 마지막 값을 가져옴
+
+```js
+_.findLast([1, 2, 3, 4], function(n) {
+  return n % 2 == 1;
+});
+// => 3
+```
+
+
+
++ _.flatMap(collection,[iteratee=_.identity])
+
+iteratee를 통해 컬렉션의 각 요소를 실행하고 매핑 된 결과를 병합하여 값의 병합 된 배열을 만듭니다. iteratee는 (value, index | key, collection) 세 개의 인수로 호출됩니다.
+
+```js
+function duplicate(n){
+  return [n,n]
+}
+console.log(
+  _.flatMap([1,2,1,[2],[[3]]])
+);
+// => [1,2,1,2,[3]]
+console.log(
+  _.flatMap([1,2],duplicate)
+);
+// => [1,1,2,2]
+```
+
+
+
++ _.flatMapDeep(collection, [iteratee=_.identity])
+
+이 메소드는 매핑 된 결과를 재귀 적으로 평평하게한다는 점을 제외하면 _.flatMap과 같습니다.
+
+```js
+function duplicate(n) {
+  return [[[n, n]]];
+}
+ 
+_.flatMapDeep([1, 2], duplicate);
+// => [1, 1, 2, 2]
+```
+
+
+
++ _.flatMapDepth(collection, [iteratee=_.identity], [depth=1])
+
+이 메소드는 매핑 된 결과를 반복적으로 심도 시간까지 평탄화한다는 점을 제외하면 _.flatMap과 같습니다.
+
+```js
+function duplicate(n) {
+  return [[[n, n]]];
+}
+ 
+_.flatMapDepth([1, 2], duplicate, 2);
+// => [[1, 1], [2, 2]]
+```
+
+
+
++ _.forEach(collection, [iteratee=_.identity])
+
+컬렉션의 요소를 반복하고 각 요소에 대해 iteratee를 호출합니다. iteratee는 (value, index | key, collection) 세 개의 인수로 호출됩니다. Iteratee 함수는 명시 적으로 false를 반환하여 일찍 반복을 종료 할 수 있습니다.
+
+참고 : 다른 "컬렉션"메서드와 마찬가지로 "길이"속성이있는 객체는 배열처럼 반복됩니다. 이 동작을 피하려면 객체 반복에 _.forIn 또는 _.forOwn을 사용하십시오.
+
+```js
+_.forEach([1, 2], function(value) {
+  console.log(value);
+});
+// => Logs `1` then `2`.
+ 
+_.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
+  console.log(key);
+});
+// => Logs 'a' then 'b' (iteration order is not guaranteed).
+```
+
+
+
+
+
++ _.forEachRight(collection, [iteratee=_.identity])
+
+이 메소드는 컬렉션의 요소를 오른쪽에서 왼쪽으로 반복한다는 점을 제외하면 _.forEach와 같습니다.
+
+```js
+_.forEachRight([1, 2], function(value) {
+  console.log(value);
+});
+// => Logs `2` then `1`.
+```
+
+
+
++ _.groupBy(collection, [iteratee=_.identity])
+
+iteratee를 통해 컬렉션의 각 요소를 실행 한 결과로 생성 된 키로 구성된 객체를 만듭니다. 그룹화 된 값의 순서는 컬렉션에서 발생하는 순서에 따라 결정됩니다. 각 키의 해당 값은 키를 생성하는 요소의 배열입니다. iteratee는 (value) 하나의 인수로 호출됩니다.
+
+```js
+_.groupBy([6.1, 4.2, 6.3], Math.floor);
+// => { '4': [4.2], '6': [6.1, 6.3] }
+ 
+// The `_.property` iteratee shorthand.
+_.groupBy(['one', 'two', 'three'], 'length');
+// => { '3': ['one', 'two'], '5': ['three'] }
+```
+
+
+
++ _.includes(collection, value, [fromIndex=0])
+
+값이 콜렉션에 있는지 점검합니다. collection이 문자열이면 값의 하위 문자열이 있는지 확인합니다. 그렇지 않으면 SameValueZero가 등호 비교에 사용됩니다. fromIndex가 음수이면 컬렉션 끝에서의 오프셋으로 사용됩니다.
+
+```js
+_.includes([1, 2, 3], 1);
+// => true
+ 
+_.includes([1, 2, 3], 1, 2);
+// => false
+ 
+_.includes({ 'a': 1, 'b': 2 }, 1);
+// => true
+ 
+_.includes('abcd', 'bc');
+// => true
+```
+
+
+
++ _.invokeMap(collection, path, [args])
+
+콜렉션 내의 각 요소의 패스에있는 메소드를 호출 해, 불려가는 각 메소드의 결과의 배열을 돌려줍니다. 추가 인수는 각 호출 된 메소드에 제공됩니다. path가 함수이면 컬렉션의 각 요소에 대해 호출되고 여기에 바인딩됩니다.
+
+ 음수이면 컬렉션 종료 시점의 오프셋으로 사용됩니다.
+
+각 요소에 원하는 행위를 조질 수 있음.
+
+```js
+_.invokeMap([[5, 1, 7], [3, 2, 1]], 'sort');
+// => [[1, 5, 7], [1, 2, 3]]
+ 
+_.invokeMap([123, 456], String.prototype.split, '');
+// => [['1', '2', '3'], ['4', '5', '6']]
+```
+
+
+
++ _.keyBy(collection, [iteratee=_.identity])
+
+iteratee를 통해 컬렉션의 각 요소를 실행 한 결과로 생성 된 키로 구성된 객체를 만듭니다. 각 키의 해당 값은 키를 생성하는 마지막 요소입니다. iteratee는 (value) 하나의 인수로 호출됩니다.
+
+반복돌면서 키로 해당 객체를 새로 만듬
+
+```js
+var array = [
+  { 'dir': 'left', 'code': 97 },
+  { 'dir': 'right', 'code': 100 }
+];
+ 
+_.keyBy(array, function(o) {
+  return String.fromCharCode(o.code);
+});
+// => { 'a': { 'dir': 'left', 'code': 97 }, 'd': { 'dir': 'right', 'code': 100 } }
+ 
+_.keyBy(array, 'dir');
+// => { 'left': { 'dir': 'left', 'code': 97 }, 'right': { 'dir': 'right', 'code': 100 } }
+```
+
+
+
++ _.map(collection, [iteratee=_.identity])
+
+iteratee를 통해 컬렉션의 각 요소를 실행하여 값의 배열을 만듭니다. iteratee는 세 개의 인수로 호출됩니다.
+
+(값, 색인 키, 모음).
+
+많은 lodash 메소드는 _every, _.filter, _.map, _.mapValues, _.reject 및 _.some과 같은 메소드의 반복 프로그램으로 작동하도록 보호됩니다.
+
+보호되는 방법은 다음과 같습니다.
+
+반복, sampleSize, slice, some, sortBy, split, take, takeRight, template, trim, trimEnd, trimStart, trimEnd, trimStart, trimEnd, trimStart, trimEnd, trimStart, trimEnd, 단어들
+
+```js
+function square(n) {
+  return n * n;
+}
+ 
+_.map([4, 8], square);
+// => [16, 64]
+ 
+_.map({ 'a': 4, 'b': 8 }, square);
+// => [16, 64] (iteration order is not guaranteed)
+ 
+var users = [
+  { 'user': 'barney' },
+  { 'user': 'fred' }
+];
+ 
+// The `_.property` iteratee shorthand.
+_.map(users, 'user');
+// => ['barney', 'fred']
+```
+
+
+
++ _.orderBy(collection, [iteratees=[_.identity]], [orders])
+
+이 메소드는 iteratees의 정렬 순서를 정렬 기준으로 지정할 수 있다는 점을 제외하면 _.sortBy와 같습니다. 주문이 지정되지 않으면 모든 값이 오름차순으로 정렬됩니다. 그렇지 않으면 내림차순에 대해 "desc"의 순서를 지정하거나 해당 값의 오름차순 정렬 순서에 "asc"를 지정하십시오.
+
+```js
+var users = [
+  { 'user': 'fred',   'age': 48 },
+  { 'user': 'barney', 'age': 34 },
+  { 'user': 'fred',   'age': 40 },
+  { 'user': 'barney', 'age': 36 }
+];
+ 
+// Sort by `user` in ascending order and by `age` in descending order.
+_.orderBy(users, ['user', 'age'], ['asc', 'desc']);
+// => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
+```
+
+
+
++ _.partition(collection, [predicate=_.identity])
+
+두 개의 그룹으로 나뉘는 요소의 배열을 만듭니다. 첫 번째 요소는 참을 반환합니다. 두 번째 요소는 거짓을 반환합니다. 술어는 하나의 인수 (값)로 호출됩니다.
+
+조건에 따라 2개의 배열로 반환해줌
+
+```js
+var users = [
+  { 'user': 'barney',  'age': 36, 'active': false },
+  { 'user': 'fred',    'age': 40, 'active': true },
+  { 'user': 'pebbles', 'age': 1,  'active': false }
+];
+ 
+_.partition(users, function(o) { return o.active; });
+// => objects for [['fred'], ['barney', 'pebbles']]
+ 
+// The `_.matches` iteratee shorthand.
+_.partition(users, { 'age': 1, 'active': false });
+// => objects for [['pebbles'], ['barney', 'fred']]
+ 
+// The `_.matchesProperty` iteratee shorthand.
+_.partition(users, ['active', false]);
+// => objects for [['barney', 'pebbles'], ['fred']]
+ 
+// The `_.property` iteratee shorthand.
+_.partition(users, 'active');
+// => objects for [['fred'], ['barney', 'pebbles']]
+```
+
+
+
++ _.reduce(collection, [iteratee=_.identity], [accumulator])
+
+콜렉션에서 각 요소를 반복하여 누적 한 결과 인 값으로 콜렉션을 줄입니다. 연속되는 각각의 호출에는 이전의 리턴 값이 제공됩니다. accumulator를 지정하지 않으면, 콜렉션의 최초의 요소가 초기치로서 사용됩니다. iteratee는 네 개의 인수로 호출됩니다.
+
+(누적 기, 값, 색인 키, 콜렉션).
+
+많은 lodash 메소드는 _.reduce, _.reduceRight 및 _.transform과 같은 메소드의 반복자로 작동하도록 보호됩니다.
+
+보호되는 방법은 다음과 같습니다.
+
+defaultsDeep, includes, merge, orderBy 및 sortBy를 지정합니다.
+
+```js
+// key는 인덱스라고 알고있었으나 사실 배열도 객체이기 때문에 key값임.
+
+_.reduce([1, 2], function(sum, n) {
+  return sum + n;
+}, 0);
+// => 3
+
+  _.reduce(['a','b','c'], function(res,val,key){
+    res.push(val);
+    return res;
+  },[])
+  // => abc
+
+_.reduce({ 'a': 1, 'b': 2, 'c': 1 }, function(result, value, key) {
+  (result[value] || (result[value] = [])).push(key);
+  return result;
+}, {});
+// => { '1': ['a', 'c'], '2': ['b'] } (iteration order is not guaranteed)
+// 객체의 경우 index의 키값이 존재하므로 key이름값이 들어감
+
+```
+
+
+
++ _.reduceRight(collection, [iteratee=_.identity], [accumulator])
+
+이 메소드는 컬렉션의 요소를 오른쪽에서 왼쪽으로 반복한다는 점을 제외하면 _.reduce와 같습니다.
+
+```js
+var array = [[0, 1], [2, 3], [4, 5]];
+ 
+_.reduceRight(array, function(flattened, other) {
+  return flattened.concat(other);
+}, []);
+// => [4, 5, 2, 3, 0, 1]
+```
+
+
+
++ _.reject(collection, [predicate=_.identity])
+
+_.filter의 반대; 이 메소드는 술어가 사실대로 리턴하지 않는] 렉션의 요소를 리턴합니다.
+
+```js
+var users = [
+  { 'user': 'barney', 'age': 36, 'active': false },
+  { 'user': 'fred',   'age': 40, 'active': true }
+];
+ 
+_.reject(users, function(o) { return !o.active; });
+// => objects for ['fred']
+ 
+// The `_.matches` iteratee shorthand.
+_.reject(users, { 'age': 40, 'active': true });
+// => objects for ['barney']
+ 
+// The `_.matchesProperty` iteratee shorthand.
+_.reject(users, ['active', false]);
+// => objects for ['fred']
+ 
+// The `_.property` iteratee shorthand.
+_.reject(users, 'active');
+// => objects for ['barney']
+```
+
+
+
++ _.sample(collection)
+
+컬렉션에서 임의의 요소를 가져옵니다.
+
+```js
+_.sample([1, 2, 3, 4]);
+// => 2
+```
+
+
+
++ _.sampleSize(collection, [n=1])
+
+컬렉션의 고유 키에서 n 개의 임의 요소를 컬렉션의 크기까지 가져옵니다.
+
+```js
+_.sampleSize([1, 2, 3], 2);
+// => [3, 1]
+ 
+_.sampleSize([1, 2, 3], 4);
+// => [2, 3, 1]
+```
+
+
+
++ _.shuffle(collection)
+
+Fisher-Yates 셔플 버전을 사용하여 셔플 된 값의 배열을 만듭니다.
+
+```js
+_.shuffle([1, 2, 3, 4]);
+// => [4, 1, 3, 2]
+```
+
+
+
++ _.size(collection)
+
+배열 형 값의 길이 또는 개체의 열거 형 문자열 키 특성의 개수를 반환하여 컬렉션 크기를 가져옵니다.
+
+```js
+_.size([1, 2, 3]);
+// => 3
+ 
+_.size({ 'a': 1, 'b': 2 });
+// => 2
+ 
+_.size('pebbles');
+// => 7
+```
+
+
+
++ _.some(collection, [predicate=_.identity])
+
+술어가 컬렉션의 모든 요소에 대해 진실성을 반환하는지 확인합니다. 술어가 진리를 반환하면 반복이 중지됩니다. 술어는 (value, index | key, collection) 세 개의 인수로 호출됩니다.
+
+조건이 하나라도 맞으면 true
+
+```js
+_.some([null, 0, 'yes', false], Boolean);
+// => true
+ 
+var users = [
+  { 'user': 'barney', 'active': true },
+  { 'user': 'fred',   'active': false }
+];
+ 
+// The `_.matches` iteratee shorthand.
+_.some(users, { 'user': 'barney', 'active': false });
+// => false
+ 
+// The `_.matchesProperty` iteratee shorthand.
+_.some(users, ['active', false]);
+// => true
+ 
+// The `_.property` iteratee shorthand.
+_.some(users, 'active');
+// => true
+```
+
+
+
++ _.sortBy(collection, [iteratees=[_.identity]])
+
+각 반복을 통해 컬렉션의 각 요소를 실행 한 결과에 따라 오름차순으로 정렬 된 요소 배열을 만듭니다. 이 메서드는 안정적인 정렬을 수행합니다. 즉, 동일한 요소의 원래 정렬 순서를 유지합니다. iteratees는 (value) 하나의 인수로 호출됩니다.
+
+```js
+var users = [
+  { 'user': 'fred',   'age': 48 },
+  { 'user': 'barney', 'age': 36 },
+  { 'user': 'fred',   'age': 40 },
+  { 'user': 'barney', 'age': 34 }
+];
+ 
+_.sortBy(users, [function(o) { return o.user; }]);
+// => objects for [['barney', 36], ['barney', 34], ['fred', 48], ['fred', 40]]
+ 
+_.sortBy(users, ['user', 'age']);
+// => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
 ```
 

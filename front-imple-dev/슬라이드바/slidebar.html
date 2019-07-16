@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery UI Slider - Range with fixed minimum</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="./slidebar.css">
+</head>
+
+<body>
+
+  <p>
+    <form action="" id="form">
+      <label for="amount">Maximum price:</label>
+      <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;" name="slide">
+      <button id="sub">전송</button>
+    </form>
+  </p>
+
+  <div id="slider-range-min"></div>
+
+
+  <form action="">
+    <input type="range" name="aaa" id="range">
+    <button>전송</button>
+  </form>
+
+  <input type="text" id="aaa">
+  <div id="bbb"></div>
+  <script>
+    // slider.disable();
+    //  PAGE:
+    // LAGACY:
+
+    let state = {
+      target: '#bbb',
+      connect: '#aaa',
+      max: 70,
+      min: 1,
+      value: 35,
+      prevBarClass: '',
+      ballClass: '',
+      nextBarClass: ''
+    };
+    sliderRange(state);
+
+    function sliderRange(config) {
+      const $slideElm = $(config.target);
+      const $connectInput = $(config.connect);
+      $slideElm.slider({
+        range: "min",
+        value: config.value || 0,
+        min: config.min,
+        max: config.max,
+        slide: function (event, ui) {
+          $connectInput.val(ui.value);
+        }
+      });
+      $connectInput.val($slideElm.slider("value"));
+
+
+      let spanBallCss = {
+        backgroundColor: '#596CB9',
+        borderRadius: '100%',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        cursor:'pointer'
+      }
+      let slideElmCss = {
+        backgroundColor: '#C6CBDE',
+        height: '6px'
+      }
+      let uiSliderRangeCss = {
+        backgroundColor: '#C6CBDE'
+      }
+      $slideElm.children('span.ui-slider-handle').css(spanBallCss)
+      $slideElm.css(slideElmCss)
+      $slideElm.children('div.ui-slider-range').css(uiSliderRangeCss)
+    };
+
+
+    //  $( function() {
+
+    //     $( "#slider-range-min" ).slider({
+    //       range: "min",
+    //       value: 37,
+    //       min: 1,
+    //       max: 700,
+    //       slide: function( event, ui ) {
+    //         $( "#amount" ).val(ui.value );
+    //       }
+    //     });
+    //     $( "#amount" ).val($( "#slider-range-min" ).slider( "value" ) );
+
+    //   } );
+    console.log(
+      document.getElementById('range')
+    );
+    document.getElementById('range').addEventListener('input',function(e){
+      console.log(this.value);
+    })
+    document.getElementById('range').addEventListener('change',function(e){
+      console.log(this.value);
+    })
+    
+  </script>
+</body>
+
+</html>
