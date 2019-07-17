@@ -1,0 +1,20 @@
+.svgbox{
+  border: 1px solid red;
+  width: 600px;
+  height: 900px;
+}
+circle{
+  cursor: pointer;
+  &.on{
+    fill: #C952D0;
+  }
+  &.on.bridge{
+    fill: #596CB9; 
+  }
+}
+.teeth_radio_label{
+  
+}
+.hidden{
+  display: none;
+}

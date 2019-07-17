@@ -4,7 +4,7 @@
 
 ## Array
 
-+ chunk
++ **chunk**
 
 청크는 덩어리라는 뜻으로 하나의 배열을 잘라주는 역할을 한다.
 
@@ -15,9 +15,9 @@ _.chunk([1,2,3],2)
 
 
 
-+ compact 
++ **compact **
 
-compact는 배열의 false나 ' '같은 빈값을 걸러준다.
+compact는 배열의 false나 ' '등 문자를 걸러준다.
 
 ```js
 _.compact([0, 1, false, 2, '', 3]);
@@ -26,7 +26,7 @@ _.compact([0, 1, false, 2, '', 3]);
 
 
 
-+ concat
++ **concat**
 
 배열을 하나로 합쳐준다. 
 
@@ -43,7 +43,7 @@ console.log(array);
 
 
 
-+ difference
++ **difference**
 
 차집합으로 두번째 배열요소에 포함하지 않는 첫번째배열의 나머지 요소를 반화한다.
 
@@ -54,7 +54,7 @@ _.difference([2, 1], [2, 3]);
 
 
 
-+ _.differenceBy
++ **_.differenceBy**
 
 차집합에서 조건을 달수있다. 3번째인자로 필터링을 하고 값을 구한다음에 구한 값의 원본을 반환한다.
 
@@ -69,7 +69,7 @@ _.differenceBy([{ 'x': 2 }, { 'x': 1 }], [{ 'x': 1 }], 'x');
 
 
 
-+ drop
++ **drop**
 
 두번째 인자로부터  잘린 배열을를 만든다.
 
@@ -89,7 +89,7 @@ _.drop([1, 2, 3], 0);
 
 
 
-+  _.dropRight
++  **_.dropRight**
 
 반대쪽에서부터 자른다. drop과 마찬가지다.
 
@@ -109,7 +109,7 @@ _.dropRight([1, 2, 3], 0);
 
 
 
-+ fill
++ **fill**
 
 start의 값부터 end까지의 값을 가진 array 요소를 채 웁니다.
 
@@ -129,7 +129,7 @@ _.fill([4, 6, 8, 10], '*', 1, 3);
 
 
 
-+ findIndex
++ **findIndex**
 
 이 메소드는 첫 번째 요소 술어의 색인을 리턴한다는 점을 제외하고는 _.find와 유사합니다. 요소 자체 대신 진실을 리턴합니다.
 
@@ -158,7 +158,7 @@ _.findIndex(users, 'active');
 
 
 
-+ findLastIndex
++ **findLastIndex**
 
 라스트 인덱스를 찾음.
 
@@ -181,7 +181,7 @@ _.findLastIndex(users, 'active');
 
 
 
-+ flatten
++ **flatten**
 
 이중 배열까지는 플랫하게 만든다.
 
@@ -192,7 +192,7 @@ _.flatten([1, [2, [3, [4]], 5]]);
 
 
 
-+ flattenDeep
++ **flattenDeep**
 
 깊은 배열까지 플랫하게 만든다.
 
@@ -203,7 +203,7 @@ _.flattenDeep([1, [2, [3, [4]], 5]]);
 
 
 
-+ flattenDepth
++ **flattenDepth**
 
 플랫의 뎁스를 인덱스로 컨트롤 할수 있다.
 
@@ -219,7 +219,7 @@ _.flattenDepth(array, 2);
 
 
 
-+ fromParis
++ **fromParis**
 
 _.toPairs의 역함수. 이 메서드는 키 - 값 쌍으로 구성된 객체를 반환합니다.
 
@@ -230,7 +230,7 @@ _.fromPairs([['a', 1], ['b', 2]]);
 
 
 
-+ head
++ **head**
 
 배열의 첫번쨰인자를 가져옴
 
@@ -244,7 +244,7 @@ _.head([]);
 
 
 
-+ indexOf
++ **indexOf**
 
 인덱스오브, 세번째인자로 세번째인덱스에 있는 놈을 
 
@@ -259,7 +259,7 @@ _.indexOf([1, 2, 1, 2], 2, 2);
 
 
 
-+ lastIndexOf
++ **lastIndexOf**
 
 이 메소드는 array의 요소를 오른쪽에서 왼쪽으로 반복한다는 점을 제외하면 _.indexOf와 유사합니다.
 
@@ -276,7 +276,7 @@ _.lastIndexOf([1, 2, 1, 2], 2, 2);
 
 
 
-+ initial
++ **initial**
 
 마지막 요소를 제외한 배열을 가져옴
 
@@ -287,7 +287,7 @@ _.initial([1, 2, 3]);
 
 
 
-+ intersection
++ **intersection**
 
 동일성 비교를 위해 SameValueZero를 사용하여 지정된 모든 배열에 포함 된 고유 한 값의 배열을 만듭니다. 결과 값의 순서와 참조는 첫 번째 배열에 의해 결정됩니다.
 
@@ -300,7 +300,7 @@ _.intersection([2, 1], [2, 3]);
 
 
 
-+ intersectionBy
++ **intersectionBy**
 
 이 메소드는 _.intersection과 비슷하지만, 각 배열의 각 요소에 대해 호출되는 iteratee를 받아 들여 비교할 기준을 생성합니다. 결과 값의 순서와 참조는 첫 번째 배열에 의해 결정됩니다. iteratee는 하나의 인수로 호출됩니다.
 
@@ -315,7 +315,7 @@ _.intersectionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
 
 
 
-+ insersectionWith
++ **insersectionWith**
 
 이 메소드는 array 요소를 비교하기 위해 호출되는 비교자를 허용한다는 점을 제외하면 _.intersection과 유사합니다. 결과 값의 순서와 참조는 첫 번째 배열에 의해 결정됩니다. 비교자는 두 개의 인수 (arrVal, othVal)로 호출됩니다.
 
@@ -329,7 +329,7 @@ _.intersectionWith(objects, others, _.isEqual);
 
 
 
-+ join
++ **join**
 
 ```js
 _.join(['a', 'b', 'c'], '~')
@@ -338,7 +338,7 @@ _.join(['a', 'b', 'c'], '~')
 
 
 
-+ last
++ **last**
 
 마지막 엘리먼트요소를 가져옴
 
@@ -349,7 +349,7 @@ _.last([1, 2, 3]);
 
 
 
-+ nth
++ **nth**
 
 배열의 인덱스 n에있는 요소를 가져옵니다. n가 음수이면 끝에있는 n 번째 요소가 반환됩니다.
 
@@ -365,7 +365,7 @@ _.nth(array, -2);
 
 
 
-+ pull
++ **pull**
 
 동일성 비교를 위해 SameValueZero를 사용하여 배열에서 주어진 모든 값을 제거합니다.
 
@@ -382,7 +382,7 @@ _.pull([1,2,3,4,5,1,2,3,4],1,2,3,4)
 
 
 
-+ pullAll
++ **pullAll**
 
 제거할 항목을 배열로 제공한다
 
@@ -396,7 +396,7 @@ console.log(array);
 
 
 
-+ pullAt
++ **pullAt**
 
 인덱스에 대응하는 배열로부터 요소를 삭제 해, 삭제 된 요소의 배열을 돌려줍니다.
 
@@ -415,7 +415,7 @@ console.log(pulled);
 
 
 
-+ remove
++ **remove**
 
 술어가 진리를 리턴하는 모든 요소를 배열에서 제거하고 제거 된 요소의 배열을 리턴합니다. 술어는 (value, index, array) 세 개의 인수로 호출됩니다.
 
@@ -434,7 +434,7 @@ console.log(evens);
 
 
 
-+ reverse
++ **reverse*
 
 첫 번째 요소가 마지막 요소가되고 두 번째 요소가 두 번째 요소가되도록 배열을 되돌립니다.
 
@@ -450,7 +450,7 @@ console.log(array);
 
 
 
-+ slice
++ **slice**
 
 _.slice(array,[start=0],[end=array.length])
 
@@ -464,7 +464,7 @@ _.slice(arr,1,3)
 
 
 
-+ sortedIndex
++ **sortedIndex**
 
 이진 검색을 사용하여 정렬 순서를 유지하기 위해 값을 배열에 삽입해야하는 가장 낮은 인덱스를 결정합니다.
 
@@ -479,7 +479,7 @@ _.sortedIndex([30, 50], 55);
 
 
 
-+ sortedLastIndex
++ **sortedLastIndex**
 
 sortIndex가 가장 낮은 인덱스면 이건 가장 큰인덱스
 
@@ -490,7 +490,7 @@ _.sortedLastIndex([4, 5, 5, 5, 6], 5);
 
 
 
-+ tail
++ **tail**
 
 array의 첫 번째 요소를 제외한 모든 것을 가져옵니다.
 
@@ -501,7 +501,7 @@ _.tail([1, 2, 3]);
 
 
 
-+ take
++ **take**
 
 n 개의 요소가있는 배열의 조각을 처음부터 가져옵니다.
 
@@ -521,7 +521,7 @@ _.take([1, 2, 3], 0);
 
 
 
-+ takeRight
++ **takeRight**
 
 끝에서 가져온 n 개의 요소가있는 배열을 만듭니다.
 
@@ -541,7 +541,7 @@ _.takeRight([1, 2, 3], 0);
 
 
 
-+ takeWhile
++ **takeWhile**
 
 반복문을 돌면서 조건이 트루인것들을 가져옴
 
@@ -1311,5 +1311,227 @@ _.sortBy(users, [function(o) { return o.user; }]);
  
 _.sortBy(users, ['user', 'age']);
 // => objects for [['barney', 34], ['barney', 36], ['fred', 40], ['fred', 48]]
+```
+
+
+
++ _.now()
+
+Unix 에포크 (1970 년 1 월 1 일 00:00:00 UTC)로부터 경과 한 밀리 세컨드 수의 타임 스탬프를 가져옵니다.
+
+```js
+_.defer(function(stamp) {
+  console.log(_.now() - stamp);
+}, _.now());
+// => Logs the number of milliseconds it took for the deferred invocation.
+```
+
+
+
+## Function
+
++ _.after(n, func)
+
+_ 이전과 반대; 이 메서드는 n 번 이상 호출되면 func을 호출하는 함수를 만듭니다.
+
+지정한만큼 호출한 이후로 작동함
+
+```js
+var saves = ['profile', 'settings'];
+ 
+var done = _.after(saves.length, function() {
+  console.log('done saving!');
+});
+ console.log(
+  done(),done()
+);
+// => undefined "done saving!"
+_.forEach(saves, function(type) {
+  asyncSave({ 'type': type, 'complete': done });
+});
+// => Logs 'done saving!' after the two async saves have completed.
+```
+
+
+
+> - _.ary(func, [n=func.length])
+>
+> 추가 인수를 무시하고 n 개 인수까지 func을 호출하는 함수를 만듭니다.
+>
+> **공부 필요**
+
+
+
+
+
++ _.before(n, func)
+
+이 바인딩과 생성 된 함수의 인수를 사용하여 func을 호출하는 함수를 만듭니다.이 함수는 n보다 작 으면서 호출됩니다. 생성 된 함수에 대한 후속 호출은 마지막 func 호출의 결과를 반환합니다.
+
+지정한 만큼만 호출하여 작동함.
+
+```js
+$('#btn').on('click', _.before(5, function(){
+  console.log('helo');
+}));
+//=> 4번만 helo 가 뜸.
+```
+
+
+
++ _.bind(func, thisArg, [partials])
+
+모 놀리 식 빌드에서 기본적으로 _ 인 _.bind.placeholder 값은 부분적으로 적용된 인수의 자리 표시 자로 사용될 수 있습니다.
+
+참고 : 기본 Function # bind와 달리이 메서드는 바인딩 된 함수의 "length"속성을 설정하지 않습니다.
+
+```js
+var objx = {
+  x:0,
+  y:0,
+  dx:5,
+  dy:7
+};
+var step = function(){
+  this.x += this.dx;
+  this.y += this.dy;
+};
+objx.step = _.bind(step,objx);
+objx.step()
+objx.x;
+// => 5
+
+var objy ={s:10}
+function hello(){
+  return this.s;
+}
+var he = _.bind(hello,objy);
+he()
+// => 10
+// => 렝스를 지원해 주지 않음.
+
+var obj = {
+  0:'hello',
+  1:'how',
+  2:'exist',
+  3:'you',
+  4:"play",
+  5:"today",
+  length:6
+}
+// => 이렇게 렝스를 일일이 넣어줘야함
+
+obj.slice = _.bind(Array.prototype.slice,obj);
+console.log(
+  obj.slice(1,4)
+);
+// =>(3) ["how", "exist", "you"]
+
+function greet(greeting,pubctuation){
+  console.log(greeting,pubctuation);
+  return greeting+' '+ this.user + pubctuation;
+}
+var object = {'user':'fred'};
+
+var bound = _.bind(greet, object,'hi');
+console.log(
+  bound('!')
+);
+// =>hi fred!
+// greet함수를 object 객체에 바인드해주고 greet함수의 첫번째인자로 hi를 넣어준다.
+// bount에 hi를 넣어 실행한 함수를 넣어주고 bound를 실행할때 !를 넣어서 실행하면 pubctuation 두번째인자로 들어가게된다.
+```
+
+
+
+
+
++ _.bindKey(object, key, [partials])
+
+객체 [key]에서 메소드를 호출하는 함수를 작성합니다.이 메소드는 수신 한 인수 앞에 부분이 붙습니다.
+
+이 메소드는 바운드 함수가 재 정의되거나 아직 존재하지 않는 메소드를 참조 할 수 있도록함으로써 _.bind와 다릅니다. 자세한 내용은 Peter Michaux의 기사를 참조하십시오.
+
+모 놀리 식 빌드에서 기본적으로 _ 인 _.bindKey.placeholder 값은 부분적으로 적용된 인수의 자리 표시 자로 사용될 수 있습니다.
+
+```js
+var object = {
+  'user': 'fred',
+  'greet': function(greeting, punctuation) {
+    return greeting + ' ' + this.user + punctuation;
+  }
+};
+ 
+var bound = _.bindKey(object, 'greet', 'hi');
+// object에서 greet키의 값을 object로 바인딩 해주고 hi를 넣어서 실행한다.
+bound('!');
+// => 'hi fred!'
+ 
+object.greet = function(greeting, punctuation) {
+  return greeting + 'ya ' + this.user + punctuation;
+};
+ 
+bound('!');
+// => 'hiya fred!'
+ 
+// Bound with placeholders.
+var bound = _.bindKey(object, 'greet', _, '!');
+bound('hi');
+// => 'hiya fred!
+```
+
+
+
+
+
++ _.curry(func, [arity=func.length])
+
+func의 인수를 받아들이고 인수의 개수가 제공된 경우 결과를 반환하는 func을 호출하거나 나머지 func 인수를 받아들이는 함수를 반환하는 등의 함수를 만듭니다. func.length가 충분하지 않으면 func의 값을 지정할 수 있습니다.
+
+모 놀리 식 빌드에서 기본적으로 _ 인 _.curry.placeholder 값은 제공된 인수의 자리 표시 자로 사용할 수 있습니다.
+
+참고 :이 메서드는 카레 함수의 "길이"속성을 설정하지 않습니다.
+
+단 정의된 인자가 모두 들어와야지 실행됨.
+
+```js
+var abc = function(a, b, c) {
+  return [a, b, c];
+};
+ 
+var curried = _.curry(abc);
+ 
+curried(1)(2)(3)
+// => [1, 2, 3]
+ 
+curried(1, 2)(3);
+// => [1, 2, 3]
+ 
+curried(1, 2, 3);
+// => [1, 2, 3]
+ 
+// Curried with placeholders.
+curried(1)(_, 3)(2);
+// => [1, 2, 3]
+
+//원하는 곳에서 인자를 하나씩 넣어서 실행해도 될듯.
+var aAsync  = curried(1)
+var bAsync = aAsync(2)
+var cAsync = bAsync(3)
+console.log(cAsync);
+```
+
+
+
++ _.curryRight(func, [arity=func.length])
+
+이 메소드는 인수가 _.partial 대신 _.partialRight의 func에 func에 적용된다는 점을 제외하고는 _curry와 같습니다.
+
+단일체 빌드에서 기본적으로 _ 인 _.curryRight.placeholder 값은 제공된 인수의 자리 표시 자로 사용될 수 있습니다.
+
+참고 :이 메서드는 카레 함수의 "길이"속성을 설정하지 않습니다.
+
+```js
+
 ```
 

@@ -1,0 +1,22 @@
+.svgbox {
+  border: 1px solid red;
+  width: 600px;
+  height: 900px;
+}
+
+circle {
+  cursor: pointer;
+}
+
+circle.on {
+  fill: #C952D0;
+}
+
+circle.on.bridge {
+  fill: #596CB9;
+}
+
+.hidden {
+  display: none;
+}
+/*# sourceMappingURL=test.css.map */
