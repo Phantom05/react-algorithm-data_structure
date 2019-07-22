@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!-- include libraries(jQuery, bootstrap) -->
+  <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+
+  <!-- include summernote css/js -->
+  <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+  <style>
+    .box {
+      padding: 15px;
+      border: 1px solid red;
+      border-radius: 2px;
+    }
+
+    .btn {
+      display: inline-block;
+      border: 1px solid blue;
+      border-radius: 2px;
+      padding: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: #ececec;
+    }
+
+    .reply__submit {
+      display: inline-block;
+      padding: 5px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .reply__submit:hover {
+      background: rgb(206, 206, 206);
+    }
+
+    .test__class {
+      width: 100%;
+    }
+    .comment__row.submit{
+      text-align: right;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box" data-seq="0">
+    <div>
+      <span>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reprehenderit obcaecati voluptatum earum voluptate
+        molestias quidem debitis, molestiae ea beatae, mollitia, ex ad illo ut temporibus officiis exercitationem rerum
+        tenetur magni.</span>
+    </div>
+    <span class="btn">Reply</span>
+    <div class="row" hidden>
+      <div class="col-md-1">
+        이미지
+      </div>
+      <div class="col-md-11">
+          <div class="res"></div>
+      </div>
+    </div>
+    
+  </div>
+  <div class="box" data-seq="1">
+    <span class="btn">Reply</span>
+        <div class="row" hidden>
+      <div class="col-md-1">
+        이미지
+      </div>
+      <div class="col-md-11">
+          <div class="res"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box" data-seq="2">
+    <span class="btn">Reply</span>
+        <div class="row" hidden>
+      <div class="col-md-1">
+        이미지
+      </div>
+      <div class="col-md-11">
+          <div class="res"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="box" data-seq="3">
+
+  </div>
+  
+  <div class="box" data-seq="4">
+    <span class="btn">Reply</span>
+        <div class="row" hidden>
+      <div class="col-md-1">
+        이미지
+      </div>
+      <div class="col-md-11">
+          <div class="res"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./comment.js"></script>
+  <script>
+    var comment = new Comment({
+      card: {
+        class: "box"
+      },
+      insert: {
+        class: "res"
+      },
+      reply_btn: '.btn',
+      seq: 'data-seq',
+      form: {
+        attr: {
+          action: "/test/",
+          class: "test__class",
+          method: "post",
+        },
+        submit: {
+          class: "reply__submit",
+          type: "submit",
+          value: "Answer_Reply"
+        },
+        textarea: {
+          class: "summernote"
+        }
+      },
+      cb: function (form) {
+        $('.summernote').summernote({
+          tabsize: 2,
+          height: 100,
+          toolbar: false,
+          disableDragAndDrop: true,
+          shortcuts: false,
+          onPaste: function (e) {
+            var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+            e.preventDefault();
+            document.execCommand('insertText', false, bufferText);
+          }
+        })
+
+        Array.from(findParent(form,'data-seq').getElementsByTagName('*')).find(list=>{
+          return list.hasAttribute('hidden')
+        }).removeAttribute('hidden')
+
+      }
+    })
+
+
+    $(document).ready(function () {
+      $('.summernote').summernote()
+    })
+  </script>
+</body>
+
+</html>

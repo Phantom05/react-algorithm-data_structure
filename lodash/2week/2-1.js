@@ -44,3 +44,30 @@ console.clear()
 console.log(
   _.add(6,4)
 );
+// _.add(augend, addend)
+
+
+// _.ceil(number, [precision=0])
+// 정밀도로 반올림 한 수를 계산합니다.
+
+// _.divide(dividend, divisor)
+// 두 숫자를 나눕니다.
+
+console.log(
+  _.divide(0.3,0.1)
+);
+console.log(
+  _.add(0.1+0.2)
+);
+
+console.clear()
+var x = new Decimal(0.1);
+var y = new Decimal(0.2);
+
+x = new Decimal(0.3)
+x = x.minus(0.1);                 // '0.2'
+var x = new Decimal(0.1);
+console.log(
+  x.add(0.2).valueOf()
+);
+console.log(x.add(0.2).toFixed(1) );
