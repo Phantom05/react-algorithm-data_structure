@@ -441,11 +441,4 @@ var cAsync = bAsync(3)
 console.log(cAsync);
 
 
-_.curryRight(func, [arity=func.length])
 
-
-// 이 메소드는 인수가 _.partial 대신 _.partialRight의 func에 func에 적용된다는 점을 제외하고는 _curry와 같습니다.
-
-// 단일체 빌드에서 기본적으로 _ 인 _.curryRight.placeholder 값은 제공된 인수의 자리 표시 자로 사용될 수 있습니다.
-
-// 참고 :이 메서드는 카레 함수의 "길이"속성을 설정하지 않습니다.

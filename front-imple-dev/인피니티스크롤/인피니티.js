@@ -32,17 +32,13 @@ console.log(a, b);
 
 
 
-
-
 $(document).ready(function () {
   var win = $(window);
   var $posts = $('#posts');
 
   $posts.scrollTop($posts.prop('scrollHeight'))
   // Each time the user scrolls
-  $posts.on('scroll', function () {
-    // console.log($posts.height() ,$posts.prop('scrollHeight')-$posts.scrollTop(),$posts.scrollTop());
-
+  document.getElementById('posts').addEventListener('scroll', _.throttle(function(){
     if ($posts.scrollTop() == 0) {
       console.log('load!');
       // console.log($posts.prop('scrollHeight'));
@@ -66,9 +62,6 @@ $(document).ready(function () {
       $posts.scrollTop(currentScrollHeight - originScrollHeight)
       $('#loading').hide();
 
-
-
-
     }
 
     // if (posts.height() == posts.prop('scrollHeight')-posts.scrollTop()) {
@@ -88,8 +81,8 @@ $(document).ready(function () {
     // 	$('#posts').append(randomPost());
     // 	$('#loading').hide();
     // }
-  });
 
+  },500))
 })
 
 

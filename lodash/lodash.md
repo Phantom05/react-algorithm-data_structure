@@ -434,7 +434,7 @@ console.log(evens);
 
 
 
-+ **reverse*
++ **reverse**
 
 첫 번째 요소가 마지막 요소가되고 두 번째 요소가 두 번째 요소가되도록 배열을 되돌립니다.
 
@@ -570,7 +570,7 @@ _.takeWhile(users, 'active');
 
 
 
-+ union
++ **union**
 
 등가 비교를 위해서 (때문에) SameValueZero를 사용해, 지정된 모든 배열로부터 순차적으로 일의의 값의 배열을 작성합니다.
 
@@ -585,7 +585,7 @@ _.union([2], [1, 2],[1,2,10])
 
 
 
-+ unionBy
++ **unionBy**
 
 union과 비슷하나 조건을 걸고 가져올 수 있음.
 
@@ -600,7 +600,7 @@ _.unionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
 
 
 
-+ uniq
++ **uniq**
 
 동일성 비교를 위해 SameValueZero를 사용하여 각 요소의 첫 번째 항목 만 보관되는 중복되지 않은 배열 버전을 만듭니다. 결과 값의 순서는 배열에서 발생하는 순서에 따라 결정됩니다.
 
@@ -613,7 +613,7 @@ _.unionBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
 
 
 
-+ uniqBy
++ **uniqBy**
 
 조건을 조져서 가져올 수 있음.
 
@@ -628,7 +628,7 @@ _.uniqBy([{ 'x': 1 }, { 'x': 2 }, { 'x': 1 }], 'x');
 
 
 
-+ zip
++ **zip**
 
 그룹화 된 요소의 배열을 작성합니다. 그 배열의 최초의 요소에는, 지정된 배열의 최초의 요소가 포함되어 2 번째의 요소에는 지정된 배열의 2 번째의 요소가 포함됩니다.
 
@@ -642,7 +642,7 @@ _.zip([1,2,'d'],[1,2])
 
 
 
-+ zipObject
++ **zipObject**
 
 이 메소드는 _.fromPairs와 비슷합니다. 단 두 개의 배열, 즉 속성 식별자와 해당 값 중 하나를 받아들입니다.
 
@@ -653,7 +653,7 @@ _.zipObject(['a', 'b'], [1, 2]);
 
 
 
-+ zipObjectDeep
++ **zipObjectDeep**
 
 이 메소드는 속성 경로를 지원한다는 점을 제외하면 _.zipObject와 유사합니다.
 
@@ -664,7 +664,7 @@ _.zipObjectDeep(['a.b[0].c', 'a.b[1].d'], [1, 2]);
 
 
 
-+ zipWith
++ **zipWith**
 
 이 메소드는 그룹화 된 값의 결합 방법을 지정하는 iteratee를 허용한다는 점을 제외하고는 _.zip과 유사합니다. iteratee는 각 그룹의 요소로 호출됩니다 (... 그룹).
 
@@ -677,7 +677,7 @@ _.zipWith([1, 2], [10, 20], [100, 200], function(a, b, c) {
 
 
 
-+ unzip
++ **unzip**
 
 zip 형태를 다시 원래대로 풀음
 
@@ -693,7 +693,7 @@ _.unzip(zipped);
 
 
 
-+ unzipWith
++ **unzipWith**
 
 이 메소드는 반복되는 값을 결합하는 방법을 지정하는 iteratee를 허용한다는 점을 제외하면 _.unzip과 유사합니다. iteratee는 각 그룹의 요소로 호출됩니다 (... 그룹).
 
@@ -707,7 +707,7 @@ _.unzipWith(zipped, _.add);
 
 
 
-+ widthout
++ **widthout**
 
 동일성 비교를 위해 SameValueZero를 사용하여 지정된 모든 값을 제외하고 배열을 만듭니다.
 
@@ -720,7 +720,7 @@ _.without([2, 1, 2, 3], 1, 2);
 
 
 
-+ xor
++ **xor**
 
 지정된 배열의 대칭적인 차이 인 고유 값의 배열을 만듭니다. 결과 값의 순서는 배열에서 발생하는 순서에 따라 결정됩니다.
 
@@ -733,7 +733,7 @@ _.xor([2, 1], [2, 3]);
 
 
 
-+ xorBy
++ **xorBy**
 
 이 메소드는 _xor와 비슷하지만, 각 배열의 각 요소에 대해 호출 된 iteratee를 받아 들여서 비교할 기준을 생성한다는 점만 다릅니다. 결과 값의 순서는 배열에서 발생하는 순서에 따라 결정됩니다. iteratee는 (value) 하나의 인수로 호출됩니다.
 
@@ -750,7 +750,7 @@ _.xorBy([{ 'x': 1 }], [{ 'x': 2 }, { 'x': 1 }], 'x');
 
 
 
-+ xorWith
++ **xorWith**
 
 ```js
 var objects = [{ 'x': 1, 'y': 2 }, { 'x': 2, 'y': 1 }];
@@ -768,7 +768,7 @@ _.xorWith(objects, others, _.isEqual);
 
 
 
-+ countBy (collection, [iteratee=_.identity])
++ **countBy (collection, [iteratee=_.identity])**
 
 iteratee를 통해 컬렉션의 각 요소를 실행 한 결과로 생성 된 키로 구성된 객체를 만듭니다. 각 키의 해당 값은 iteratee가 키를 리턴 한 횟수입니다. iteratee는 (value) 하나의 인수로 호출됩니다.
 
@@ -785,7 +785,7 @@ _.countBy(['one', 'two', 'three'], 'length');
 
 
 
-+ every(collection, [predicate=_.identity])
++ **every(collection, [predicate=_.identity])**
 
 술어가 컬렉션의 모든 요소에 대해 진실성을 반환하는지 확인합니다. 술어가 거짓을 반환하면 반복이 중지됩니다. 술어는 (value, index | key, collection) 세 개의 인수로 호출됩니다.
 
@@ -813,7 +813,7 @@ _.every(users, 'active');
 
 
 
-+ fillter(collection, [predicate=_.identity])
++ **fillter(collection, [predicate=_.identity])**
 
 모든 요소의 배열을 반환하는 컬렉션의 요소를 반복하고 predicate가 truthy를 반환합니다. 술어는 (value, index | key, collection) 세 개의 인수로 호출됩니다.
 
@@ -841,7 +841,7 @@ _.filter(users, 'active');
 
 
 
-+ find(collection, [predicate=_.identity], [fromIndex=0])
++ **find(collection, [predicate=_.identity], [fromIndex=0])**
 
 컬렉션 요소를 반복하고, 첫 번째 요소 조건자를 반환하면 true를 반환합니다. 술어는 (value, index | key, collection) 세 개의 인수로 호출됩니다.
 
@@ -870,7 +870,7 @@ _.find(users, 'active');
 
 
 
-+ findLast(collection, [predicate=.identity], [fromIndex=collection.length-1])
++ **findLast(collection, [predicate=.identity], [fromIndex=collection.length-1])**
 
 이 메소드는 컬렉션의 요소를 오른쪽에서 왼쪽으로 반복한다는 점을 제외하면 _.find와 유사합니다.
 
@@ -885,7 +885,7 @@ _.findLast([1, 2, 3, 4], function(n) {
 
 
 
-+ _.flatMap(collection,[iteratee=_.identity])
++ **_.flatMap(collection,[iteratee=_.identity])**
 
 iteratee를 통해 컬렉션의 각 요소를 실행하고 매핑 된 결과를 병합하여 값의 병합 된 배열을 만듭니다. iteratee는 (value, index | key, collection) 세 개의 인수로 호출됩니다.
 
@@ -905,7 +905,7 @@ console.log(
 
 
 
-+ _.flatMapDeep(collection, [iteratee=_.identity])
++ **_.flatMapDeep(collection, [iteratee=_.identity])**
 
 이 메소드는 매핑 된 결과를 재귀 적으로 평평하게한다는 점을 제외하면 _.flatMap과 같습니다.
 
@@ -920,7 +920,7 @@ _.flatMapDeep([1, 2], duplicate);
 
 
 
-+ _.flatMapDepth(collection, [iteratee=_.identity], [depth=1])
++ **_.flatMapDepth(collection, [iteratee=_.identity], [depth=1])**
 
 이 메소드는 매핑 된 결과를 반복적으로 심도 시간까지 평탄화한다는 점을 제외하면 _.flatMap과 같습니다.
 
@@ -935,7 +935,7 @@ _.flatMapDepth([1, 2], duplicate, 2);
 
 
 
-+ _.forEach(collection, [iteratee=_.identity])
++ **_.forEach(collection, [iteratee=_.identity])**
 
 컬렉션의 요소를 반복하고 각 요소에 대해 iteratee를 호출합니다. iteratee는 (value, index | key, collection) 세 개의 인수로 호출됩니다. Iteratee 함수는 명시 적으로 false를 반환하여 일찍 반복을 종료 할 수 있습니다.
 
@@ -957,9 +957,9 @@ _.forEach({ 'a': 1, 'b': 2 }, function(value, key) {
 
 
 
-+ _.forEachRight(collection, [iteratee=_.identity])
++ **_.forEachRight(collection, [iteratee=_.identity])**
 
-이 메소드는 컬렉션의 요소를 오른쪽에서 왼쪽으로 반복한다는 점을 제외하면 _.forEach와 같습니다.
+###### 이 메소드는 컬렉션의 요소를 오른쪽에서 왼쪽으로 반복한다는 점을 제외하면 _.forEach와 같습니다.
 
 ```js
 _.forEachRight([1, 2], function(value) {
@@ -970,7 +970,7 @@ _.forEachRight([1, 2], function(value) {
 
 
 
-+ _.groupBy(collection, [iteratee=_.identity])
++ **_.groupBy(collection, [iteratee=_.identity])**
 
 iteratee를 통해 컬렉션의 각 요소를 실행 한 결과로 생성 된 키로 구성된 객체를 만듭니다. 그룹화 된 값의 순서는 컬렉션에서 발생하는 순서에 따라 결정됩니다. 각 키의 해당 값은 키를 생성하는 요소의 배열입니다. iteratee는 (value) 하나의 인수로 호출됩니다.
 
@@ -985,7 +985,7 @@ _.groupBy(['one', 'two', 'three'], 'length');
 
 
 
-+ _.includes(collection, value, [fromIndex=0])
++ **_.includes(collection, value, [fromIndex=0])**
 
 값이 콜렉션에 있는지 점검합니다. collection이 문자열이면 값의 하위 문자열이 있는지 확인합니다. 그렇지 않으면 SameValueZero가 등호 비교에 사용됩니다. fromIndex가 음수이면 컬렉션 끝에서의 오프셋으로 사용됩니다.
 
@@ -1005,7 +1005,7 @@ _.includes('abcd', 'bc');
 
 
 
-+ _.invokeMap(collection, path, [args])
++ **_.invokeMap(collection, path, [args])**
 
 콜렉션 내의 각 요소의 패스에있는 메소드를 호출 해, 불려가는 각 메소드의 결과의 배열을 돌려줍니다. 추가 인수는 각 호출 된 메소드에 제공됩니다. path가 함수이면 컬렉션의 각 요소에 대해 호출되고 여기에 바인딩됩니다.
 
@@ -1023,7 +1023,7 @@ _.invokeMap([123, 456], String.prototype.split, '');
 
 
 
-+ _.keyBy(collection, [iteratee=_.identity])
++ **_.keyBy(collection, [iteratee=_.identity])**
 
 iteratee를 통해 컬렉션의 각 요소를 실행 한 결과로 생성 된 키로 구성된 객체를 만듭니다. 각 키의 해당 값은 키를 생성하는 마지막 요소입니다. iteratee는 (value) 하나의 인수로 호출됩니다.
 
@@ -1046,7 +1046,7 @@ _.keyBy(array, 'dir');
 
 
 
-+ _.map(collection, [iteratee=_.identity])
++ **_.map(collection, [iteratee=_.identity])**
 
 iteratee를 통해 컬렉션의 각 요소를 실행하여 값의 배열을 만듭니다. iteratee는 세 개의 인수로 호출됩니다.
 
@@ -1081,7 +1081,7 @@ _.map(users, 'user');
 
 
 
-+ _.orderBy(collection, [iteratees=[_.identity]], [orders])
++ **_.orderBy(collection, [iteratees=[_.identity]], [orders])**
 
 이 메소드는 iteratees의 정렬 순서를 정렬 기준으로 지정할 수 있다는 점을 제외하면 _.sortBy와 같습니다. 주문이 지정되지 않으면 모든 값이 오름차순으로 정렬됩니다. 그렇지 않으면 내림차순에 대해 "desc"의 순서를 지정하거나 해당 값의 오름차순 정렬 순서에 "asc"를 지정하십시오.
 
@@ -1100,7 +1100,7 @@ _.orderBy(users, ['user', 'age'], ['asc', 'desc']);
 
 
 
-+ _.partition(collection, [predicate=_.identity])
++ **_.partition(collection, [predicate=_.identity])**
 
 두 개의 그룹으로 나뉘는 요소의 배열을 만듭니다. 첫 번째 요소는 참을 반환합니다. 두 번째 요소는 거짓을 반환합니다. 술어는 하나의 인수 (값)로 호출됩니다.
 
@@ -1131,7 +1131,7 @@ _.partition(users, 'active');
 
 
 
-+ _.reduce(collection, [iteratee=_.identity], [accumulator])
++ **_.reduce(collection, [iteratee=_.identity], [accumulator])**
 
 콜렉션에서 각 요소를 반복하여 누적 한 결과 인 값으로 콜렉션을 줄입니다. 연속되는 각각의 호출에는 이전의 리턴 값이 제공됩니다. accumulator를 지정하지 않으면, 콜렉션의 최초의 요소가 초기치로서 사용됩니다. iteratee는 네 개의 인수로 호출됩니다.
 
@@ -1168,7 +1168,7 @@ _.reduce({ 'a': 1, 'b': 2, 'c': 1 }, function(result, value, key) {
 
 
 
-+ _.reduceRight(collection, [iteratee=_.identity], [accumulator])
++ **_.reduceRight(collection, [iteratee=_.identity], [accumulator])**
 
 이 메소드는 컬렉션의 요소를 오른쪽에서 왼쪽으로 반복한다는 점을 제외하면 _.reduce와 같습니다.
 
@@ -1183,7 +1183,7 @@ _.reduceRight(array, function(flattened, other) {
 
 
 
-+ _.reject(collection, [predicate=_.identity])
++ **_.reject(collection, [predicate=_.identity])**
 
 _.filter의 반대; 이 메소드는 술어가 사실대로 리턴하지 않는] 렉션의 요소를 리턴합니다.
 
@@ -1211,7 +1211,7 @@ _.reject(users, 'active');
 
 
 
-+ _.sample(collection)
++ **_.sample(collection)**
 
 컬렉션에서 임의의 요소를 가져옵니다.
 
@@ -1222,7 +1222,7 @@ _.sample([1, 2, 3, 4]);
 
 
 
-+ _.sampleSize(collection, [n=1])
++ **_.sampleSize(collection, [n=1])**
 
 컬렉션의 고유 키에서 n 개의 임의 요소를 컬렉션의 크기까지 가져옵니다.
 
@@ -1236,7 +1236,7 @@ _.sampleSize([1, 2, 3], 4);
 
 
 
-+ _.shuffle(collection)
++ **_.shuffle(collection)**
 
 Fisher-Yates 셔플 버전을 사용하여 셔플 된 값의 배열을 만듭니다.
 
@@ -1247,7 +1247,7 @@ _.shuffle([1, 2, 3, 4]);
 
 
 
-+ _.size(collection)
++ **_.size(collection)**
 
 배열 형 값의 길이 또는 개체의 열거 형 문자열 키 특성의 개수를 반환하여 컬렉션 크기를 가져옵니다.
 
@@ -1264,7 +1264,7 @@ _.size('pebbles');
 
 
 
-+ _.some(collection, [predicate=_.identity])
++ **_.some(collection, [predicate=_.identity])**
 
 술어가 컬렉션의 모든 요소에 대해 진실성을 반환하는지 확인합니다. 술어가 진리를 반환하면 반복이 중지됩니다. 술어는 (value, index | key, collection) 세 개의 인수로 호출됩니다.
 
@@ -1294,7 +1294,7 @@ _.some(users, 'active');
 
 
 
-+ _.sortBy(collection, [iteratees=[_.identity]])
++ **_.sortBy(collection, [iteratees=[_.identity]])**
 
 각 반복을 통해 컬렉션의 각 요소를 실행 한 결과에 따라 오름차순으로 정렬 된 요소 배열을 만듭니다. 이 메서드는 안정적인 정렬을 수행합니다. 즉, 동일한 요소의 원래 정렬 순서를 유지합니다. iteratees는 (value) 하나의 인수로 호출됩니다.
 
@@ -1315,7 +1315,7 @@ _.sortBy(users, ['user', 'age']);
 
 
 
-+ _.now()
++ **_.now()**
 
 Unix 에포크 (1970 년 1 월 1 일 00:00:00 UTC)로부터 경과 한 밀리 세컨드 수의 타임 스탬프를 가져옵니다.
 
@@ -1330,7 +1330,7 @@ _.defer(function(stamp) {
 
 ## Function
 
-+ _.after(n, func)
++ **_.after(n, func)**
 
 _ 이전과 반대; 이 메서드는 n 번 이상 호출되면 func을 호출하는 함수를 만듭니다.
 
@@ -1354,17 +1354,45 @@ _.forEach(saves, function(type) {
 
 
 
-> - _.ary(func, [n=func.length])
->
-> 추가 인수를 무시하고 n 개 인수까지 func을 호출하는 함수를 만듭니다.
->
-> **공부 필요**
++ **.ary(func, [n=func.length])**
+
+추가 인수를 무시하고 n 개 인수까지 func을 호출하는 함수를 만듭니다.
+
+```js
+_.map(['6', '8', '10'], _.ary(parseInt, 1));
+// => [6, 8, 10]
+```
+
+<i>단순히 위의 예제만 보면 아리송 할 수 있다.(저의 경우는 그럤음..) `_.map`이 넘기는 인자를 생각하지 않으면 삽질을 할 수 있다. 바닐라의 map이나 로대쉬의 _.map과 비슷한 동작을 하는거 같은데 `arguments`로 (iterater, index,  array )을 넘기게 된다.  array는 현재 map이 적용된 array의 참조이다. 떄문에,  아래와 같이 사용할경우 `parseInt`의 두번째인자로 사용되는 진법 변환떄문에 문제가 될 수 있다.</i>
+
+```js
+_.map(['6', '8', '10'], parseInt);
+// => (3) [6, NaN, 2]
+
+// _.map([ ... ], (원소요소, 인덱스, 전체 배열) => { ... })
+// _.map([ ... ], parseInt) 해서 넘겨버리면 parseInt에 두 번 째 인자값이 진법이라서
+// _.ary(parseInt, 1) 하면 인자를 하나만 제한해서 원소 요소만 넘기게된다.
+```
+
+<i>`parseInt() `의경우 두번째인자로 진법 변환을 시키는 인자이기 때문에 3개 인자를 전해주는 map을 사용할 경우 문제가 된다. 떄문에, `_.ary`를 사용하여 인자의 개수를 정해서 넘겨주게 되면 원소요소만 전달하여 원하는 값을 얻을 수 있을 것이다.. 그럼 로대쉬 도큐의 기본예제가 이해가 될 것이다.</i>
 
 
 
++ **_.unary(func)**
+
+추가 인수를 무시하고 최대 하나의 인수를 허용하는 함수를 만듭니다.
+
+```js
+_.map(['6', '8', '10'], _.unary(parseInt));
+// => [6, 8, 10]
+
+```
+
+<i>`_.ary`의 사용법을 단축시킨건대, `_.ary`의 경우는 인자를 1,2,3... 이런식으로 조절할 수 있는데 1로 자주쓰이니까 `_.unary`를 만들어  `_.ary(func,1)`을 만든거라고 보면 될 것 같다.</i>
 
 
-+ _.before(n, func)
+
++ **_.before(n, func)**
 
 이 바인딩과 생성 된 함수의 인수를 사용하여 func을 호출하는 함수를 만듭니다.이 함수는 n보다 작 으면서 호출됩니다. 생성 된 함수에 대한 후속 호출은 마지막 func 호출의 결과를 반환합니다.
 
@@ -1379,7 +1407,7 @@ $('#btn').on('click', _.before(5, function(){
 
 
 
-+ _.bind(func, thisArg, [partials])
++ **_.bind(func, thisArg, [partials])**
 
 모 놀리 식 빌드에서 기본적으로 _ 인 _.bind.placeholder 값은 부분적으로 적용된 인수의 자리 표시 자로 사용될 수 있습니다.
 
@@ -1446,7 +1474,7 @@ console.log(
 
 
 
-+ _.bindKey(object, key, [partials])
++ **_.bindKey(object, key, [partials])**
 
 객체 [key]에서 메소드를 호출하는 함수를 작성합니다.이 메소드는 수신 한 인수 앞에 부분이 붙습니다.
 
@@ -1484,7 +1512,7 @@ bound('hi');
 
 
 
-+ _.curry(func, [arity=func.length])
++ **_.curry(func, [arity=func.length])**
 
 func의 인수를 받아들이고 인수의 개수가 제공된 경우 결과를 반환하는 func을 호출하거나 나머지 func 인수를 받아들이는 함수를 반환하는 등의 함수를 만듭니다. func.length가 충분하지 않으면 func의 값을 지정할 수 있습니다.
 
@@ -1523,7 +1551,7 @@ console.log(cAsync);
 
 
 
-+ _.curryRight(func, [arity=func.length])
++ **_.curryRight(func, [arity=func.length])**
 
 이 메소드는 인수가 _.partial 대신 _.partialRight의 func에 func에 적용된다는 점을 제외하고는 _curry와 같습니다.
 
@@ -1535,3 +1563,798 @@ console.log(cAsync);
 
 ```
 
+
+
++ **_.debounce(func, [wait=0], [options={}])**
+
+ 디 바운스 함수가 호출 된 마지막 시간이 경과 한 후 대기 밀리 초가 될 때까지 func 호출을 지연시키는 디 바운스 함수를 작성합니다. 디 바운스 된 함수에는 지연된 func 호출을 취소하는 cancel 메소드와 즉시 func 호출을 플러시하는 메소드가 있습니다. func가 대기 시간 초과의 시작 및 / 또는 후행 가장자리에서 호출되어야하는지 여부를 나타내는 옵션을 제공하십시오. func는 debounced 함수에 제공되는 마지막 인자로 호출됩니다. 이후에 debounced 함수를 호출하면 마지막 func 호출의 결과가 반환됩니다.
+
+마지막 호출 이후 일정 밀리세컨드 이후로 지연된 호출을 하도록 debounce된 함수를 만듭니다.
+
+`_.debounce`는 `_.throttle`과 마찬가지로 과다한 이벤트 로직 실행을 방지하기 위해 사용되는 함수이다. 바로 실행되는 `_.throttle`과는 달리 호출이 반복되는 동안에는 로직 실행을 방지하며, 호출이 멈춘 뒤, 설정한 시간이 지나고 나서야 로직을 실행하게 된다
+
+`_.debounce` 역시 실제로 자주 활용되는데, 가장 자주 활용되는 사례로는 AJAX 요청을 이용하는 검색 인터페이스(Autocomplete)가 있겠다. 검색을 담당하는 input 요소에 무언가를 타이핑 할 때마다 AJAX 요청을 보내는 것은 마찬가지로 과도한 부담이다. 따라서 유저가 타이핑을 마쳤다고 예상되는 지점에서 요청을 보내는 것이 적당하다. 그럴 때 `_.debounce`를 사용해서 유저가 타이핑을 멈춘 뒤, 몇 밀리세컨드 이후에 요청을 보내면 되는 것이다.
+
+마지막 호출 이후 일정 밀리세컨드 이후로 지연된 호출을 하도록 debounce된 함수를 만듭니다.
+
+해당 초마다 실행하고 해당 조건이 또 부합하면 그떄 1번씩 실행함. 
+
+```js
+
+var debounceCount = 0;
+var notDebounceCount = 0;
+
+var debounceFn = _.debounce(function(){
+  $('#debounce').html(`Debounce : ${++debounceCount}`)
+   console.log(++debounceCount)
+},10)
+var notDebounceFn = function(){
+  $('#notDebounce').html(`notDebounceCount : ${++notDebounceCount}`)
+}
+$(document).on('mousemove',function(){
+  debounceFn()
+  notDebounceFn()
+})
+
+// 중요 실시간 ajax를 때릴때, 디바운스를 사용
+document.getElementById('input').onkeyup = _.debounce(function() {
+  document.getElementById('debounced').innerHTML = 'Debounced message!';
+}, 500);
+
+
+```
+
+
+
++ **_.throttle(func, [wait=0], [options={}])**
+
+최대 대기 밀리 초마다 func 만 호출하는 스로틀 기능을 만듭니다. throttled 함수에는 지연 func 호출을 취소하는 cancel 메소드와 즉시 func 호출을 호출하는 flush 메소드가 있습니다. func가 대기 시간 초과의 시작 및 / 또는 후행 가장자리에서 호출되어야하는지 여부를 나타내는 옵션을 제공하십시오. func은 throttled 함수에 제공된 마지막 인수로 호출됩니다. 이후 스로틀 링 된 함수를 호출하면 마지막 func 호출의 결과가 반환됩니다.
+
+매 밀리세컨드마다 최대 한 번만 호출될 수 있도록 Throttle된 함수를 만듭니다.
+
+`_.throttle`은 로직 실행 주기를 만드는 함수라고 이해하면 된다. 밀리세컨드 단위로 시간을 설정하면 `_.throttle`에 넘긴 콜백함수는 설정한 시간 동안 최대 한 번만 호출된다.
+
+```js
+var noThrottledCount = 0;
+var throttledCount = 0;
+
+var noThrottledElem = document.getElementById('no-throttle');
+var throttledElem = document.getElementById('throttle');
+
+var noThrottledFunc = function() {
+	noThrottledElem.innerHTML = noThrottledCount++;
+};
+
+var throttledFunc = _.throttle(function() {
+	throttledElem.innerHTML = throttledCount++;
+}, 100);
+
+
+document.documentElement.onmousemove = function() {
+	noThrottledFunc();
+  throttledFunc();
+};
+```
+
+
+
++ **_.extend(destination, *sources)**
+
+**source** 객체에 있는 모든 프로퍼티를 **destination** 객체에 복사하고, **destination** 객체를 리턴합니다. source는 순서대로 처리하므로, 마지막 source의 프로퍼티가 앞의 인자들이 가진 같은 이름의 프로퍼티를 덮어쓸 수 있습니다.
+
+“extend는 매개변수의 순서에 유의해서 사용해라”라는 말로 축약될 수 있는 이야기를 이렇게 늘어 놓을 필요가 있나 싶지만, 이 문제로 몇 시간 가량을 날려먹었기 때문에 이렇게 포스팅 기록을 남긴다. 역시 API 문서는 영어라고 읽기 싫다고 넘기지말고 주의 깊게 보아야겠다.
+
+```js
+const _ = require('underscore');
+
+let people = [{
+  name: '이현섭',
+  age: 27
+}, {
+  name: '이승민',
+  age: 28
+}, {
+  name: '오유근',
+  age: 26
+}];
+
+let base = { home: '한강빌리지' };
+
+people = people.map((person) => _.extend(base, person)); // x
+people = people.map((person) => _.extend(person, base)); // o
+// 순서 중요
+```
+
+
+
++ **_.defer(func, [args])**
+
+현재 호출 스택이 지워질 때까지 func을 호출합니다. func이 호출 될 때 추가 인수가 제공됩니다.
+
+
+
+```js
+_.defer(function(text) {
+  console.log(text);
+}, 'deferred');
+// => Logs 'deferred' after one millisecond.
+
+_.defer(function(text) {
+  console.log(text);
+}, 'deferrefd');
+
+console.log('wow');
+
+_.defer(function(text) {
+  console.log(text);
+}, '
+ // = > wow
+ // = > deferrefd
+ // = > deferred
+        
+_.delay(function(text) {
+  console.log(text);
+}, 0, 'later');
+//이거와 동일하게 동작함
+        
+```
+
+
+
++ **_.delay(func, wait, [args])**
+
+ 대기 밀리 초 후에 func을 호출합니다. func이 호출 될 때 추가 인수가 제공됩니다.
+
+```js
+_.delay(function(text) {
+  console.log(text);
+}, 1000, 'later');
+```
+
+
+
++ **_.flip(func)**
+
+인수가 반전 된 func을 호출하는 함수를 만듭니다.
+
+```js
+// 인수가 반전 된 func을 호출하는 함수를 만듭니다.
+var flipped = _.flip(function() {
+  return _.toArray(arguments);
+});
+ 
+flipped('a', 'b', 'c', 'd');
+// => ['d', 'c', 'b', 'a']
+```
+
+
+
++ **_.memoize(func, [resolver])**
+
+func의 결과를 메모하는 함수를 만듭니다. resolver가 제공되면 memoized 함수에 제공된 인수를 기반으로 결과를 저장하기위한 캐시 키를 결정합니다. 기본적으로 memoized 함수에 제공된 첫 번째 인수는 맵 캐시 키로 사용됩니다. func는 memoized 함수의 바인딩과 함께 호출됩니다.
+
+참고 : 캐시는 memoized 함수의 캐시 속성으로 표시됩니다. _memoize.Cache 생성자를 clear, delete, get, has 및 set의 Map 메소드 인터페이스를 구현하는 인스턴스로 대체하여 생성을 사용자 정의 할 수 있습니다.
+
+```js
+
+var object = { 'a': 1, 'b': 2 };
+var other = { 'c': 3, 'd': 4 };
+ 
+var values = _.memoize(_.values);
+values(object);
+// => [1, 2]
+ 
+values(other);
+// => [3, 4]
+ 
+object.a = 2;
+values(object);
+// => [1, 2]
+ 
+// Modify the result cache.
+values.cache.set(object, ['a', 'b']);
+values(object);
+// => ['a', 'b']
+ 
+// Replace `_.memoize.Cache`.
+_.memoize.Cache = WeakMap;
+
+var test = _.memoize(function(val){
+  return val
+});
+console.log(
+  test(object)
+);
+```
+
+
+
++ **_.negate(predicate)**
+
+술어 func의 결과를 무효화하는 함수를 작성합니다. func 술어는이 바인딩과 작성된 함수의 인수로 호출됩니다.
+
+반대로 만들어줌
+
+```js
+function isEven(n) {
+  return n % 2 == 0;
+}
+ 
+_.filter([1, 2, 3, 4, 5, 6], _.negate(isEven));
+// => [1, 3, 5]
+```
+
+
+
++ **_.once(func)**
+
+func을 한 번만 호출하도록 제한된 함수를 만듭니다. 함수를 반복하여 호출하면 첫 번째 호출의 값이 반환됩니다. func은이 바인딩과 생성 된 함수의 인수를 사용하여 호출됩니다.
+
+```js
+function bem(){
+  console.log('BEM!');
+}
+var initialize = _.once(bem);
+initialize();
+initialize();
+initialize();
+// 1번만 BEM!이나옴
+```
+
+
+
++ **_.overArgs(func, [transforms=[_.identity]])**
+
+인수가 변환 된 func을 호출하는 함수를 만듭니다.
+
+```js
+function doubled(n) {
+  return n * 2;
+}
+ 
+function square(n) {
+  return n * n;
+}
+ 
+var func = _.overArgs(function(x, y) {
+  return [x, y];
+}, [square, doubled]);
+ 
+func(9, 3);
+// => [81, 6]
+ 
+func(10, 5);
+// => [100, 10]
+```
+
+
+
++ **_.partial(func, [partials])**
+
+func을 인수로받는 부분 앞에 partial이있는 func을 호출하는 함수를 만듭니다. 이 메소드는이 바인딩을 변경하지 않는다는 점을 제외하면 _.bind와 유사합니다.
+모 놀리 식 빌드에서 기본적으로 _ 인 _.partial.placeholder 값은 부분적으로 적용된 인수의 자리 표시 자로 사용될 수 있습니다.
+참고 :이 메서드는 부분적으로 적용된 함수의 "length"속성을 설정하지 않습니다.
+
+그냥 새로운 함수를 만들기 위해 만든 함수
+
+
+
+```js
+//  예를 들어 _.partial 함수는 다음과 같이 기존 함수의 인자를 고정시킨 새로운 함수를 반환해준다.
+const add = (v1, v2) => v1 + v2;
+
+const add3 = _.partial(add, 3);
+const add5 = _.partial(add, 5);
+
+console.log(add3(10)); // 13
+console.log(add5(10)); // 15
+
+//HOF의 장점은 함수에 기능을 추가하는 코드를 재사용 할 수 있다는 것이다. 만약 add 함수를 이용해서 partial 함수가 없이 add3 과 add5 함수를 만드려면 다음과 같이 직접 두 개의 함수를 만들어야 할 것이다.
+const add3 = function(x){
+  return add(v + 3);
+}
+const add3 = function(x){
+  return add(v + 5);
+}
+const add6 = v => add(v + 6);
+const add8 = v => add(v + 8);
+
+// 하지만 HOF를 이용하면 기능 단위로 새로운 함수를 만들어내는 코드를 재사용할 수 있게 된다. 위의 예제는 너무 간단해서 체감이 잘 안될 수도 있지만, 좀더 복잡한 형태의 HOF인 경우 많은 양의 중복 코드를 제거할 수 있을 것이다.
+
+function acc(f){
+  let v = 0;
+  return function(){
+    v = f(v);
+    return v;
+  }
+}
+
+const partial = (f, v1) => v2 => f(v1, v2);
+const add = (v1, v2) => v1 + v2;
+
+const add3 = partial(add, 3);
+const acc3 = acc(add3);
+console.log(acc3(),acc3(),acc3());
+```
+
+
+
++ **_.partialRight(func, [partials])**
+
+이 메소드는 부분적으로 적용된 인수가 수신 한 인수에 추가된다는 점을 제외하면 _.partial과 유사합니다.
+
+모 놀리 식 빌드에서 기본적으로 _ 인 _.partialRight.placeholder 값은 부분적으로 적용된 인수의 자리 표시 자로 사용될 수 있습니다.
+
+참고 :이 메서드는 부분적으로 적용된 함수의 "length"속성을 설정하지 않습니다.
+
+```js
+function greet(greeting, name) {
+  return greeting + ' ' + name;
+}
+ 
+var greetFred = _.partialRight(greet, 'fred');
+greetFred('hi');
+// => 'hi fred'
+ 
+// Partially applied with placeholders.
+var sayHelloTo = _.partialRight(greet, 'hello', _);
+sayHelloTo('fred');
+// => 'hello fred'
+```
+
+
+
++ **_.rearg(func, indexes)**
+
+첫 번째 인덱스의 인수 값이 첫 번째 인수로 제공되고 두 번째 인덱스의 인수 값이 두 번째 인수로 제공되는 등 지정된 인덱스에 따라 정렬 된 인수로 func을 호출하는 함수를 만듭니다.
+
+기존에 만들어서 적용되어있는 함수의 인수를 바꿔서 조질 수 있음.
+
+```js
+var rearged = _.rearg(function(a, b, c) {
+  return [a, b, c];
+}, [2, 0, 1]);
+ 
+rearged('b', 'c', 'a')
+// => ['a', 'b', 'c']
+
+rearged('a','b','c')
+// => ["c", "a", "b"]
+```
+
+
+
++ **_.rest(func, [start=func.length-1])**
+
+생성 된 함수와 인수의이 바인딩을 사용하여 func을 호출하는 함수를 만듭니다.이 함수는 인수로 배열로 제공됩니다.
+
+첫번째 인자만 두면 모든 배열이 들어오고 매개변수를 늘릴때마다 아래와 같이 변한다.
+
+```js
+var say = _.rest(function(what,a1,a2) {
+  console.log(what,a1,a2);
+});
+ 
+console.log(
+  say('hello', 'fred', 'barney', 'pebbles')
+);
+// => hello fred (2) ["barney", "pebbles"]
+
+var say = _.rest(function(what,a1) {
+  console.log(what,a1);
+});
+ 
+console.log(
+  say('hello', 'fred', 'barney', 'pebbles')
+);
+// => hello (3) ["fred", "barney", "pebbles"]
+
+var say = _.rest(function(what) {
+  console.log(what)
+});
+ 
+console.log(
+  say('hello', 'fred', 'barney', 'pebbles')
+);
+// => ["hello", "fred", "barney", "pebbles"]
+```
+
+
+
++ **_.spread(func, [start=0])**
+
+Create 함수의이 바인딩과 Function # apply와 같은 인수 배열을 사용하여 func을 호출하는 함수를 만듭니다.
+
+```js
+var say = _.spread(function(who, what) {
+  return who + ' says ' + what;
+});
+ 
+say(['fred', 'hello']);
+// => 'fred says hello'
+ 
+var numbers = Promise.all([
+  Promise.resolve(40),
+  Promise.resolve(36)
+]);
+ 
+numbers.then(_.spread(function(x, y) {
+  return x + y;
+}));
+// => a Promise of 76
+```
+
+
+
++ **_.wrap(value, [wrapper=identity])**
+
+래퍼를 첫 번째 인수로 제공하는 함수를 만듭니다. 함수에 제공된 추가 인수는 랩퍼에 제공된 인수에 추가됩니다. 랩퍼는 작성된 함수의이 Y 인딩으로 호출됩니다.
+
+첫번째들어가는 함수를 두번째인자에 들어가는 함수의 첫번째 인자로 넣어준다.
+
+```js
+var p = _.wrap(_.escape, function(func, text) {
+  return '<p>' + func(text) + '</p>';
+});
+ 
+p('fred, barney, & pebbles');
+// => '<p>fred, barney, &amp; pebbles</p>'
+
+var p = _.wrap(function(v){return v+' hehe'}, function(func, text) {
+  return '<p>' + func(text) + '</p>';
+});
+
+console.log(
+  p('fred, barney, & pebbles')
+);
+// => '<p>fred, barney, &amp; pebbles hehe</p>'
+```
+
+
+
+
+
+## Lang
+
++ **_.castArray(value)**
+
+값이 배열이 아닌 경우 값을 배열로 변환합니다.
+
+```js
+_.castArray(1);
+// => [1]
+ 
+_.castArray({ 'a': 1 });
+// => [{ 'a': 1 }]
+ 
+_.castArray('abc');
+// => ['abc']
+ 
+_.castArray(null);
+// => [null]
+ 
+_.castArray(undefined);
+// => [undefined]
+ 
+_.castArray();
+// => []
+ 
+var array = [1, 2, 3];
+console.log(_.castArray(array) === array);
+// => true
+```
+
+
+
++ **_.clone(value)**
+
+참고 :이 방법은 구조적 복제 알고리즘을 기반으로하며 복제 배열, 배열 버퍼, 부울, 날짜 개체,지도, 숫자, 개체 개체, 정규식, 집합, 문자열, 기호 및 형식이 지정된 배열을 지원합니다. arguments 객체의 자체 열거 가능 속성은 일반 객체로 복제됩니다. 오류 객체, 함수, DOM 노드 및 WeakMaps와 같은 복제 불가능한 값에 대해서는 빈 객체가 반환됩니다.
+
+클론했을때 현재 상황만 참조하고 그 뒤로 원본에 추가하는것들은 복사가 안됨. 좋음..
+
+객체들은 그냥 계속 참조됨.
+
+```js
+var objects = [{'a':1},{'b':2}];
+
+var shallow = _.clone(object);
+console.log(shallow[0] === objects[0]);
+object.a = 'wow';
+object[0].a = 5
+
+console.log(object);
+// 0: {a: 5}
+// 1: {b: 2}
+// a: "wow"
+console.log(shallow);
+// 0: {a: 5}
+// 1: {b: 2}
+```
+
+
+
++ **_.cloneDeep(value)**
+
+이 메소드는 재귀 적으로 값을 복제한다는 점을 제외하면 _.clone과 유사합니다.
+
+```js
+var objects = [{ 'a': 1 }, { 'b': 2 }];
+ 
+var deep = _.cloneDeep(objects);
+console.log(deep[0] === objects[0]);
+// => false
+```
+
+
+
++ **_.cloneDeepWith(value, [customizer])**
+
+이 메소드는 재귀 적으로 값을 복제한다는 점을 제외하면 _.cloneWith와 같습니다.
+
+단순 복사가 아닌 커스텀해서 깊은 복사를 할 수가 있음.
+
+```js
+function customizer(value) {
+  if (_.isElement(value)) {
+    return value.cloneNode(true); //자식까지 모두 복사함.
+  }
+}
+ 
+var el = _.cloneDeepWith(document.body, customizer);
+ 
+console.log(el === document.body);
+// => false
+console.log(el.nodeName);
+// => 'BODY'
+console.log(el.childNodes.length);
+// => 20 
+```
+
+
+
++ **_.cloneWith(value, [customizer])**
+
+이 메서드는 _.clone과 비슷하지만 복제 된 값을 생성하기 위해 호출되는 사용자 지정자를 허용한다는 점만 다릅니다. 사용자 정의 프로그램이 undefined를 반환하면 복제가 대신 메소드에 의해 처리됩니다. 사용자 정의 프로그램은 최대 네 개의 인수로 호출됩니다. (값 [, 색인 | 키, 객체, 스택]).
+
+단순 복사가 아닌 커스텀해서 얕은 복사를 할 수가 있음.
+
+```js
+function customizer(value) {
+  if (_.isElement(value)) {
+    return value.cloneNode(false);
+  }
+}
+ 
+var el = _.cloneWith(document.body, customizer);
+ 
+console.log(el === document.body);
+// => false
+console.log(el.nodeName);
+// => 'BODY'
+console.log(el.childNodes.length);
+// => 0 
+```
+
+
+
++ **_.conformsTo(object, source)**
+
+객체의 해당 속성 값을 사용하여 source의 predicate 속성을 호출하여 객체가 source를 준수하는지 확인합니다.
+
+주 :이 메소드는 소스가 부분적으로 적용될 때 _.conforms와 동일합니다.
+
+두번째 인자로 오브젝트가 들어감.
+
+```js
+var object = { 'a': 1, 'b': 2 };
+ 
+_.conformsTo(object, { 'b': function(n) { return n > 1; } });
+// => true
+ 
+_.conformsTo(object, { 'b': function(n) { return n > 2; } });
+// => false
+```
+
+
+
++ **_.eq(value, other)**
+
+두 값 사이의 SameValueZero 비교를 수행하여 두 값이 같은지 확인합니다.
+
+```js
+var object = { 'a': 1 };
+var other = { 'a': 1 };
+ 
+_.eq(object, object);
+// => true
+ 
+_.eq(object, other);
+// => false
+ 
+_.eq('a', 'a');
+// => true
+ 
+_.eq('a', Object('a'));
+// => false
+ 
+_.eq(NaN, NaN);
+// => true
+```
+
+
+
++ **_.gt(value, other)**
+
+value값이 이 other 것보다 큰지 점검합니다.
+
+```js
+_.gt(3, 1);
+// => true
+ 
+_.gt(3, 3);
+// => false
+ 
+_.gt(1, 3);
+// => false
+```
+
+
+
+- **_.gte(value, other)**
+
+value값이 이 other 것보다 크거나 같은지 점검합니다.
+
+```js
+_.gte(3, 1);
+// => true
+ 
+_.gte(3, 3);
+// => true
+ 
+_.gte(1, 3);
+// => false
+```
+
+
+
++ **_.isArguments(value)**
+
+값이 인수 객체 일 가능성이 있는지 확인합니다.
+
+```js
+_.isArguments(function() { return arguments; }());
+// => true
+ 
+_.isArguments([1, 2, 3]);
+// => false
+```
+
+
+
++ **_.isArray(value)**
+
+값이 Array 객체로 분류되는지 확인합니다.
+
+```js
+_.isArray([1, 2, 3]);
+// => true
+ 
+_.isArray(document.body.children);
+// => false
+ 
+_.isArray('abc');
+// => false
+ 
+_.isArray(_.noop);
+// => false
+
+_.isArray(function(){return arguments})
+// => false
+```
+
+
+
++ **_.isArrayBuffer(value)**
+
+```js
+_.isArrayBuffer(new ArrayBuffer(2));
+// => true
+ 
+_.isArrayBuffer(new Array(2));
+// => false
+```
+
+
+
++ **_.isArrayLike(value)**
+
+값이 배열 형인지 확인합니다. 값이 함수가 아니고 0보다 크고 같고 Number.MAX_SAFE_INTEGER보다 작거나 같은 정수인 value.length를 갖는 경우 값은 배열과 같은 것으로 간주됩니다.
+
+```js
+_.isArrayLike([1, 2, 3]);
+// => true
+ 
+_.isArrayLike(document.body.children);
+// => true
+ 
+_.isArrayLike('abc');
+// => true
+ 
+_.isArrayLike(_.noop);
+// => false
+```
+
+
+
++ **_.*isArrayLikeObject*(value)**
+
+이 메소드는 value가 객체인지 여부를 확인한다는 점을 제외하면 _.isArrayLike와 유사합니다.
+
+```js
+_.isArrayLikeObject([1, 2, 3]);
+// => true
+ 
+_.isArrayLikeObject(document.body.children);
+// => true
+ 
+_.isArrayLikeObject('abc');
+// => false
+ 
+_.isArrayLikeObject(_.noop);
+// => false
+```
+
+
+
++ **_.isBoolean(value)**
+
+```js
+_.isBoolean(false);
+// => true
+ 
+_.isBoolean(null);
+// => false
+```
+
+
+
++ **_.isBuffer(value)**
+
+```js
+// => true
+ 
+_.isBuffer(new Uint8Array(2));
+// => false
+```
+
+
+
++ **_.isDate(value)**
+
+값이 Date 객체로 분류되는지 확인합니다.
+
+```js
+_.isDate(new Date);
+// => true
+ 
+_.isDate('Mon April 23 2012');
+// => false
+```
+
+
+
++ **_.isElement(value)**
+
+값이 DOM 요소인지 확인합니다.
+
+```js
+_.isElement(document.body);
+// => true
+ 
+_.isElement('<body>');
+// => false
+```
+
+
+
++ 
