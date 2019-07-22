@@ -68,6 +68,7 @@
         이미지
       </div>
       <div class="col-md-11">
+        쯔녕쓰
           <div class="res"></div>
       </div>
     </div>
@@ -80,6 +81,7 @@
         이미지
       </div>
       <div class="col-md-11">
+        쯔녕쓰
           <div class="res"></div>
       </div>
     </div>
@@ -100,7 +102,7 @@
   <div class="box" data-seq="3">
 
   </div>
-  
+
   <div class="box" data-seq="4">
     <span class="btn">Reply</span>
         <div class="row" hidden>
@@ -108,13 +110,61 @@
         이미지
       </div>
       <div class="col-md-11">
-          <div class="res"></div>
+          <!-- <div class="res"></div> -->
       </div>
     </div>
   </div>
 
+
+  <!-- <div class="signup_memberType">
+    <div class="signup_item">
+      <input type="radio" class=" ">
+      <label for="">야호</label>
+    </div>
+    <div class="signup_item">
+      <input type="radio" class=" ">
+      <label for="">야호</label>
+    </div>
+    <div class="signup_item">
+      <input type="checkbox" class=" ">
+      <label for="">야호</label>
+      <div>
+        <input type="radio">
+        <label for="">인야호</label>
+      </div>
+    </div>
+  </div> -->
+  
   <script src="./comment.js"></script>
   <script>
+     let summerNodeConfig = {
+      tabsize: 2,
+      height: 150,
+      toolbar: false,
+      disableDragAndDrop: true,
+      shortcuts: false,
+      callbacks: {
+        onPaste: function (e) {
+          if (document.queryCommandSupported("insertText")) {
+            var text = $(e.currentTarget).html();
+            var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
+            setTimeout(function () {document.execCommand('insertText', false, bufferText);}, 10);
+            e.preventDefault();
+          } else { //IE
+            var text = window.clipboardData.getData("text")
+            if (trap) {
+              trap = false;
+            } else {
+              trap = true;
+              setTimeout(function () {document.execCommand('paste', false, text);}, 10);
+              e.preventDefault();
+            }
+          }
+
+        }
+      }
+    }
+
     var comment = new Comment({
       card: {
         class: "box"
@@ -140,23 +190,10 @@
         }
       },
       cb: function (form) {
-        $('.summernote').summernote({
-          tabsize: 2,
-          height: 100,
-          toolbar: false,
-          disableDragAndDrop: true,
-          shortcuts: false,
-          onPaste: function (e) {
-            var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text');
-            e.preventDefault();
-            document.execCommand('insertText', false, bufferText);
-          }
-        })
-
+        $('.summernote').summernote(summerNodeConfig)
         Array.from(findParent(form,'data-seq').getElementsByTagName('*')).find(list=>{
           return list.hasAttribute('hidden')
         }).removeAttribute('hidden')
-
       }
     })
 
