@@ -1,3 +1,5 @@
+
+
 # lodash
 
 <i>함수형 프로그래밍 로대쉬</i>
@@ -2357,4 +2359,532 @@ _.isElement('<body>');
 
 
 
-+ 
++ ***_.isEmpty(value)***
+
+값이 빈 객체, 컬렉션, 맵 또는 세트인지 확인합니다.
+
+**개체에 열거 가능한 문자열 키 특성이없는 경우 개체는 비어있는 것으로 간주**됩니다.
+
+즉, 숫자는 무조건 트루가 나오게됨.. 문자열은 들어있으면 false
+
+인수 오브젝트, 배열, 버퍼, 문자열 또는 jQuery와 유사한 콜렉션과 같은 배열 형 값은 길이가 0이면 비어있는 것으로 간주됩니다. 마찬가지로 크기가 0 인 경우 맵 및 세트는 비어있는 것으로 간주됩니다.
+
+```js
+_.isEmpty(null);
+// => true
+ 
+_.isEmpty(true);
+// => true
+ 
+_.isEmpty(1);
+// => true
+ 
+_.isEmpty([1, 2, 3]);
+// => false
+ 
+_.isEmpty({ 'a': 1 });
+// => false
+```
+
+
+
++ ***_.isEqual(value, other)***
+
+두 값을 동일하게 비교할 수 있도록 두 값을 깊이 비교합니다.
+
+참고 :이 메서드는 배열, 배열 버퍼, 부울 값, 날짜 개체, 오류 개체, 맵, 숫자, 개체 개체, 정규식, 집합, 문자열, 기호 및 입력 된 배열 비교를 지원합니다. 객체 객체는 상속 된 열거 가능 속성이 아닌 자체 객체에 의해 비교됩니다.
+
+**함수와 DOM 노드는 엄격한 동등성, 즉 ===로 비교됩니다.**
+
+일반 적으로는 뎁스만 보고 참조인 ===로 비교핮 ㅣ않지만, 함수랑 DOM노드는 ===로 비교함.
+
+```js
+var object = { 'a': 1 };
+var other = { 'a': 1 };
+ 
+_.isEqual(object, other);
+// => true
+
+function hello(){}
+_.isEqual(hello, function(){})
+// => false
+
+
+```
+
+
+
+
+
+>
+>
+>- ***_.isEqualWith(value, other, [customizer])***
+>
+>이 메서드는 _.isEqual과 비슷하지만 값을 비교하기 위해 호출되는 사용자 지정자를 허용한다는 점만 다릅니다. 사용자 정의 프로그램이 undefined를 반환하면 비교가 대신 메소드에 의해 처리됩니다. 커스터마이져는 (objValue, othValue [, index | key, object, other, stack]) 최대 6 개의 인수로 호출됩니다.
+>
+>```js
+>
+>```
+>
+>
+
+
+
++ ***_.isError(value)***
+
+값이 Error, EvalError, RangeError, ReferenceError, SyntaxError, TypeError 또는 URIError 객체인지 확인합니다.
+
+```js
+_.isError(new Error);
+// => true
+ 
+_.isError(Error);
+// => false
+```
+
+
+
++ ***_.isFinite(value)***
+
+값이 유한 프리미티브 숫자인지 확인합니다.
+
+```js
+_.isFinite(3);
+// => true
+ 
+_.isFinite(Number.MIN_VALUE);
+// => true
+ 
+_.isFinite(Infinity);
+// => false
+ 
+_.isFinite('3');
+// => false
+```
+
+
+
++ ***_.isFunction(value)***
+
+값이 Function 개체로 분류되는지 확인합니다.
+
+```js
+_.isFunction(_);
+// => true
+ 
+_.isFunction(/abc/);
+// => false
+```
+
+
+
++ ***_.isInteger(value)***
+
+값이 정수인지 검사합니다.
+
+참고 :이 메서드는 Number.isInteger를 기반으로합니다.
+
+```js
+_.isInteger(3);
+// => true
+ 
+_.isInteger(Number.MIN_VALUE);
+// => false
+ 
+_.isInteger(Infinity);
+// => false
+ 
+_.isInteger('3');
+// => false
+```
+
+
+
++ ***_.isLength(value)***
+
+값이 유효한 배열 모양 길이인지 확인합니다.
+
+참고 :이 메서드는 ToLength를 기반으로합니다.
+
+```js
+_.isLength(3);
+// => true
+ 
+_.isLength(Number.MIN_VALUE);
+// => false
+ 
+_.isLength(Infinity);
+// => false
+ 
+_.isLength('3');
+// => false
+```
+
+
+
++ ***_.isMap(value)***
+
+값이 Map 객체로 분류되는지 확인합니다.
+
+```js
+_.isMap(new Map);
+// => true
+ 
+_.isMap(new WeakMap);
+// => false
+```
+
+
+
++ ***_.isMatch(object, source)***
+
+객체와 소스를 부분적으로 비교하여 객체가 동일한 속성 값을 포함하는지 확인합니다.
+
+주 :이 메소드는 소스가 부분적으로 적용될 때 _.matches와 동일합니다.
+
+부분 비교는 빈 배열 및 빈 객체 소스 값을 배열 또는 객체 값과 각각 일치시킵니다. 지원되는 값 비교 목록은 _.isEqual을 참조하십시오.
+
+```js
+var object = { 'a': 1, 'b': 2 };
+ 
+_.isMatch(object, { 'b': 2 });
+// => true
+ 
+_.isMatch(object, { 'b': 1 });
+// => false
+```
+
+
+
++ ***_.isNative(value)***
+
+네이티브 기능을 안정적으로 감지 할 수 없습니다. 여러 요청에도 불구하고, core-js 관리자는 탐지를 수정하려는 모든 시도가 방해받을 것임을 분명히했습니다. 결과적으로, 우리는 선택의 여지가 있지만 오류를 던질 것입니다. 불행하게도 이것은 core-js에 의존하는 babel-polyfill 같은 패키지에도 영향을 미친다.
+
+```js
+_.isNative(Array.prototype.push);
+// => true
+ 
+_.isNative(_);
+// => false
+```
+
+
+
+
+
++ ***_.isNil(value)***
+
+값이 null인지 또는 'undefined'인지 확인합니다.
+
+```js
+_.isNil(null);
+// => true
+ 
+_.isNil(void 0);
+// => true
+ 
+_.isNil(NaN);
+// => false
+```
+
+
+
++ ***_.isNull(value)***
+
+값이 **null** 일지 어떨지를 판정합니다.
+
+```js
+_.isNull(null);
+// => true
+ 
+_.isNull(void 0);
+// => false
+```
+
+
+
++ ***_.isNumber(value)***
+
+값이 Number 프리미티브 또는 객체로 분류되는지 확인합니다.
+
+참고 : 숫자로 분류 된 Infinity, -Infinity 및 NaN을 제외하려면 _.isFinite 메서드를 사용합니다.
+
+```js
+_.isNumber(3);
+// => true
+ 
+_.isNumber(Number.MIN_VALUE);
+// => true
+ 
+_.isNumber(Infinity);
+// => true
+ 
+_.isNumber('3');
+// => false
+```
+
+
+
++ ***_.isObject(value)***
+
+value가 Object의 언어 유형인지 확인합니다. (예 : 배열, 함수, 객체, 정규식, 새 Number (0) 및 새 String ( '))
+
+```js
+_.isObject({});
+// => true
+ 
+_.isObject([1, 2, 3]);
+// => true
+ 
+_.isObject(_.noop);
+// => true
+ 
+_.isObject(null);
+// => false
+```
+
+
+
++ ***_.isObjectLike(value)***
+
+값이 객체와 같은지 검사합니다. null이 아니고 **typeof** result가 "object"인 경우 값은 객체와 유사합니다.
+
+```js
+_.isObjectLike({});
+// => true
+ 
+_.isObjectLike([1, 2, 3]);
+// => true
+ 
+_.isObjectLike(_.noop);
+// => false
+ 
+_.isObjectLike(null);
+// => false
+```
+
+
+
++ ***_.isPlainObject(value)***
+
+값이 일반 객체, 즉 Object 생성자 또는 [[Prototype]]이 **null** 인 객체인지 확인합니다.
+
+```js
+function Foo() {
+  this.a = 1;
+}
+ 
+_.isPlainObject(new Foo);
+// => false
+ 
+_.isPlainObject([1, 2, 3]);
+// => false
+ 
+_.isPlainObject({ 'x': 0, 'y': 0 });
+// => true
+ 
+_.isPlainObject(Object.create(null));
+// => true
+```
+
+
+
++ ***_.isRegExp(value)***
+
+값이 RegExp 객체로 분류되는지 확인합니다.
+
+```js
+_.isRegExp(/abc/);
+// => true
+ 
+_.isRegExp('/abc/');
+// => false
+```
+
+
+
+
+
++ ***_.isString(value)***
+
+값이 String 프리미티브 또는 객체로 분류되는지 확인합니다.
+
+```js
+_.isString('abc');
+// => true
+ 
+_.isString(1);
+// => false
+```
+
+
+
++ ***_.isUndefined(value)***
+
+값이 정의되지 않았는지 확인합니다.
+
+```js
+_.isUndefined(void 0);
+// => true
+ 
+_.isUndefined(null);
+// => false
+```
+
+
+
++ ***_.lt(value, other)***
+
+값이 다른 것보다 작은 지 점검합니다.
+
+```js
+_.lt(1, 3);
+// => true
+ 
+_.lt(3, 3);
+// => false
+ 
+_.lt(3, 1);
+// => false
+```
+
+
+
++ ***_.lte(value, other)***
+
+값이 다른 값보다 작거나 같은지 검사합니다.
+
+```js
+_.lte(1, 3);
+// => true
+ 
+_.lte(3, 3);
+// => true
+ 
+_.lte(3, 1);
+// => false
+```
+
+
+
++ ***_.toArray(value)***
+
+값을 배열로 변환합니다.
+
+값만 변환시킴, 객체를 넣으면 값만 가져오고, 스트링을 넣으면 각각 배열의 요소로 들어가지만, 숫자가 들어가면 빈배열이 나오게됨.
+
+```js
+_.toArray({ 'a': 1, 'b': 2 });
+// => [1, 2]
+ 
+_.toArray('abc');
+// => ['a', 'b', 'c']
+ 
+_.toArray(1);
+// => []
+ 
+_.toArray(null);
+// => []
+```
+
+
+
++ ***_.toInteger(value)***
+
+참고 :이 방법은 ToInteger를 기반으로합니다.
+
+```js
+_.toInteger(3.2);
+// => 3
+ 
+_.toInteger(Number.MIN_VALUE);
+// => 0
+ 
+_.toInteger(Infinity);
+// => 1.7976931348623157e+308
+ 
+_.toInteger('3.2');
+// => 3
+```
+
+
+
++ ***_.toLength(value)***
+
+배열과 같은 객체의 길이로 사용하기에 적합한 정수로 값을 변환합니다.
+
+```js
+_.toLength(3.2);
+// => 3
+ 
+_.toLength(Number.MIN_VALUE);
+// => 0
+ 
+_.toLength(Infinity);
+// => 4294967295
+ 
+_.toLength('3.2');
+// => 3
+```
+
+
+
++ ***_.toNumber(value)***
+
+값을 숫자로 변환합니다.
+
+```js
+_.toNumber(3.2);
+// => 3.2
+ 
+_.toNumber(Number.MIN_VALUE);
+// => 5e-324
+ 
+_.toNumber(Infinity);
+// => Infinity
+ 
+_.toNumber('3.2');
+// => 3.2
+```
+
+
+
++ ***_.toPlainObject(value)***
+
+값을 일반 객체의 속성을 소유하기 위해 상속받은 열거 가능한 문자열의 키 특성을 병합하는 일반 객체로 값을 변환합니다.
+
+```js
+function Foo() {
+  this.b = 2;
+}
+ 
+Foo.prototype.c = 3;
+ 
+_.assign({ 'a': 1 }, new Foo);
+// => { 'a': 1, 'b': 2 }
+ 
+_.assign({ 'a': 1 }, _.toPlainObject(new Foo));
+// => { 'a': 1, 'b': 2, 'c': 3 }
+```
+
+
+
++ ***_.toString(value)***
+
+스트링으로 변환해줌
+
+```js
+_.toString(null);
+// => ''
+ 
+_.toString(-0);
+// => '-0'
+ 
+_.toString([1, 2, 3]);
+// => '1,2,3'
+```
+
+
+
+## Math
+
