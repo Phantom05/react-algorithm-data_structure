@@ -3105,21 +3105,26 @@ _.sumBy(objects, 'n');
 
 
 
->
->
->- ***_.clamp(number, [lower], upper)***
->
->포괄적 인 상한 및 하한 범위 내에서 클램프 수.
->
->```js
->_.clamp(-10, -5, 5);
->// => -5
-> 
->_.clamp(10, -5, 5);
->// => 5
->```
->
->
+
+
++ ***_.clamp(number, [lower], upper)***
+
+포괄적 인 상한 및 하한 범위 내에서 클램프 수.
+
+
+
+```js
+_.clamp(-10, -5, 5);
+// => -5
+// => -5부터 5까지의 값만 동작하게됨 첫번째 값이 -10이라고 할지라도 -5까지만 잡혀있어서 -5이하는 모두 -5로 반환하게되고 5이상의 값을 첫번째 인자로 넣으면 5까지만 반환하게됨.
+ 
+_.clamp(10, -5, 5);
+// => 5
+.clamp(-500, -100, 5)
+// => -100
+_.clamp(9999, -100, 5)
+// =>5
+```
 
 
 
@@ -3155,4 +3160,88 @@ _.inRange(-3, -2, -6);
 ```
 
 
+
++ ***_.random([lower=0], [upper=1], [floating])***
+
+포괄적 인 하위 경계와 상위 경계 사이에 임의의 숫자를 생성합니다. 인수가 1 개만 지정되면 (자), 0 ~ 지정된 번호의 사이의 수치가 돌려 주어집니다. floating이 true이거나 lower 또는 upper가 float이면 부동 소수점 숫자가 정수 대신 반환됩니다.
+
+```js
+_.random(0, 5);
+// => an integer between 0 and 5
+ 
+_.random(5);
+// => also an integer between 0 and 5
+ 
+_.random(5, true);
+// => a floating-point number between 0 and 5
+ 
+_.random(1.2, 5.2);
+// => a floating-point number between 1.2 and 5.2
+```
+
+
+
++ ***_.assign(object, [sources])***
+
+소스 개체의 자체 열거 형 문자열 키 특성을 대상 개체에 할당합니다. 원본 개체는 왼쪽에서 오른쪽으로 적용됩니다. 후속 소스는 이전 소스의 등록 정보 지정을 겹쳐 9니다.
+
+```js
+function Foo(){
+  this.a = 1;
+}
+function Bar(){
+  this.c = 3;
+}
+
+Foo.prototype.b = 2;
+Bar.prototype.d = 4;
+
+console.log(
+  _.assign({'a':0},new Foo, new Bar)
+);
+// 기존으 {a:0}은 new Foo로 덮어씌워짐. prototype의 인자들은 할당되지 않음.
+```
+
+
+
++ ***_.assignIn(object, [sources])***
+
+이 메소드는 _.assign과 유사하지만, 자신과 상속 된 소스 특성을 반복한다는 점만 다릅니다.
+
+```js
+function Foo() {
+  this.a = 1;
+}
+ 
+function Bar() {
+  this.c = 3;
+}
+ 
+Foo.prototype.b = 2;
+Bar.prototype.d = 4;
+ 
+_.assignIn({ 'a': 0 }, new Foo, new Bar);
+// => { 'a': 1, 'b': 2, 'c': 3, 'd': 4 }
+// 프로토타입까지 할당해버림.
+```
+
+
+
++ ***_.assignInWith(object, sources, [customizer])***
+
+이 메소드는 _.assignIn과 비슷하지만 할당 된 값을 생성하기 위해 호출되는 사용자 정의 프로그램을 허용한다는 점만 다릅니다. 사용자 정의 프로그램이 undefined를 반환하면 대신 할당이 처리됩니다. 커스터마이져는 (objValue, srcValue, key, object, source) 5 개의 인자로 호출된다.
+
+```js
+
+```
+
+
+
++ ***_.assignWith(object, sources, [customizer])***
+
+이 메서드는 할당 된 값을 생성하기 위해 호출되는 사용자 지정자를 수락한다는 점을 제외하면 _.assign과 유사합니다. 사용자 정의 프로그램이 undefined를 반환하면 대신 할당이 처리됩니다. 커스터마이져는 (objValue, srcValue, key, object, source) 5 개의 인자로 호출된다.
+
+```js
+
+```
 
