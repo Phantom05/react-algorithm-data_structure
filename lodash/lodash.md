@@ -2925,3 +2925,234 @@ _.divide(6, 4);
 // => 1.5
 ```
 
+
+
++ ***_.floor(number, [precision=0])***
+
+정밀도로 반올림 한 수를 계산합니다.
+
+두번째 인자는 precision 개수임.
+
+```js
+_.floor(4.006);
+// => 4
+ 
+_.floor(0.046, 2);
+// => 0.04
+ 
+_.floor(4060, -2);
+// => 4000
+```
+
+
+
++ ***_.max(array)***
+
+배열의 최대 값을 계산합니다. array가 비어 있거나 거짓이면 undefined가 반환됩니다.
+
+```js
+_.max([4, 2, 8, 6]);
+// => 8
+ 
+_.max([]);
+// => undefined
+```
+
+
+
++ ***_.maxBy(array, [iteratee=_.identity])***
+
+이 메소드는 array의 각 요소에 대해 호출 된 iteratee를 허용한다는 점을 제외하고 _.max와 유사합니다.이 값은 해당 값의 순위 지정 기준을 생성합니다. iteratee는 (value) 하나의 인수로 호출됩니다.
+
+```js
+var objects = [{ 'n': 1 }, { 'n': 2 }];
+ 
+_.maxBy(objects, function(o) { return o.n; });
+// => { 'n': 2 }
+ 
+// The `_.property` iteratee shorthand.
+_.maxBy(objects, 'n');
+// => { 'n': 2 }
+```
+
+
+
++ ***_.mean(array)***
+
+배열에있는 값의 평균을 계산합니다.
+
+```js
+_.mean([4, 2, 8, 6]);
+// => 5
+```
+
+
+
++ ***_.meanBy(array, [iteratee=_.identity])***
+
+이 메소드는 array의 각 요소에 대해 호출 된 iteratee를 받아 들여 평균값을 생성한다는 점을 제외하면 _.mean과 유사합니다. iteratee는 (value) 하나의 인수로 호출됩니다.
+
+```js
+var objects = [{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }];
+ 
+_.meanBy(objects, function(o) { return o.n; });
+// => 5
+ 
+// The `_.property` iteratee shorthand.
+_.meanBy(objects, 'n');
+// => 5
+```
+
+
+
++ ***_.min(array)***
+
+배열의 최소값을 계산합니다. array가 비어 있거나 거짓이면 undefined가 반환됩니다.
+
+```js
+_.min([4, 2, 8, 6]);
+// => 2
+ 
+_.min([]);
+// => undefined
+```
+
+
+
++ ***_.minBy(array, [iteratee=_.identity])***
+
+이 메소드는 배열의 각 요소에 대해 호출 된 iteratee를 받아 들여 값의 순위 지정 기준을 생성한다는 점을 제외하면 _.min과 유사합니다. iteratee는 (value) 하나의 인수로 호출됩니다.
+
+```js
+var objects = [{ 'n': 1 }, { 'n': 2 }];
+ 
+_.minBy(objects, function(o) { return o.n; });
+// => { 'n': 1 }
+ 
+// The `_.property` iteratee shorthand.
+_.minBy(objects, 'n');
+// => { 'n': 1 }
+```
+
+
+
++ ***_.multiply(multiplier, multiplicand)***
+
+두 숫자를 곱하십시오.
+
+```js
+_.multiply(6, 4);
+// => 24
+```
+
+
+
++ ***_.round(number, [precision=0])***
+
+정밀도로 반올림 한 수를 계산합니다.
+
+두번째 인자는 precision임.
+
+```js
+_.round(4.006);
+// => 4
+ 
+_.round(4.006, 2);
+// => 4.01
+ 
+_.round(4060, -2);
+// => 4100
+```
+
+
+
++ ***_.subtract(minuend, subtrahend)***
+
+두 숫자를 뺍니다.
+
+```js
+_.subtract(6, 4);
+// => 2
+```
+
+
+
++ ***_.sum(array)***
+
+배열에있는 값의 합을 계산합니다.
+
+```js
+_.sum([4, 2, 8, 6]);
+// => 20
+```
+
+
+
++ ***_.sumBy(array, [iteratee=_.identity])***
+
+이 메소드는 _.sum과 비슷하지만, 배열의 각 요소에 대해 호출 된 iteratee를 받아 들여 합계 값을 생성합니다. iteratee는 (value) 하나의 인수로 호출됩니다.
+
+```js
+var objects = [{ 'n': 4 }, { 'n': 2 }, { 'n': 8 }, { 'n': 6 }];
+ 
+_.sumBy(objects, function(o) { return o.n; });
+// => 20
+ 
+// The `_.property` iteratee shorthand.
+_.sumBy(objects, 'n');
+// => 20
+```
+
+
+
+>
+>
+>- ***_.clamp(number, [lower], upper)***
+>
+>포괄적 인 상한 및 하한 범위 내에서 클램프 수.
+>
+>```js
+>_.clamp(-10, -5, 5);
+>// => -5
+> 
+>_.clamp(10, -5, 5);
+>// => 5
+>```
+>
+>
+
+
+
++ ***_.inRange(number, [start=0], end)***
+
+n가 개시와 종료까지의 사이에 있는지 없는지를 판정합니다. end가 지정되어 있지 않은 경우, start로 시작되어 0으로 설정됩니다. start가 end보다 큰 경우, params는 부의 범위를 지원하도록 (듯이) 스왑됩니다.
+
+가운대가 옵셔널이고, 가운데 인자가 있으면, 두번째 인자가 start부터 세번째인자 end 까지 사이에 첫번째 인자가 있으면 true
+
+인자가 2개밖에 없으면 2번째인자가 end이고 첫번째 인자가 두번째 인자안에 있으면 trur
+
+```js
+_.inRange(3, 2, 4);
+// => true
+ 
+_.inRange(4, 8);
+// => true
+ 
+_.inRange(4, 2);
+// => false
+ 
+_.inRange(2, 2);
+// => false
+ 
+_.inRange(1.2, 2);
+// => true
+ 
+_.inRange(5.2, 4);
+// => false
+ 
+_.inRange(-3, -2, -6);
+// => true
+```
+
+
+
