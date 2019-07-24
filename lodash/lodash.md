@@ -3227,21 +3227,334 @@ _.assignIn({ 'a': 0 }, new Foo, new Bar);
 
 
 
-+ ***_.assignInWith(object, sources, [customizer])***
+>
+>
+>- ***_.assignInWith(object, sources, [customizer])***
+>
+>이 메소드는 _.assignIn과 비슷하지만 할당 된 값을 생성하기 위해 호출되는 사용자 정의 프로그램을 허용한다는 점만 다릅니다. 사용자 정의 프로그램이 undefined를 반환하면 대신 할당이 처리됩니다. 커스터마이져는 (objValue, srcValue, key, object, source) 5 개의 인자로 호출된다.
+>
+>```js
+>
+>```
+>
+>
+>
+>- ***_.assignWith(object, sources, [customizer])***
+>
+>이 메서드는 할당 된 값을 생성하기 위해 호출되는 사용자 지정자를 수락한다는 점을 제외하면 _.assign과 유사합니다. 사용자 정의 프로그램이 undefined를 반환하면 대신 할당이 처리됩니다. 커스터마이져는 (objValue, srcValue, key, object, source) 5 개의 인자로 호출된다.
+>
+>```js
+>
+>```
+>
+>
 
-이 메소드는 _.assignIn과 비슷하지만 할당 된 값을 생성하기 위해 호출되는 사용자 정의 프로그램을 허용한다는 점만 다릅니다. 사용자 정의 프로그램이 undefined를 반환하면 대신 할당이 처리됩니다. 커스터마이져는 (objValue, srcValue, key, object, source) 5 개의 인자로 호출된다.
+
+
++ ***_.at(object, [paths])***
+
+object의 패스에 대응하는 값의 배열을 작성합니다.
 
 ```js
-
+var object = { 'a': [{ 'b': { 'c': 3 } }, 4] };
+ 
+_.at(object, ['a[0].b.c', 'a[1]']);
+// => [3, 4]
 ```
 
 
 
-+ ***_.assignWith(object, sources, [customizer])***
++ ***_.create(prototype, [properties])***
 
-이 메서드는 할당 된 값을 생성하기 위해 호출되는 사용자 지정자를 수락한다는 점을 제외하면 _.assign과 유사합니다. 사용자 정의 프로그램이 undefined를 반환하면 대신 할당이 처리됩니다. 커스터마이져는 (objValue, srcValue, key, object, source) 5 개의 인자로 호출된다.
+prototype object로부터 상속 한 object를 작성합니다. 속성 개체가 제공되면 자체 열거 가능한 문자열 키 특성이 생성 된 개체에 할당됩니다.
 
 ```js
-
+function Shape() {
+  this.x = 0;
+  this.y = 0;
+}
+ 
+function Circle() {
+  Shape.call(this);
+}
+ 
+Circle.prototype = _.create(Shape.prototype, {
+  'constructor': Circle
+});
+ 
+var circle = new Circle;
+circle instanceof Circle;
+// => true
+ 
+circle instanceof Shape;
+// => true
 ```
+
+
+
+
+
+
+
++ ***_.defaults(object, [sources])***
+
+undefined로 해석되는 모든 대상 속성에 대해 소스 객체의 소유하고 상속 된 열거 가능한 문자열 키 특성을 대상 객체에 할당합니다. 원본 개체는 왼쪽에서 오른쪽으로 적용됩니다. 속성이 설정되면 동일한 속성의 추가 값이 무시됩니다.
+
+먼저 추가된 객체가 반환하게 되고 추가로 중복된 이름을 가진 객체는 무시하게됨
+
+```js
+_.defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
+// => { 'a': 1, 'b': 2 }
+```
+
+
+
++ ***_.defaultsDeep(object, [sources])***
+
+이 메소드는 재귀 적으로 기본 특성을 지정한다는 점을 제외하면 _.defaults와 유사합니다.
+
+뒤로 오는 객체가 기존의 객체와 중복된 이름을 갖고 있으면 덮어씀.
+
+```js
+_.defaultsDeep({ 'a': { 'b': 2 } }, { 'a': { 'b': 1, 'c': 3 } });
+// => { 'a': { 'b': 2, 'c': 3 } }
+```
+
+
+
++ ***_.toPairs(object)***
+
+_.fromPairs에서 사용할 수있는 객체에 대한 자체 열거 형 문자열 키 - 값 쌍의 배열을 만듭니다. object가 맵 또는 세트 인 경우, 그 엔트리가 돌려 주어집니다.
+
+entries와 동일하게 동작함. 프로토타입은 무시됨.
+
+```js
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+ 
+Foo.prototype.c = 3;
+ 
+_.toPairs(new Foo);
+// => [['a', 1], ['b', 2]] (iteration order is not guaranteed)
+```
+
+
+
++ ***_.toPairsIn(object)***
+
+_.fromPairs에서 사용할 수있는 객체에 대한 자체적이고 상속 가능한 열거 가능한 문자열 키 - 값 쌍의 배열을 만듭니다. object가 맵 또는 세트 인 경우, 그 엔트리가 돌려 주어집니다.
+
+프로토타입까지 배열로 만듬.
+
+```js
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+ 
+Foo.prototype.c = 3;
+ 
+_.toPairsIn(new Foo);
+// => [['a', 1], ['b', 2], ['c', 3]] (iteration order is not guaranteed)
+```
+
+
+
++ ***_.findKey(object, [predicate=_.identity])***
+
+이 메소드는 첫 번째 요소 술어의 키를 리턴한다는 점을 제외하면 _.find와 유사합니다. 요소 자체 대신 진실을 리턴합니다.
+
+조건에 부합하는 첫번째 키만 가져옴
+
+```js
+var users = {
+  'barney':  { 'age': 36, 'active': true },
+  'fred':    { 'age': 40, 'active': false },
+  'pebbles': { 'age': 1,  'active': true }
+};
+ 
+_.findKey(users, function(o) { return o.age < 40; });
+// => 'barney' (iteration order is not guaranteed)
+ 
+// The `_.matches` iteratee shorthand.
+_.findKey(users, { 'age': 1, 'active': true });
+// => 'pebbles'
+ 
+// The `_.matchesProperty` iteratee shorthand.
+_.findKey(users, ['active', false]);
+// => 'fred'
+ 
+// The `_.property` iteratee shorthand.
+_.findKey(users, 'active');
+// => 'barney'
+```
+
+
+
++ ***_.findLastKey(object, [predicate=_.identity])***
+
+이 메소드는 컬렉션의 요소를 반대 순서로 반복한다는 점을 제외하면 _.findKey와 유사합니다.
+
+```js
+var users = {
+  'barney':  { 'age': 36, 'active': true },
+  'fred':    { 'age': 40, 'active': false },
+  'pebbles': { 'age': 1,  'active': true }
+};
+ 
+_.findLastKey(users, function(o) { return o.age < 40; });
+// => returns 'pebbles' assuming `_.findKey` returns 'barney'
+ 
+// The `_.matches` iteratee shorthand.
+_.findLastKey(users, { 'age': 36, 'active': true });
+// => 'barney'
+ 
+// The `_.matchesProperty` iteratee shorthand.
+_.findLastKey(users, ['active', false]);
+// => 'fred'
+ 
+// The `_.property` iteratee shorthand.
+_.findLastKey(users, 'active');
+// => 'pebbles'
+```
+
+
+
++ ***_.forIn(object, [iteratee=_.identity])***
+
+개체의 자체 및 상속 된 열거 가능한 문자열 키 특성을 반복하고 각 속성에 대해 iteratee를 호출합니다. iteratee는 (value, key, object) 세 개의 인수로 호출됩니다. Iteratee 함수는 명시 적으로 false를 반환하여 일찍 반복을 종료 할 수 있습니다.
+
+```js
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+ 
+Foo.prototype.c = 3;
+ 
+_.forIn(new Foo, function(value, key) {
+  console.log(key);
+});
+// => Logs 'a', 'b', then 'c' (iteration order is not guaranteed).
+```
+
+
+
++ ***_.forInRight(object, [iteratee=_.identity])***
+
+ 이 메소드는 반대의 순서로 오브젝트의 특성을 반복한다는 점을 제외하면 _.forIn과 유사합니다.
+
+```js
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+ 
+Foo.prototype.c = 3;
+ 
+_.forInRight(new Foo, function(value, key) {
+  console.log(key);
+});
+// => Logs 'c', 'b', then 'a' assuming `_.forIn` logs 'a', 'b', then 'c'.
+```
+
+
+
++ ***_.forOwn(object, [iteratee=_.identity])***
+
+개체의 자체 열거 형 문자열 키 특성을 반복하고 각 속성에 대해 iteratee를 호출합니다. iteratee는 (value, key, object) 세 개의 인수로 호출됩니다. Iteratee 함수는 명시 적으로 false를 반환하여 일찍 반복을 종료 할 수 있습니다.
+
+```js
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+ 
+Foo.prototype.c = 3;
+ 
+_.forOwn(new Foo, function(value, key) {
+  console.log(key);
+});
+// => Logs 'a' then 'b' (iteration order is not guaranteed).
+```
+
+
+
++ ***_.forOwnRight(object, [iteratee=_.identity])***
+
+이 메소드는 _.forOwn과 닮아 있습니다 만, 반대의 순서로 object의 property를 반복 처리하는 점이 다릅니다.
+
+```js
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+ 
+Foo.prototype.c = 3;
+ 
+_.forOwnRight(new Foo, function(value, key) {
+  console.log(key);
+});
+// => Logs 'b' then 'a' assuming `_.forOwn` logs 'a' then 'b'.
+```
+
+
+
++ ***_.functions(object)***
+
+object의 고유 한 열거 가능 속성에서 함수 속성 이름의 배열을 만듭니다.
+
+```js
+function Foo() {
+  this.a = _.constant('a');
+  this.b = _.constant('b');
+}
+ 
+Foo.prototype.c = _.constant('c');
+ 
+_.functions(new Foo);
+// => ['a', 'b']
+```
+
+
+
++ ***_.functionsIn(object)***
+
+object의 상속 가능한 열거 가능 속성에서 상속받은 함수 속성 이름의 배열을 만듭니다.
+
+```js
+function Foo() {
+  this.a = _.constant('a');
+  this.b = _.constant('b');
+}
+ 
+Foo.prototype.c = _.constant('c');
+ 
+_.functionsIn(new Foo);
+// => ['a', 'b', 'c']
+```
+
+
+
++ ***_.get(object, path, [defaultValue])***
+
+object의 패스에있는 값을 가져옵니다. 해결 된 값이 미정 도리의 경우는, defaultValue가 그 자리에 돌려 주어집니다.
+
+```JS
+var object = { 'a': [{ 'b': { 'c': 3 } }] };
+ 
+_.get(object, 'a[0].b.c');
+// => 3
+ 
+_.get(object, ['a', '0', 'b', 'c']);
+// => 3
+ 
+_.get(object, 'a.b.c', 'default');
+// => 'default'
+//default는 값이 없을때 넣어줄값
+```
+
+
 
