@@ -162,3 +162,139 @@ console.log(
 //default는 값이 없을때 넣어줄값
 
 // _.has(object, path)
+// 패스가 object의 직접적인 프로퍼티 일지 어떨지를 판정합니다.
+
+var object = {'a':{'b':2}};
+var other = _.create({'a':_.create({'b':2})})
+
+console.log(
+  _.has(object,'a')
+);
+console.log(
+  _.has(object,'a.b')
+);
+console.log(
+  _.has(object,['a','b'])
+);
+console.log(
+  _.has(other)
+);
+//prototype에 있는건 has로 체크하지 않음
+
+// _.hasIn(object, path)
+// path가 객체의 직접적인 속성인지 상속 된 속성인지 확인합니다.
+
+console.log(
+  _.hasIn(object,'a')
+);
+console.log(
+  _.hasIn(other,'a.b')
+);
+
+// _.invert(object)
+// 객체의 반전 된 키와 값으로 구성된 객체를 만듭니다. object에 중복 값이 ​​포함 된 경우 후속 값은 이전 값의 속성 할당을 덮어 씁니다.
+var object = { 'a': 1, 'b': 2, 'c': 1 };
+ 
+_.invert(object);
+// => { '1': 'c', '2': 'b' }
+
+// _.invertBy(object, [iteratee=_.identity])
+// 이 메소드는 반전 된 오브젝트가 iteratee를 통해 오브젝트의 각 요소를 실행 한 결과에서 생성된다는 점을 제외하면 _.invert와 유사합니다. 각 반전 된 키의 해당 반전 값은 반전 된 값을 생성하는 키 배열입니다. iteratee는 (value) 하나의 인수로 호출됩니다.
+
+var object = { 'a': 1, 'b': 2, 'c': 1 };
+ 
+_.invertBy(object);
+// => { '1': ['a', 'c'], '2': ['b'] }
+ 
+_.invertBy(object, function(value) {
+  return 'group' + value;
+});
+// => { 'group1': ['a', 'c'], 'group2': ['b'] }
+
+
+// _.invoke(object, path, [args])
+// 오브젝트의 패스에있는 메소드를 호출합니다.
+
+var object = { 'a': [{ 'b': { 'c': [1, 2, 3, 4] } }] };
+ 
+_.invoke(object, 'a[0].b.c.slice', 1, 3);
+// => [2, 3]
+
+// _.keys(object)
+
+// _.keysIn(object)
+
+// _.mapKeys(object, [iteratee=_.identity])
+// _.mapValues의 반대; 이 메소드는 iteratee를 통해 오브젝트의 자체 열거 가능 문자열 키 특성을 실행하여 생성 된 오브젝트 및 키와 동일한 값을 갖는 오브젝트를 작성합니다. iteratee는 (value, key, object) 세 개의 인수로 호출됩니다.
+
+_.mapKeys({'a':1,'b':2}, function(value,key){
+  return key + value;
+})
+
+// _.mapValues(object, [iteratee=_.identity])
+// 객체와 동일한 키를 가진 객체를 생성하고 iteratee를 통해 객체의 자체 열거 형 문자열 키 특성을 각각 실행하여 생성 된 값을 생성합니다. iteratee는 세 개의 인수로 호출됩니다.
+
+
+var users = {
+  'fred':    { 'user': 'fred',    'age': 40 },
+  'pebbles': { 'user': 'pebbles', 'age': 1 }
+};
+ 
+_.mapValues(users, function(o) { return o.age; });
+// => { 'fred': 40, 'pebbles': 1 } (iteration order is not guaranteed)
+ 
+// The `_.property` iteratee shorthand.
+_.mapValues(users, 'age');
+// => { 'fred': 40, 'pebbles': 1 } (iteration order is not guaranteed)
+
+
+// _.merge(object, [sources])
+
+// 이 메소드는 _.assign과 유사하지만 소스 객체의 자체 및 상속 된 열거 가능 문자열 키 특성을 대상 객체에 재귀 적으로 병합합니다. 대상 값이 있으면 undefined로 확인되는 소스 속성은 건너 뜁니다. 배열 및 일반 개체 속성은 재귀 적으로 병합됩니다. 다른 객체 및 값 유형은 할당에 의해 무시됩니다. 원본 개체는 왼쪽에서 오른쪽으로 적용됩니다. 후속 소스는 이전 소스의 등록 정보 지정을 겹쳐 9니다.
+// 1:1매칭으로 머지가됨.
+
+// 참고 :이 메서드는 객체를 변형합니다.
+var object = {
+  'a': [{ 'b': 2 }, { 'd': 4 },{'g':[1]}]
+};
+ 
+var other = {
+  'a': [{ 'c': 3 }, { 'e': 5 },{'g':[3]}]
+};
+ 
+console.log(
+  _.merge(object, other)
+);
+// => { 'a': [{ 'b': 2, 'c': 3 }, { 'd': 4, 'e': 5 }] }
+
+// _.mergeWith(object, sources, customizer)
+
+// 이 메소드는 destination 및 source 특성의 병합 된 값을 생성하기 위해 호출되는 사용자 정의 프로그램을 허용한다는 점을 제외하면 _.merge와 유사합니다. 사용자 정의 프로그램이 undefined를 리턴하면 병합은 대신 메소드에 의해 처리됩니다. 커스터마이져는 6 개의 인자로 호출된다 :
+// (objValue, srcValue, 키, 객체, 소스, 스택).
+
+// 참고 :이 메서드는 객체를 변형합니다.
+
+function customizer(objValue, srcValue) {
+  if (_.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+}
+ 
+var object = { 'a': [1], 'b': [2] };
+var other = { 'a': [3], 'b': [4] };
+ 
+console.log(
+  _.mergeWith(object, other, customizer)
+);
+// => { 'a': [1, 3], 'b': [2, 4] }
+
+// _.omit(object, [paths])
+
+// _.pick의 반대; 이 메소드는 생략되지 않은 객체의 자체 및 상속 가능한 열거 가능 속성 경로로 구성된 객체를 만듭니다.
+
+// 참고 :이 방법은 _.pick보다 상당히 느립니다.
+// 조건에서 제외된 친구들을 가져옴
+var object = { 'a': 1, 'b': '2', 'c': 3 };
+ 
+_.omit(object, ['a', 'c']);
+// => { 'b': '2' }

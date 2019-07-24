@@ -3558,3 +3558,225 @@ _.get(object, 'a.b.c', 'default');
 
 
 
++ ***_.has(object, path)***
+
+패스가 object의 직접적인 프로퍼티 일지 어떨지를 판정합니다.
+
+```js
+var object = { 'a': { 'b': 2 } };
+var other = _.create({ 'a': _.create({ 'b': 2 }) });
+ 
+_.has(object, 'a');
+// => true
+ 
+_.has(object, 'a.b');
+// => true
+ 
+_.has(object, ['a', 'b']);
+// => true
+ 
+_.has(other, 'a');
+// => false
+//prototype에 있는건 has로 체크하지 않음
+```
+
+
+
++ ***_.hasIn(object, path)***
+
+ path가 객체의 직접적인 속성인지 상속 된 속성인지 확인합니다.
+
+```js
+var object = _.create({ 'a': _.create({ 'b': 2 }) });
+ 
+_.hasIn(object, 'a');
+// => true
+ 
+_.hasIn(object, 'a.b');
+// => true
+ 
+_.hasIn(object, ['a', 'b']);
+// => true
+ 
+_.hasIn(object, 'b');
+// => false
+```
+
+
+
++ ***.invert(object)***
+
+객체의 반전 된 키와 값으로 구성된 객체를 만듭니다. object에 중복 값이 포함 된 경우 후속 값은 이전 값의 속성 할당을 덮어 씁니다.
+
+```js
+var object = { 'a': 1, 'b': 2, 'c': 1 };
+ 
+_.invert(object);
+// => { '1': 'c', '2': 'b' }
+```
+
+
+
++ ***_.invertBy(object, [iteratee=_.identity])***
+
+이 메소드는 반전 된 오브젝트가 iteratee를 통해 오브젝트의 각 요소를 실행 한 결과에서 생성된다는 점을 제외하면 _.invert와 유사합니다. 각 반전 된 키의 해당 반전 값은 반전 된 값을 생성하는 키 배열입니다. iteratee는 (value) 하나의 인수로 호출됩니다.
+
+```js
+var object = { 'a': 1, 'b': 2, 'c': 1 };
+ 
+_.invertBy(object);
+// => { '1': ['a', 'c'], '2': ['b'] }
+ 
+_.invertBy(object, function(value) {
+  return 'group' + value;
+});
+// => { 'group1': ['a', 'c'], 'group2': ['b'] }
+```
+
+
+
++ ***_.invoke(object, path, [args])***
+
+오브젝트의 패스에있는 메소드를 호출합니다.
+
+```js
+var object = { 'a': [{ 'b': { 'c': [1, 2, 3, 4] } }] };
+ 
+_.invoke(object, 'a[0].b.c.slice', 1, 3);
+// => [2, 3]
+```
+
+
+
++ ***_.keys(object)***
+
+object의 열거 가능한 속성 이름의 배열을 만듭니다.
+
+주 : 비 오브젝트 값은 오브젝트로 강제 변환됩니다. 자세한 내용은 ES 사양을 참조하십시오.
+
+```js
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+ 
+Foo.prototype.c = 3;
+ 
+_.keys(new Foo);
+// => ['a', 'b'] (iteration order is not guaranteed)
+ 
+_.keys('hi');
+// => ['0', '1']
+```
+
+
+
++ ***_.keysIn(object)***
+
+object의 상속 가능한 열거 가능 속성 이름의 배열을 만듭니다.
+
+주 : 비 오브젝트 값은 오브젝트로 강제 변환됩니다.
+
+프로토타입 까지 키배열로 만듬 In이 붙으면 대부분이 그런듯.
+
+```js
+function Foo() {
+  this.a = 1;
+  this.b = 2;
+}
+ 
+Foo.prototype.c = 3;
+ 
+_.keysIn(new Foo);
+// => ['a', 'b', 'c'] (iteration order is not guaranteed)
+```
+
+
+
++ ***_.mapKeys(object, [iteratee=_.identity])***
+
+_.mapValues의 반대; 이 메소드는 iteratee를 통해 오브젝트의 자체 열거 가능 문자열 키 특성을 실행하여 생성 된 오브젝트 및 키와 동일한 값을 갖는 오브젝트를 작성합니다. iteratee는 (value, key, object) 세 개의 인수로 호출됩니다.
+
+```js
+_.mapKeys({ 'a': 1, 'b': 2 }, function(value, key) {
+  return key + value;
+});
+// => { 'a1': 1, 'b2': 2 }
+```
+
+
+
++ ***_.mapValues(object, [iteratee=_.identity])***
+
+객체와 동일한 키를 가진 객체를 생성하고 iteratee를 통해 객체의 자체 열거 형 문자열 키 특성을 각각 실행하여 생성 된 값을 생성합니다. iteratee는 세 개의 인수로 호출됩니다.
+
+```js
+var users = {
+  'fred':    { 'user': 'fred',    'age': 40 },
+  'pebbles': { 'user': 'pebbles', 'age': 1 }
+};
+ 
+_.mapValues(users, function(o) { return o.age; });
+// => { 'fred': 40, 'pebbles': 1 } (iteration order is not guaranteed)
+ 
+// The `_.property` iteratee shorthand.
+_.mapValues(users, 'age');
+// => { 'fred': 40, 'pebbles': 1 } (iteration order is not guaranteed)
+```
+
+
+
++ ***_.merge(object, [sources])***
+
+이 메소드는 _.assign과 유사하지만 소스 객체의 자체 및 상속 된 열거 가능 문자열 키 특성을 대상 객체에 재귀 적으로 병합합니다. 대상 값이 있으면 undefined로 확인되는 소스 속성은 건너 뜁니다. 배열 및 일반 개체 속성은 재귀 적으로 병합됩니다. 다른 객체 및 값 유형은 할당에 의해 무시됩니다. 원본 개체는 왼쪽에서 오른쪽으로 적용됩니다. 후속 소스는 이전 소스의 등록 정보 지정을 겹쳐 9니다.
+
+1:1매칭으로 머지가됨.
+
+만약 배열같은 값이 있으면 덮어쓰게됨.
+
+참고 :이 메서드는 객체를 변형합니다.
+
+```js
+var object = {
+  'a': [{ 'b': 2 }, { 'd': 4 },{'g':[1]}]
+};
+ 
+var other = {
+  'a': [{ 'c': 3 }, { 'e': 5 },{'g':[3]}]
+};
+ 
+_.merge(object, other);
+// => { 'a': [{ 'b': 2, 'c': 3 }, { 'd': 4, 'e': 5 },{'g':[3]}] }
+// => g가 쪽이 다음 나올 mergeWith에서 컨트롤 가능
+```
+
+
+
++ ***_.mergeWith(object, sources, customizer)***
+
+이 메소드는 destination 및 source 특성의 병합 된 값을 생성하기 위해 호출되는 사용자 정의 프로그램을 허용한다는 점을 제외하면 _.merge와 유사합니다. 사용자 정의 프로그램이 undefined를 리턴하면 병합은 대신 메소드에 의해 처리됩니다. 커스터마이져는 6 개의 인자로 호출된다 :
+
+ (objValue, srcValue, 키, 객체, 소스, 스택).
+
+ 참고 :이 메서드는 객체를 변형합니다.
+
+```js
+function customizer(objValue, srcValue) {
+  if (_.isArray(objValue)) {
+    return objValue.concat(srcValue);
+  }
+}
+ 
+var object = { 'a': [1], 'b': [2] };
+var other = { 'a': [3], 'b': [4] };
+ 
+_.mergeWith(object, other, customizer);
+// => { 'a': [1, 3], 'b': [2, 4] }
+```
+
+
+
+
+
+
+
