@@ -298,3 +298,87 @@ var object = { 'a': 1, 'b': '2', 'c': 3 };
  
 _.omit(object, ['a', 'c']);
 // => { 'b': '2' }
+
+
+// _.pick의 반대; 이 메소드는 생략되지 않은 객체의 자체 및 상속 가능한 열거 가능 속성 경로로 구성된 객체를 만듭니다.
+
+// _.omitBy(object, [predicate=_.identity])
+// _.pickBy의 반대; 이 메소드는 술어가 진실로 리턴하지 않는 오브젝트의 고유 한 속성과 상속 된 열거 가능한 문자열 키 특성으로 구성된 오브젝트를 작성합니다. 술어는 (value, key) 두 개의 인수로 호출됩니다.
+// 조건을 걸수있고 조건에 부합하지 않는 친구를 가져온다.
+
+var object = {"a":1,'b':'2',"c":3};
+
+console.log(
+  _.omitBy(object, _.isNumber)
+);
+
+// _.pick(object, [paths])
+// 선택된 객체 속성으로 구성된 객체를 만듭니다.
+
+console.clear();
+
+
+let person = (() => (gender) => (gender) ? 'male' : 'female')();
+const room = [
+  [person(1), person(1)],
+  [person(0), person(0)],
+  [person(0), person(1)]
+];
+
+let per = (num, total) => Math.floor((num / total) * 100);
+
+/**
+ *  처음 방 3개 
+ * // 무엇을 두드릴지모름.
+ * 남자만있는방을 제외한 룸2개중 1개
+ * 그중 여자 목소리 3/4 => 남자가 나올확률 25 
+ * //단순히 c방 여자라고 생각할 수 있으나 당신이나는 말은 문화적으로 여자가 여자를 지칭 할 수도 있으므로.. 4명중 1명으로 퍼센테이지를 잡음
+ * 남자가 나가는걸 거부할 확률 50
+ */
+function knock() {
+  const res_per = {count: 0,per: 0,}
+  function sum_res(fn) {
+    res_per.per += fn
+    res_per.count++
+  }
+  const acc = [
+    per(1, room.length),
+    per(1, 2),
+    (100 - per(3, 4)),
+    per(1, 2)
+  ];
+  acc.map(list => sum_res(list))
+  return res_per.per / res_per.count
+}
+knock();
+
+// _.pick(object, [paths])
+
+// 선택된 객체 속성으로 구성된 객체를 만듭니다.
+
+var object = {"a":1,'b':'2',"c":3};
+
+console.log(
+  _.pick(object,['a','c'])
+);
+
+// _.pickBy(object, [predicate=_.identity])
+// 객체 프로퍼티로 구성된 객체를 만듭니다. 술어는 (value, key) 두 개의 인수로 호출됩니다.
+
+console.clear()
+// _.result(object, path, [defaultValue])
+// 이 메소드는 해결 된 값이 상위 오브젝트의이 바인딩으로 호출 된 함수이고 결과가 리턴되는 경우를 제외하고는 _get과 같습니다.
+// 값이 있는 결과를 반환할때는 동일하고, 값을 못찾고 3번째 디폴트로 인자인자를 반환하게 될 때, get은 함수를 실행하지 않고 result는 함수를 실행하게됨.
+var object = { 'a': [{ 'b': { 'c1': 3, 'c2': _.constant(4) } }] };
+console.log(
+  _.get(object, 'a[0].b.c3', function(){
+    console.log(this,'this');
+    return 'default'
+  })
+);
+console.log(
+  _.result(object, 'a[0].b.c3', function(){
+    console.log(this,'this');
+    return 'default'
+  })
+);
