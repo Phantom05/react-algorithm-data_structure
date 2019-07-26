@@ -3181,6 +3181,12 @@ _.random(1.2, 5.2);
 
 
 
+
+
+## Object
+
+
+
 + ***_.assign(object, [sources])***
 
 소스 개체의 자체 열거 형 문자열 키 특성을 대상 개체에 할당합니다. 원본 개체는 왼쪽에서 오른쪽으로 적용됩니다. 후속 소스는 이전 소스의 등록 정보 지정을 겹쳐 9니다.
@@ -4033,6 +4039,103 @@ Foo.prototype.c = 3;
  
 _.valuesIn(new Foo);
 // => [1, 2, 3] (iteration order is not guaranteed)
+```
+
+
+
+## Seq
+
+
+
++ ***_(value)* **
+
+ 암묵적 _.chain
+
+```js
+function square(n) {
+  return n * n;
+}
+ 
+var wrapped = _([1, 2, 3]);
+ 
+// Returns an unwrapped value.
+wrapped.reduce(_.add);
+// => 6
+ 
+// Returns a wrapped value.
+var squares = wrapped.map(square);
+ 
+_.isArray(squares);
+// => false
+ 
+_.isArray(squares.value());
+// => true
+```
+
+
+
+
+
+
+
++ ***_.chain(value))***
+
+명시 적 메서드 체인 시퀀스가 활성화 된 값을 래핑하는 lodash 래퍼 인스턴스를 만듭니다. 그러한 시퀀스의 결과는 _ # 값으로 풀어야합니다.
+
+```js
+var users = [
+  { 'user': 'barney',  'age': 36 },
+  { 'user': 'fred',    'age': 40 },
+  { 'user': 'pebbles', 'age': 1 }
+];
+ 
+var youngest = _
+  .chain(users)
+  .sortBy('age')
+  .map(function(o) {
+    return o.user + ' is ' + o.age;
+  })
+  .head()
+  .value();
+// => 'pebbles is 1'
+```
+
+
+
++ ***_.tap(value, interceptor)***
+
+이 메서드는 인터셉터를 호출하고 값을 반환합니다. 인터셉터는 하나의 인수로 호출됩니다. (값). 이 메소드의 목적은 중간 결과를 수정하기 위해 메소드 체인 순서를 "탭"하는 것입니다.
+
+return이 없어도 됨.
+
+```js
+_([1, 2, 3])
+ .tap(function(array) {
+// Mutate input array.
+   array.pop();
+ })
+ .reverse()
+ .value();
+// => [2, 1]
+```
+
+
+
++ ***_.thru(value, interceptor)***
+
+이 메소드는 인터셉터의 결과를 리턴한다는 점을 제외하면 _tap과 같습니다. 이 메소드의 목적은 메소드 체인 순서에서 중간 결과를 대체하는 값을 "통과"하는 것입니다.
+
+return 을 꼭해줘야함.
+
+```js
+_('  abc  ')
+ .chain()
+ .trim()
+ .thru(function(value) {
+   return [value];
+ })
+ .value();
+// => ['abc']
 ```
 
 

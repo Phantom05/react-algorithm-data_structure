@@ -145,3 +145,98 @@ console.log(
 );
 
 
+
+// 암시 적 메서드 체인 시퀀스를 사용할 수 있도록 값을 래핑하는 lodash 객체를 만듭니다. 배열, 콜렉션 및 함수에서 작동하고 리턴하는 메소드는 함께 연결될 수 있습니다. 단일의 값을 취득하거나 원시적 인 값을 돌려주는 메소드는, 체인 순서를 자동적으로 종료 해, 랩 해제 된 값을 돌려줍니다. 그렇지 않으면 _ # 값으로 값을 래핑 해제해야합니다.
+
+// _ # 값으로 래핑되지 않아야하는 명시 적 체인 시퀀스는 _.chain을 사용하여 활성화 할 수 있습니다.
+
+// 체인 메소드의 실행은 지연적입니다. 즉, # 값이 암시 적 또는 명시 적으로 호출 될 때까지 지연됩니다.
+
+// 게으른 평가를 통해 여러 가지 방법으로 바로 가기 융합을 지원할 수 있습니다. 바로 가기 융합은 iteratee 호출을 병합하는 최적화입니다. 이것은 중간 배열의 생성을 피하고 iteratee 실행의 수를 크게 줄일 수 있습니다. 체인 시퀀스의 섹션은 섹션이 배열에 적용되고 iteratees가 하나의 인수 만 받아들이는 경우 바로 가기 융합의 대상이됩니다. 섹션이 바로 가기 융합에 적합한 지 여부에 대한 경험적 방법은 변경 될 수 있습니다.
+
+console.log(
+  _([1,2,3])
+);
+
+// _.chain(value)
+
+// 명시 적 메서드 체인 시퀀스가 ​​활성화 된 값을 래핑하는 lodash 래퍼 인스턴스를 만듭니다. 그러한 시퀀스의 결과는 _ # 값으로 풀어야합니다.
+
+console.clear()
+var users = [
+  {'user':'barney','age':36},
+  {'user':'fred','age':40},
+  {'user':'pebbles','age':1}
+];
+
+var youngest = _
+.chain(users)
+.sortBy('age')
+.map(function(o){
+  return o.user + ' is ' + o.age
+})
+.head()
+.value()
+
+
+// _.tap(value, interceptor)
+// 이 메서드는 인터셉터를 호출하고 값을 반환합니다. 인터셉터는 하나의 인수로 호출됩니다. (값). 이 메소드의 목적은 중간 결과를 수정하기 위해 메소드 체인 순서를 "탭"하는 것입니다.
+// return이 없어도 됨.
+var s = _([1,2,3])
+.tap(function(array){
+  array.pop();
+})
+.reverse()
+.value()
+console.log(s);
+
+
+
+// _.thru(value, interceptor)
+//이 메소드는 인터셉터의 결과를 리턴한다는 점을 제외하면 _tap과 같습니다. 이 메소드의 목적은 메소드 체인 순서에서 중간 결과를 대체하는 값을 "통과"하는 것입니다.
+// return 을 꼭해줘야함.
+console.log(
+  _([1,2,3])
+  .chain()
+  // .trim()
+  .thru(function (value) {
+    // console.log(value);
+    value.pop()
+    // return [value]
+  })
+  .value()
+);
+
+
+
+function square(n) {
+  return n * n;
+}
+ var wrapped = _([1,2,3]);
+console.log(
+  wrapped.reduce(_.add)
+);
+var squares = wrapped.map(square);
+console.log(squares.value());
+
+// _.prototype[Symbol.iterator]()
+// 래퍼를 반복 가능하게합니다.
+
+
+var wrapped = _([1, 2]);
+ 
+wrapped[Symbol.iterator]() === wrapped;
+// => true
+// => iterator가 가능하다는것을 보여줌.
+ 
+Array.from(wrapped);
+// => [1, 2]
+
+
+// _.prototype.at([paths])
+// 이 메소드는 _.at의 랩퍼 버전입니다.
+
+var object = {'a':[{"b":{'c':3}},4]};
+console.log(
+  _(object).at(['a[0].b.c','a[1]']).value()
+);
