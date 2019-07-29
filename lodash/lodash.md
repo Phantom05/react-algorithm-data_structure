@@ -4140,3 +4140,73 @@ _('  abc  ')
 
 
 
++ ***`_.prototype[Symbol.iterator]()`***
+
+래퍼를 반복 가능하게합니다.
+
+```js
+var wrapped = _([1, 2]);
+ 
+wrapped[Symbol.iterator]() === wrapped;
+// => true
+// => iterator가 가능하다는것을 보여줌.
+ 
+Array.from(wrapped);
+// => [1, 2]
+```
+
+
+
++ ***_.prototype.at([paths])***
+
+이 메소드는 _.at의 랩퍼 버전입니다.
+
+```js
+var object = { 'a': [{ 'b': { 'c': 3 } }, 4] };
+ 
+_(object).at(['a[0].b.c', 'a[1]']).value();
+// => [3, 4]
+```
+
+
+
++ ***_.prototype.at([paths])***
+
+이 메소드는 _.at의 랩퍼 버전입니다.
+
+```js
+var object = { 'a': [{ 'b': { 'c': 3 } }, 4] };
+ 
+_(object).at(['a[0].b.c', 'a[1]']).value();
+// => [3, 4]
+```
+
+
+
++ ***_.prototype.chain()***
+
+명시 적 메서드 체인 시퀀스가 활성화 된 lodash 래퍼 인스턴스를 만듭니다.
+
+```js
+var users = [
+  { 'user': 'barney', 'age': 36 },
+  { 'user': 'fred',   'age': 40 }
+];
+ 
+// A sequence without explicit chaining.
+_(users).head();
+// => { 'user': 'barney', 'age': 36 }
+ 
+// A sequence with explicit chaining.
+_(users)
+  .chain()
+  .head()
+  .pick('user')
+  .value();
+// => { 'user': 'barney' }
+```
+
+
+
++ ***_.prototype.commit()***
+

@@ -1,0 +1,26 @@
+    /* li:nth-of-type(-n+2){
+      color: red;
+    } */
+    /* 
+    index:1 -1+2 => 1 1번째 녀석 스타일
+    index:2 -2+2 => 0 0번째 녀석 스타일
+    */
+
+    // $cal: calc(-2n / 2 + 2);
+    li:nth-child(2n){
+      color: blue;
+    }
+    /*
+    index:0 -2*0+5 => 5번째 녀석 스타일
+    index:1 -2*1+5 => -3번째 녀석 스타일
+    index:2 -2*2+5 => 1번쨰 녀석 스타일
+    index:3 -2*3+5 => -1번째 녀석 스타일.
+    */
+    // li:nth-child(-2n * 2 + 5){
+    //   color: purple;
+    // }
+    
+
+    li:nth-of-type(2n):nth-last-of-type(-n+3){
+      color: red;
+    }
