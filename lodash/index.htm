@@ -66,7 +66,29 @@
       list-style: none;
       box-sizing: border-box;
     }
+      
+    .navbar-light .navbar-nav .nav-link {
+          color: rgb(64, 64, 64);
+      }
+      .btco-menu li > a {
+          padding: 10px 15px;
+          color: #000;
+      
+      }
+      
+      .btco-menu .active a:focus,
+      .btco-menu li a:focus ,
+      .navbar > .show > a:focus{
+          background: transparent;
+          outline: 0;
+      }
+      
+      
+      .dropdown-menu .show > .dropdown-toggle::after{
+          transform: rotate(-90deg);
+      }
   </style>
+=
 
 <h2>아코디언</h2>
 <div class="acodian">
@@ -168,34 +190,12 @@
     </ul>
   </div>
 
-  <style>
-  
-  .navbar-light .navbar-nav .nav-link {
-    color: rgb(64, 64, 64);
-}
-.btco-menu li > a {
-    padding: 10px 15px;
-    color: #000;
-
-}
-
-.btco-menu .active a:focus,
-.btco-menu li a:focus ,
-.navbar > .show > a:focus{
-    background: transparent;
-    outline: 0;
-}
 
 
-.dropdown-menu .show > .dropdown-toggle::after{
-    transform: rotate(-90deg);
-}
-</style>
 
-
-  <script src="./3week/3-2.js"></script>
+  <script src="./3week/3-3.js"></script>
   <script>
-    dropDown(200)
+    // dropDown(200)
   </script>
 </body>
 

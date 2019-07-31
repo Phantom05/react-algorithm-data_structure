@@ -498,6 +498,5 @@ hello('zzz')()
 
 function what(){
   return function(){
-    
   }
 }
