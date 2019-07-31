@@ -358,3 +358,146 @@ _.map(objects, _.property('a.b'));
  
 _.map(_.sortBy(objects, _.property(['a', 'b'])), 'a.b');
 // => [1, 2]
+
+// _.propertyOf(object)
+
+// _.property의 반대; 이 메서드는 object의 지정된 경로에서 값을 반환하는 함수를 만듭니다.
+
+var array = [0,1,2];
+var object = {'a':array,'b':array,'c':array};
+console.log(
+  _.map(['a[2]','c[0]'], _.propertyOf(object))
+);
+
+// _.range([start=0], end, [step=1])
+// 시작부터 끝까지 포함하는 숫자 배열 (양수 또는 음수)을 만듭니다. 음의 시작이 끝이나 단계없이 지정되면 -1 단계가 사용됩니다. end가 지정되지 않으면 start로 시작하도록 설정되고 0으로 설정됩니다.
+
+// 참고 : JavaScript는 예기치 않은 결과를 생성 할 수있는 부동 소수점 값을 해결하기 위해 IEEE-754 표준을 따릅니다.
+
+console.log(
+  _.range(0,1,0.1)
+);
+// =>  [0, 0.1, 0.2, 0.30000000000000004, 0.4, 0.5, 0.6, 0.7, 0.7999999999999999, 0.8999999999999999]
+
+_.range(4);
+// => [0, 1, 2, 3]
+ 
+_.range(-4);
+// => [0, -1, -2, -3]
+ 
+_.range(1, 5);
+// => [1, 2, 3, 4]
+ 
+_.range(0, 20, 5);
+// => [0, 5, 10, 15]
+ 
+_.range(0, -4, -1);
+// => [0, -1, -2, -3]
+ 
+_.range(1, 4, 0);
+// => [1, 1, 1]
+ 
+_.range(0);
+// => []
+
+
+// _.rangeRight([start=0], end, [step=1])
+// 이 메소드는 값이 내림차순으로 채워지는 것을 제외하고는 _range와 유사합니다.
+// 거꾸로 내려옴.
+
+console.log(
+  _.rangeRight(4,2)
+);
+
+_.rangeRight(4);
+// => [3, 2, 1, 0]
+ 
+_.rangeRight(-4);
+// => [-3, -2, -1, 0]
+ 
+_.rangeRight(1, 5);
+// => [4, 3, 2, 1]
+ 
+_.rangeRight(0, 20, 5);
+// => [15, 10, 5, 0]
+ 
+_.rangeRight(0, -4, -1);
+// => [-3, -2, -1, 0]
+ 
+_.rangeRight(1, 4, 0);
+// => [1, 1, 1]
+ 
+_.rangeRight(0);
+// => []
+
+
+console.clear()
+// _.runInContext([context=root])
+// 컨텍스트 오브젝트를 사용하여 새로운 pristine lodash 함수를 작성하십시오.
+
+
+console.log(
+  _.mixin({ 'foo': _.constant('foo') })
+);
+
+
+var lodash = _.runInContext();
+lodash.mixin({ 'bar': lodash.constant('bar') });
+ 
+_.isFunction(_.foo);
+// => true
+_.isFunction(_.bar);
+// => false
+ 
+lodash.isFunction(lodash.foo);
+// => false
+lodash.isFunction(lodash.bar);
+// => true
+ 
+// Create a suped-up `defer` in Node.js.
+// var defer = _.runInContext({ 'setTimeout': setImmediate }).defer;
+
+
+_.stubArray()
+// 이 메소드는 새로운 빈 배열을 리턴합니다.
+
+_.stubFalse()
+// 이 메소드는 false 리턴합니다.
+
+_.stubObject()
+// 이 메소드는 {} 리턴합니다.
+
+
+_.stubString()
+// 이 메소드는 ''를 반환합니다.
+
+_.stubTrue()
+// 이 메소드는 true를 반환합니다.
+
+// _.times(n, [iteratee=_.identity])
+// iteratee를 n 번 호출하여 각 호출의 결과 배열을 반환합니다. iteratee는 하나의 인수로 호출됩니다. (색인).
+console.log(
+  _.times(4,String)
+);
+
+// _.toPath(value)
+// 값을 속성 경로 배열로 변환합니다.
+
+
+// _.uniqueId([prefix=''])
+// 고유 한 ID를 생성합니다. prefix가 주어지면 ID가 추가됩니다.
+console.log(
+  _.uniqueId('contact_')
+);
+console.log(
+  _.uniqueId()
+);
+
+const hello = (name) => ()=> `${name} world`;
+hello('zzz')()
+
+function what(){
+  return function(){
+    
+  }
+}
