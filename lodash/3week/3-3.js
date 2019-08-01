@@ -52,3 +52,33 @@ console.log(
 console.log(
   _.concat(Array.from(li1),Array.from(li2))
 );
+
+console.clear();
+
+
+;(function(){
+
+ /** Detect free variable `global` from Node.js. */
+ var freeGlobal = typeof global == 'object' && global && global.Object === Object && global;
+
+ /** Detect free variable `self`. */
+ var freeSelf = typeof self == 'object' && self && self.Object === Object && self;
+
+ /** Used as a reference to the global object. */
+ var root = freeGlobal || freeSelf || Function('return this')();
+
+  var Module ={};
+
+  function hello(){
+    console.log('hello');
+  }
+
+  Module.hello = hello;
+
+  root.Module = Module
+
+}.call(this));
+
+
+
+
