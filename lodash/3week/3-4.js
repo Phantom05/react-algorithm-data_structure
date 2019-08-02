@@ -39,3 +39,28 @@ console.log(
 console.log(
   _.flattenDeep([1,2,[3,4,[5,6,[7,8,9]]]])
 );
+
+
+
+console.log(
+  _.flattenDepth([1,[2],[3,[4]]],2)
+);
+console.log(
+  _.fromPairs([['a',1],['b',2],['ㅊ',65]])
+);
+
+console.log(
+  _.head([1,2,3])
+);
+
+console.log(
+  _.indexOf(['a','b','c','d'],'a')
+);
+console.log(
+  _.findIndex(['a','b','c','d'],['a'])
+);
+
+console.log(
+  _.initial([1,2,3])
+);
+// 마지막 요소를 제외한 요소를 가져옴.
