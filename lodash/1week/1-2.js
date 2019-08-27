@@ -15,7 +15,7 @@ console.log(
   _.every([true,false],Boolean)
 );
 console.log(
-  _.every(users, { 'user': "barney","action":false})
+  _.every(users, { 'user':  "barney","action":false})
 );
 console.log(
   _.every(users,['active',false])
