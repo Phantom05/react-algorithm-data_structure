@@ -1,24 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+  <script src="https://npmcdn.com/@reactivex/rxjs@5.0.0-beta.8/dist/global/Rx.umd.js"></script>
 </head>
+
 <body>
-  <script src="./_.js"></script>
+
+
+  <input id="range" type="number">
+  <button id="update">Update</button>
+  <h3 id="display">0</h3>
+
+
+
+
   <script>
-    function _curry(fn){
-      return function(a){
-        return function(b){
-          return fn(a,b);
+    function _curry(fn) {
+      return function (a) {
+        return function (b) {
+          return fn(a, b);
         }
       }
     }
 
-    var add = _curry(function(a,b){
-      return a+b;
+    var add = _curry(function (a, b) {
+      return a + b;
     });
 
     var add10 = add(10);
@@ -26,5 +37,7 @@
       add10(5)
     );
   </script>
+  <script src="./_.js"></script>
 </body>
+
 </html>

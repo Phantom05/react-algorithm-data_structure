@@ -110,14 +110,15 @@ function objectToString(value) {
 function isObjectLike(value) {
   return value != null && typeof value == 'object';
 }
-function arrayPush(array, values) {
-  var index = -1,
-      length = values.length,
-      offset = array.length;
-  while (++index < length) {
-    array[offset + index] = values[index];
+
+
+function flattenDepth(array, depth) {
+  var length = array == null ? 0 : array.length;
+  if (!length) {
+    return [];
   }
-  return array;
+  depth = depth === undefined ? 1 : toInteger(depth);
+  return baseFlatten(array, depth);
 }
 
 function flatten(array) {
@@ -137,7 +138,18 @@ function isFlattenable(value) {
     !!(spreadableSymbol && value && value[spreadableSymbol]);
 }
 
-// 큰 함수를 하나 만들고, 기능을 쪼개논다...
+
+
+function arrayPush(array, values) {
+  var index = -1,
+      length = values.length,
+      offset = array.length;
+  while (++index < length) {
+    array[offset + index] = values[index];
+  }
+  return array;
+}
+// 큰 함수를 하나 만들고, 기능을 쪼개면서 매개변수를 아에 조절한다. 오..개쩐다.
 function baseFlatten(array, depth, predicate, isStrict, result) {
   var index = -1,
       length = array.length;
@@ -185,7 +197,8 @@ function test(array,depth,result){
         //새배열에  value를 계속 합쳐서 줌. result는 참조 상태이기때문에 함수 내부에서 반복문이 돌아도 계속 들어감.
         arrayPush(result,value)
       }
-    }else{ // 뎁스가 1이하면. 그냥 뒤쪽으로 벨류들을 계속 넣음.
+
+    }else{ // 뎁스가 1이하면. 그냥 새로운 result 배열에 순회하면서 뒤쪽으로 벨류들을 계속 넣음.
       result[result.length] = value;
     }
 
@@ -193,7 +206,7 @@ function test(array,depth,result){
 
   return result
 }
-test([1,2,3,[5,[6]],7], 2)
+test([1,2,3,[5,[6,[8]]],7], 2)
 
 
 
