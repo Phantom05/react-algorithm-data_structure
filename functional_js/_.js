@@ -247,4 +247,73 @@ const subscription = (function(currentNumber) {
       .do(v => currentNumber = v)
       .startWith(currentNumber)
       .subscribe(updateHTML('display'));
-}(0))
+}(0));
+
+function subScript(...abc){
+  return () =>{
+    Rx.Observable.fromEvent(updateButton, 'click')
+  }
+}
+
+
+// 정수 n이 주어지면, n개의 여는 괄호 "("와 n개의 닫는 괄호 ")"로 만들 수 있는 괄호 조합을 모두 구하시오. (시간 복잡도 제한 없습니다).
+
+// Given an integer N, find the number of possible balanced parentheses with N opening and closing brackets.
+
+// // 예제)
+// Input: 1
+// Output: ["()"]
+
+// Input: 2
+// Output: ["(())", "()()"]
+
+// Input: 3
+// Output: ["((()))", "(()())", "()(())", "(())()", "()()()"]
+
+// Input: 3
+// Output: ["(())()", "(()())", "()(())", "(())()", "()()()"]
+
+console.clear();
+
+function remove(arr,idx){
+  arr.splice(idx,1)
+}
+function insert(arr,idx,info){
+  arr.splice(idx,0,info);
+}
+
+function conc(res,arr){
+  res.push(arr.concat([]).join(''))
+}
+function t(n){
+  let num = n;
+  n = '()'.repeat(n).split('').sort();
+  let half = Math.floor(n.length /2),res = [];
+
+  conc(res,n);
+  for(let i = 0 ; i < num-1 ; i ++){
+    let id = half+i+1;
+    // console.log(n,id);
+    insert(n,id,n[0]);
+    remove(n,0);
+
+    conc(res,n);
+  }
+  console.log(res);
+  // return n
+}
+
+console.log(
+  t(3)
+);
+// (((())))
+// (((()()))
+// ((()()))
+// (()()())
+
+
+// var test = [1,2,3]
+// insert(test,1,5);
+// console.log(test);
+// remove(test,1);
+// console.log(test);
