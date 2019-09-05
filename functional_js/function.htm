@@ -7,6 +7,24 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
   <script src="https://npmcdn.com/@reactivex/rxjs@5.0.0-beta.8/dist/global/Rx.umd.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <style>
+  .testEle {
+  width:100px;
+  height:100px;
+  background: #f80;
+  text-align:center;
+  color:#fff;
+  display:table-cell;
+  vertical-align:middle;
+  cursor:pointer;
+}
+
+#testEle2.testEle {
+  height:24px;
+  background:#333;
+}
+  </style>
 </head>
 
 <body>
@@ -17,8 +35,32 @@
   <h3 id="display">0</h3>
 
 
+  <button id="test">Test</button>
+
+  <a href="http://www.google.com" onclick="alert('clicked')" target="_blank">Go to google</a>
 
 
+
+  <div class="testEle" id="testEle">
+      Click Num: <span id="testspan">0</span>
+    </div>
+  <div class="testEle" id="testEle2">Switch!</div>
+
+
+  <button id="elem" onclick="alert('Click!');">Autoclick</button>
+
+  <!-- <h1 id="elem1">Hello from the script!</h1> -->
+  
+  <form action="/">
+    <button type="submit" id="elem1">elem1</button>
+  </form>
+  <form action="" id="testForm">
+    <input type="checkbox">
+  </form>
+
+  <form action="" id="target">
+
+  </form>
   <script>
     function _curry(fn) {
       return function (a) {

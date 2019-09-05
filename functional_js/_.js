@@ -317,3 +317,145 @@ console.log(
 // console.log(test);
 // remove(test,1);
 // console.log(test);
+
+
+function fireEvent(element, event) {
+  if (document.createEventObject) {
+    // dispatch for IE
+    var evt = document.createEventObject();
+    return element.fireEvent('on' + event, evt)
+  } else {
+    // dispatch for firefox + others
+    var evt = document.createEvent("HTMLEvents");
+    evt.initEvent(event, true, true); // event type,bubbling,cancelable
+    return !element.dispatchEvent(evt);
+  }
+}
+
+/**
+ * Fire an event handler to the specified node. Event handlers can detect that the event was fired programatically
+ * by testing for a 'synthetic=true' property on the event object
+ * @param {HTMLNode} node The node to fire the event handler on.
+ * @param {String} eventName The name of the event without the "on" (e.g., "focus")
+ */
+function triggerEvent(node, eventName) {
+  let doc;
+  if (node.ownerDocument) {
+      doc = node.ownerDocument;
+  } else if (node.nodeType == 9){
+      // the node may be the document itself, nodeType 9 = DOCUMENT_NODE
+      doc = node;
+  } else {
+      throw new Error("Invalid node passed to fireEvent: " + node.id);
+  }
+
+   if (node.dispatchEvent) {
+    let eventClass = "";
+      switch (eventName) {
+          case "click": 
+          case "mousedown":
+          case "mouseup":
+              eventClass = "MouseEvents";
+              break;
+
+          case "focus":
+          case "change":
+          case "blur":
+          case "select":
+              eventClass = "HTMLEvents";
+              break;
+
+          case "submit":
+              break
+
+          default:
+              throw "fireEvent: Couldn't find an event class for event '" + eventName + "'.";
+              break;
+      }
+      
+      if(eventName === 'submit'){
+        let event = new Event(eventName);
+        node.dispatchEvent(event);
+        return
+      }else{
+        let event = doc.createEvent(eventClass);
+        let bubbles = eventName == "change" ? false : true;
+        event.initEvent(eventName, bubbles, true); // All events created as bubbling and cancelable.
+        event.synthetic = true; // allow detection of synthetic events
+        node.dispatchEvent(event, true);
+      }
+  } else if (node.fireEvent) {
+      // IE-old school style
+      let event = doc.createEventObject();
+      event.synthetic = true; // allow detection of synthetic events
+      node.fireEvent("on" + eventName, event);
+  }
+};
+
+
+document.getElementById('test').addEventListener('click',function(e){
+  triggerEvent(document.getElementById("target"), "submit");
+  triggerEvent(document.getElementById("elem1"), "click");
+})
+
+
+document.getElementById('elem1').addEventListener('click',function(e){
+  e.preventDefault();
+  console.log('elem1');
+
+})
+
+document.getElementById('elem1').addEventListener('click',function(e){
+  e.preventDefault();
+  console.log('elem11');
+
+})
+
+
+var event = new Event('build')
+
+
+
+var event = document.createEvent("HTMLEvents");
+event.initEvent("mouseover", true, false);
+
+
+var btn = document.getElementById('test')
+
+btn.addEventListener("mouseover", function (e) {
+  // getElm('.boxbox').classList.add('on')
+// console.log('hello');
+})
+
+$('#test').bind('click',function(){
+  console.log('click')
+})
+
+
+
+let sumtest= 0;
+
+
+document.getElementById('target').addEventListener('submit',function(e){
+  e.preventDefault();
+  console.log('in');
+  console.log(++sumtest);
+})
+
+let aaaa = new Event("submit");
+$('#testForm').on('click', function() {
+  target.dispatchEvent(aaaa);
+});
+
+
+  // catch on document...
+  document.addEventListener("hello", function(event) { // (1)
+    alert("Hello from " + event.target.tagName); // Hello from H1
+  });
+
+  // ...dispatch on elem!
+  let event22 = new Event("hello", {bubbles: true}); // (2)
+  // elem1.dispatchEvent(event22);
+
+  // the handler on document will activate and display the message.
+
